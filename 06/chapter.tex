@@ -1,0 +1,229 @@
+\chapter{Języki i~metody programowania}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+\newtheorem{pyt}{Pytanie}
+\newtheorem{odp}{Odpowiedź}
+
+\newenvironment{opracowanie}[1][1]{
+	\newcounter{nr_pytania}
+	\setcounter{nr_pytania}{#1}
+}{}
+\newcommand{\pytanie}[1]
+{
+\section{\arabic{nr_pytania}. IT1A\_W08,IT1A\_U8}
+\stepcounter{nr_pytania}
+\pyt \textbf{#1}
+\par
+}
+
+\newcommand{\answer}[5]{
+\section{#1}
+%\textbf{#2}
+
+% \vspace{0.4cm}
+\noindent
+{\textbf{Przykładowa odpowiedź:}}
+#2
+\ifthenelse
+    {\equal{#3}{T}}
+    {\textbf{PRAWDA}}
+    {\ifthenelse
+        {\equal{#3}{F}}
+        {\textbf{FAŁSZ}}
+        {\textbf{DIY}}
+    }
+
+\vspace{0.4cm}
+\noindent
+\textbf{Odpowiedź:}
+#4
+
+\ifthenelse{\equal{#5}{}}{}{
+    \vspace{0.4cm}
+    \noindent
+    \textbf{Wyjaśnienie:} #5
+}
+
+}
+
+Przykładowe odpowiedzi nie kleją się z pytaniami, stąd właściwa odpowiedź rzadko będzie się odnosić do niej.
+Pytania są dosyć lakoniczne i nierzadko pokrywają jeden czy dwa wykłady tego przedmiotu, dlatego odpowiedzi będą raczej w formie skrótu tematu, a w wyjaśnieniach będę starał się opisać sedno absurdu przykładowej odpowiedzi.
+Będę starał się utrzymać konwencji w której pierwszy akapit jest najistotniejszy w danym pytaniu, a pozostałe, to pobieżne rozwinięte tematu, które warto raz przeczytać.
+
+\answer
+{Do czego służy jednostka sterująca}
+{Nie licząc licznika cykli jest to zawsze układ sekwencyjny}
+{F}
+{
+\cite{js} Dekoduje instrukcje znajdujące się w rejestrze rozkazów na sygnały sterujące przesyłane do innych podzespołów procesora i na magistralę systemową. Odpowiada też za odbieranie sygnałów z magistrali systemowej. Kontroluje cykle procesora.
+
+\cite{uw} Taki moduł pojawił się w pierwszym modelu architektury komputerowej von Neumanna. W tym modelu, jednostka sterująca zawiera: licznik programu (PC - program counter), rejestr adresowy (MAR - memory adress register), rejestr instrukcji (Instruction Register) i pomocnicze rejestry (Instruction Buffer Register)
+
+\cite{js} Instrukcje procesora są rozkładane na mikrooperacje wykonywane w kolejnych taktach procesora. Cykl procesora dzieli się na takty (np. 1 ustawienie adresu pamięci do odczytu, 2 pobranie wartości z pamięci, 3 podniesienie licznika programu)
+}
+{Zgodnie z odpowiedzią [\ref{odp:90}] licznik jest sensu stricto sekwencyjny.}
+\label{odp:87}
+
+\answer {ALU}
+{musi byc układem sekwencyjnym}{F}
+{
+Jednostka arytmetyczno-logiczna (Arythemtic-logical unit) - odpowiada za obliczenia i operacje logiczne. Sterowana przez jednostkę sterującą [\ref{odp:87}]
+}
+{\cite{uk} ALU jest blokiem kombinacyjnym [\ref{odp:90}]}
+
+\answer{Korzystając z układu FPGA można wykonać}
+{na przykład dowolny układ kombinacyjny, ograniczony jedynie wielkością struktury FPGA}{F}
+{Można stworzyć dowolny układ kombinacyjny i sekwencyjny. Wielkość rzeczywiście jest ograniczona przez liczbę zawartych bloków logicznych (64 do dziesiątek tysięcy)}
+{}
+
+\answer{Układ kombinacyjny, to}
+{w skład jego mogą wchodzić bramki logiczne w połączeniu z przerzutnikami jk}{F}
+{
+Układ cyfrowy, w którym stan wyjść zależy wyłącznie od stanu wejść.
+
+Hazard w układach komibnacyjnych - wynika z niezerowego czasu propagacji sygnału przez kolejne elementy układu.
+}
+{Przerzutnik jk (ogólnie przerzutniki) jest układem sekwencyjnym [\ref{odp:91}]}
+\label{odp:90}
+
+\answer{Układ sekwencyjny, to}
+{może się składać z samych bramek logicznych}{T}
+{
+Układ cyfrowy różniący się od kombinacyjnego tym, że posiada wewnętrzny stan. Stan wyjść zależy zarówno od stanu wejść, jak i stanu wewnętrznego układu.
+
+Układ taki jest opisywany przez piątkę $<Q, X, Y, \delta, \gamma>$, gdzie
+
+\begin{itemize}
+\item $Q$ - zbiór stanów wewnętrznych
+\item $X \subseteq {0,1}^n$ - zbiór dopuszczalnych stanów wejść
+\item $Y \subseteq {0,1}^m$ - zbiór możliwych stanów wejść
+\item $\delta:Q\times X\rightarrow Q$ - funkcja przejść
+\item $\gamma:Q\times X\rightarrow Y$ - funkcja wyjść
+\end{itemize}
+
+Odróżniamy dwa rodzaje układów sekwencyjnych, asynchroniczny i synchroniczny.
+
+Układ asynchroniczny spełnia warunek
+
+\begin{equation}
+\label{sekasy}
+\forall_{x\in X}\forall_{q,s\in Q}Q(\delta(s,x)=q\Rightarrow\delta(q,x)=q
+\end{equation}
+
+Znaczy to tyle, że tylko zmiana stanu wejść może wpłynąć na zmianę stanu wyjść i stanu wewnętrznego.
+
+Układ synchroniczny - różni się od układu asynchronicznego tym, że stan na wejściach ma wpływ na układ tylko, gdy pojawi się sygnał na wejściu zegarowym. (szczególny przypadek układu asynchronicznego, jeśli traktować sygnał zegarowy jako jedno z wejść)
+}
+{Może, ale nie musi. Przykładowo przerzutnik RS można zbudować wykorzystując jedynie 2~bramki NAND. Przykład na układ składający się nie tylko z bramek: DRAM [\ref{odp:92}]}
+\label{odp:91}
+
+\answer{Pamięć ram}
+{możemy wykonać z bramek nand}{T}
+{
+RAM (random access memory), to pamięć o dostępie swobodnym (czas dostępu do danych jest niezależny od ich położenia, w odróżnieniu do pamięci sekwencyjnej, jak np. w pamięci taśmowej; poza tym jest możliwy wielokrotny i łatwy zapis, w odróżnieniu do pamięci ROM i EEPROM).
+
+Pamięć ram jest wytwarzana w dwóch technologiach:
+\begin{itemize}
+\item SRAM - \cite{sram} bity są zapamiętane w przerzutnikach. Pozwala na szybszy dostęp do wartości niż w pamięciach DRAM, lecz na jej konstrukcję potrzeba 6 tranzystorów (1 tranzystor i 1 kondensator dla DRAM), więc jest droższa w produkcji. Jest stosowana w pamięciach cache;
+\item DRAM - \cite{dram} zaprojektowana jako zastępnik pamięci SRAM. Jej konstrukcja jest dużo prostsza (poprzedni punkt), przez co jest tańsza w produkcji i można upakować więcej bitów na tej samej powierzchni. Wadą tego typu pamięci jest konieczność cyklicznego odświeżania stanu pamięci, by zniwelować zjawisko wycieku pamięci (szczegóły w źródle);
+\end{itemize}
+}
+{
+Bramka NAND pełni \emph{system funkcjonalnie pełny}, czyli możemy z jej pomocą skonstruować dowolny układ kombinacyjny. Pojedynczy tranzystor to układ kombinacyjny, który daje na wyjściu taką wartość, jaką dostał na wejściu.
+Pamięć SRAM jest zbudowana z 6 tranzystorów.
+Z tego wynika, że możemy wykonać pamięć RAM z bramek NAND.
+}
+\label{odp:92}
+
+\answer{Pamięć ram dwuportowa}
+{w układach FPGA taki rodzaj pamięci nie występuje}{F}
+{
+\cite{dwuport} rodzaj pamięci RAM umożliwiający dwóm niezależnym procesom dostęp do wspólnych danych.
+
+Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowanie danej komórki, jeśli drugi proces zapisuje do niej.
+}
+{Znalazłem artykuły, które sugerują że takie pamięci są dostępne \url{http://bfy.tw/2n7S}}
+
+\answer{Licznik}
+{możemy wykonać przy użyciu FPGA ale tylko jednokierunkowy}{F}
+{
+\cite{licz} Urządzenie zliczające impulsy zegarowe. Na wejściu ma sygnał impulsu zegara, ilość wyjść zależy ilobitowy jest licznik i podają wartość w postaci binarnej.
+}
+{Na FPGA można praktycznie stworzyć dowolne układy}
+
+\answer{Procesor}
+{możemy wykonać przy użyciu FPGA ale tylko jednordzeniowy}{}
+{
+Sekwencyjne urządzenie cyfrowe zawierające jednostkę arytmetyczno-logiczną, jednostkę sterującą i rejestry. Wykonuje proste instrukcje z listy rozkazów procesora. W procesorze można wyróżnić dwie części: blok sterujący i blok wykonawczy. Blok sterujący ma za zadanie pobieranie rozkazów z pamięci, dekodowanie ich, przygotowanie argumentów oraz generowanie sygnałów sterujących operacjami podczas fazy wykonywania. Blok wykonawczy zawiera ALU.
+}
+{}
+
+\answer{Lista rozkazów procesora}
+{musi zawierać rozkazy z różnymi trybami adresowania}{}
+{
+Zestaw instrukcji, jakie dany procesor jest w stanie wykonać. Każdy procesor ma własną listę rozkazów. Grupy rozkazy to m.in. arytmetyczno-logiczne, przesyłania danych i przeniesienia sterowania. Rozkaz zawiera informację o operacji jaką ma wykonać, o operandach (jeżeli są) i wyniku (jeżeli jest). Trybem adresacji operanda może być wartościa natychmiastową, adresem pamięci lub rejestrem. Wynikiem (trybem adresacji) może być adres pamięci lub rejestr.
+}
+{}
+
+\answer{Karta graficzna}
+{przy użyciu FPGA nie można zbudować karty graficznej ze sprzętowym wspomoaganiem OpenGL}{}
+{
+OpenGL to specyfikacja otwartego i uniwersalnego API do tworzenia grafiki. Jest to zestaw podstawowych funckji umożliwiających tworzenie grafiki.
+}
+{}
+
+\answer{Klawiatura}
+{kody wysyłane przez klawiature to kody ascii}{}
+{
+Dane z klawiatury wysyłane są w postaci scancodeów generowanych przez naciśniecie przycisku. Różne kody są używane przez klawiatury i zależy to od ich wewnętrzej implementacji i architektury. Naciśniecie przycisku może generować wiele kodów. Dane z klawiatury wysyłane są szeregowo w postaci ramek, w tym 8 bitów danych. Przykładowa wartość kodu dla przycisku F5 to 0xBF.
+}
+{}
+
+\begin{opracowanie}[87]
+\pytanie{Lista rozkazów procesora}
+
+\pytanie{Karta graficzna}
+
+\pytanie{Interfejs rs232}
+
+\pytanie{Licznik rozkazów}
+
+\pytanie{Rozkaz skoku bezwarunkowego procesora}
+
+\pytanie{Rozkaz procesora wykonujący dodanie dwóch liczb}
+
+\pytanie{Licznik cykli procesora}
+
+\pytanie{W procesorze wykorzystującym przetwarzanie potokowe}
+
+\pytanie{Sumator jednobitowy}
+
+\pytanie{Rejestr rozkazów}
+
+\pytanie{Przykłady układów kombinacyjnych, to}
+\odp
+
+\begin{itemize}
+\item ALU
+\item sumator
+\item komparator
+\item (de)multiplexer
+\end{itemize}
+
+\pytanie{Przykłady układów sekwencyjnych, to}
+
+\pytanie{Transmisja asynchroniczna}
+
+\end{opracowanie}
+
+\begin{thebibliography}{99}
+\bibitem{uw} Marcin Peczarski, \emph{Notatki do wykładu z architektury komputerów}, 17 lutego 2008
+\bibitem{js} Notatki do kolosa \url{http://kolos.math.uni.lodz.pl/~archive/Architektura%20komputerow/07%20jednostka%20sterujaca.pdf}
+\bibitem{uk} Układ kombinacyjny \url{https://pl.wikipedia.org/wiki/Uk%C5%82ad_kombinacyjny}
+\bibitem{sram} Pamięć statyczna RAM \url{http://eduinf.waw.pl/inf/alg/002_struct/0043.php}
+\bibitem{dram} Dynamiczna pamięć RAM \url{http://eduinf.waw.pl/inf/alg/002_struct/0044.php}
+\bibitem{dwuport} Pamięć dwuportowa \url{https://pl.wikipedia.org/wiki/Pami%C4%99%C4%87_dwuportowa}
+\bibitem{licz} Licznik asynchroniczny \url{http://eduinf.waw.pl/inf/alg/002_struct/0035.php}
+\end{thebibliography}

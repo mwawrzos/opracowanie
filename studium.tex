@@ -1,0 +1,73 @@
+\documentclass[11pt]{aghdpl}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{capt-of}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage{url}
+\usepackage{varwidth}
+\usepackage{titletoc}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage{xstring}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\definecolor{Gray}{gray}{0.75}
+\definecolor{LightGray}{gray}{0.90}
+
+\author{Informatyka 2012}
+\shortauthor{Informatyka 2012}
+
+\titlePL{Opracowanie pytań}
+\titleEN{}
+
+\shorttitlePL{Opracowanie pytań}
+\shorttitleEN{}
+
+\thesistype{Egzamin inżynierski 2015}
+
+\supervisor{}
+
+\degreeprogramme{}
+
+\subject{} 
+
+\date{2015}
+
+\department{}
+
+\faculty{}
+
+\newcommand{\PartialToc}{
+\startcontents[chapters]\vspace{-1cm}\vbox{\bf\large Spis treści}
+\printcontents[chapters]{}{1}{}
+\newpage
+}
+%---------------------------------------------------------------------------
+
+\setcounter{tocdepth}{0}
+\begin{document}
+
+\titlepages
+\tableofcontents
+\clearpage
+\setcounter{tocdepth}{1}
+
+\include{06/chapter}
+
+
+\end{document}
