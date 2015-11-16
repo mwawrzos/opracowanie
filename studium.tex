@@ -15,8 +15,12 @@
 \usepackage{varwidth}
 \usepackage{titletoc}
 \usepackage{hyperref}
-\usepackage{ifthen}
-\usepackage{xstring}
+\usepackage{framed}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\usepackage{latexsym}
+\usepackage{bbding} 
+
 
 \hypersetup{
     colorlinks,
@@ -52,11 +56,36 @@
 
 \faculty{}
 
+\titleformat*{\section}{\Large\bfseries}
+
 \newcommand{\PartialToc}{
 \startcontents[chapters]\vspace{-1cm}\vbox{\bf\large Spis treści}
 \printcontents[chapters]{}{1}{}
 \newpage
 }
+
+\newcommand{\answer}[5]{
+\section{#1}
+
+\noindent
+{\textbf{Przykładowa odpowiedź:}}
+#2
+\textbf{\ifstrequal{#3}{T}{PRAWDA}{
+    \ifstrequal{#3}{F}{FAŁSZ}{DIY}
+}}
+
+\vspace{0.4cm}
+\noindent
+\textbf{Odpowiedź:}
+#4
+\ifstrempty{#5}{}{
+    \vspace{0.4cm}
+    \noindent
+    \textbf{Wyjaśnienie:} #5
+}
+}
+
+
 %---------------------------------------------------------------------------
 
 \setcounter{tocdepth}{0}
