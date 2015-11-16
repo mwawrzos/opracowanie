@@ -18,36 +18,6 @@
 \par
 }
 
-\newcommand{\answer}[5]{
-\section{#1}
-%\textbf{#2}
-
-% \vspace{0.4cm}
-\noindent
-{\textbf{Przykładowa odpowiedź:}}
-#2
-\ifthenelse
-    {\equal{#3}{T}}
-    {\textbf{PRAWDA}}
-    {\ifthenelse
-        {\equal{#3}{F}}
-        {\textbf{FAŁSZ}}
-        {\textbf{DIY}}
-    }
-
-\vspace{0.4cm}
-\noindent
-\textbf{Odpowiedź:}
-#4
-
-\ifthenelse{\equal{#5}{}}{}{
-    \vspace{0.4cm}
-    \noindent
-    \textbf{Wyjaśnienie:} #5
-}
-
-}
-
 \section{Wprowadzenie}
 
 Przykładowe odpowiedzi nie kleją się z pytaniami, stąd właściwa odpowiedź rzadko będzie się odnosić do niej.
@@ -227,7 +197,7 @@ Zestaw instrukcji, jakie dany procesor jest w stanie wykonać. Każdy procesor m
 {
 OpenGL to specyfikacja otwartego i uniwersalnego API do tworzenia grafiki. Jest to zestaw podstawowych funckji umożliwiających tworzenie grafiki.
 }
-{Da się \cite{fpga:logi3D} (dafuq! skąd to mamy wiedzieć?? było na wykładzie??}
+{Samo FPGA nie wspiera (chyba). Da się z użyciem zewnętrznego akceleratora \cite{fpga:logi3D} (dafuq! skąd to mamy wiedzieć?? było na wykładzie??}
 
 \answer{Klawiatura}
 {kody wysyłane przez klawiature to kody ascii}{}
