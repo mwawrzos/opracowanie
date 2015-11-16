@@ -144,7 +144,7 @@ Z tego wynika, że możemy wykonać pamięć RAM z bramek NAND.
 
 Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowanie danej komórki, jeśli drugi proces zapisuje do niej.
 }
-{Znalazłem artykuły, które sugerują że takie pamięci są dostępne \url{http://bfy.tw/2n7S}}
+{Znalazłem artykuły, które sugerują że takie pamięci są dostępne \url{http://bfy.tw/2n7S} (czy ktoś kojarzy to na wykładach??)}
 
 \answer{Licznik}
 {możemy wykonać przy użyciu FPGA ale tylko jednokierunkowy}{F}
@@ -180,6 +180,89 @@ OpenGL to specyfikacja otwartego i uniwersalnego API do tworzenia grafiki. Jest 
 Dane z klawiatury wysyłane są w postaci scancodeów generowanych przez naciśniecie przycisku. Różne kody są używane przez klawiatury i zależy to od ich wewnętrzej implementacji i architektury. Naciśniecie przycisku może generować wiele kodów. Dane z klawiatury wysyłane są szeregowo w postaci ramek, w tym 8 bitów danych. Przykładowa wartość kodu dla przycisku F5 to 0xBF.
 }
 {}
+
+
+\label{odp:99}
+\answer
+{Interfejs rs232}
+{wykorzystuje transmisję szeregową}
+{T}
+{
+Szeregowy interfejs RS232 służy do przesyłania danych pomiędzy dwoma urządzeniami. W taki układ wejścia/wyjścia - port komunikacyjny - wyposażone są chyba wszystkiekomputery (najczęściej w dwa porty), komputerowe myszy, modemy, niektóre drukarki i pamięci masowe, a także wiele urządzeń przemysłowych.
+}
+{
+Standard RS-232 opisuje sposób połączenia urządzeń DTE (ang. Data Terminal Equipment) tj. urządzeń końcowych danych (np. komputer) oraz urządzeń DCE (ang. Data Communication Equipment), czyli urządzeń komunikacji danych (np. modem). Standard określa nazwy styków złącza oraz przypisane im sygnały a także specyfikację elektryczną obwodów wewnętrznych.
+}
+
+\label{odp:100}
+\answer
+{Licznik rozkazów}
+{słuzy do pamiętania adresu mającego się wykonać rozkazu lub adresu aktualnie pobieranego argumentu z pamięci programu}
+{T}
+{
+Licznik rozkazów jest podstawowym rejestrem znajdującym się w każdym procesorze. W zależności od modelu procesora w rejestrze tym przechowywany jest adres aktualnie wykonywanej lub częściej następnej instrukcji. W tym drugim wypadku licznik programu jest zwiększany zaraz po odebraniu instrukcji i przeniesieniu jej do rejestru instrukcji. Poprzez modyfikację tego rejestru implementuje się skoki, w tym skoki warunkowe, pętle i podprogramy.
+}
+{
+Procesor pobiera z pamięci kod rozkazu wskazywanego przez licznik rozkazów i umieszcza go w rejestrze rozkazów. Układ sterowania dekoduje go i na jego podstawie steruje pracą rejestrów, układu arytmetyczno-logicznego oraz wewnętrznych szyn.
+}
+
+\label{odp:101}
+\answer
+{Rozkaz skoku bezwarunkowego procesora}
+{Powoduje wpisanie do licznika rozkazów adresu rozkazu mającego się wykonac po skoku ale tylko w przypadku spełnienia warunku skoku}
+{F}
+{
+Skoki bezwarunkowe zawsze zmieniają przebieg programu.
+}
+{
+Rozgałęzienia (skoki) w programach typu x86 dzielą się na dwie kategorie: rozgałęzienia (skoki) bezwarunkowe (które zawsze zmieniają przebieg programu) oraz rozgałęzienia (skoki) warunkowe (które mogą, lecz nie musza zmienić przebiegu programu).
+}
+
+\label{odp:102}
+\answer
+{Rozkaz skoku warunkowego procesora}
+{Powoduje wpisanie do licznika rozkazów adresu rozkazu mającego się wykonac po skoku niezaleznie od warunku.}
+{F}
+{
+Procesor realizuje skok pod określonym warunkiem. Rozkaz skoku bada nie poprzednią instrukcję, do której przecież nie może wrócić, lecz stan pewnego specjalnego rejestru procesora, zwanego rejestrem znaczników.
+}
+{
+Znacznik należy rozumieć jako jednobitową komórkę mogącą przyjmować jeden z dwóch stanów: O lub 1.
+[\ref{odp:91}]
+}
+
+\label{odp:103}
+\answer
+{Rozkaz procesora wykonujący dodanie dwóch liczb}
+{Żaden z powyższych.}
+{F}
+{
+Rozkaz dodawania, którego pierwszym argumentem jest zawsze akumulator (w nim pozostaje również wynik dodawania) jest dostępny w dwóch wariantach:
+ADD - dodawanie bez przeniesienia
+ADDC - dodawanie z przeniesieniem (flaga CY)
+}
+{
+Przy dodawaniu wartości jednobajtowych wykorzystywany jest rozkaz ADD:
+ADD A, R7 ; A ← A + R7.
+Przy dodawaniu wartości wielobajtowych, do operacji na najmłodszych bajtach należyużyć rozkazu ADD, przy kolejnych zaś rozkazu ADDC. Przykład:
+MOV A, R5 ; młodszy bajt pierwszego składnika
+ADD A, R7 ; sumowanie młodszych bajtów
+MOV R7, A ; młodszy bajt wyniku
+MOV A, R4 ; starszy bajt pierwszego składnika
+ADDC A, R6 ; sumowanie starszych bajtów z uwzględnieniem przeniesienia
+MOV R6, A ; starszy bajt wyniku
+}
+
+\label{odp:104}
+\answer
+{Licznik cykli procesora}
+{To co robi procesor w danym cyklu danego rozkazu określone jest przez jednostkę sterującą.}
+{T}
+{
+Przy restarcie sprzętowym licznik cykli procesora ustawiany jest na zero a następnie zwiększanyo 1 co każdy cykl procesora.
+}
+{
+}
 
 \begin{opracowanie}[87]
 \pytanie{Lista rozkazów procesora}
