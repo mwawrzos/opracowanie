@@ -48,9 +48,64 @@
 
 }
 
+\section{Wprowadzenie}
+
 Przykładowe odpowiedzi nie kleją się z pytaniami, stąd właściwa odpowiedź rzadko będzie się odnosić do niej.
 Pytania są dosyć lakoniczne i nierzadko pokrywają jeden czy dwa wykłady tego przedmiotu, dlatego odpowiedzi będą raczej w formie skrótu tematu, a w wyjaśnieniach będę starał się opisać sedno absurdu przykładowej odpowiedzi.
 Będę starał się utrzymać konwencji w której pierwszy akapit jest najistotniejszy w danym pytaniu, a pozostałe, to pobieżne rozwinięte tematu, które warto raz przeczytać.
+
+\section{FPGA}
+
+W kilku pytaniach jest wspomniane o układach FPGA, lecz mało pytań jest bezpośrednio z tym układem związanych, dlatego pokrótce przypomnę, czym to jest.
+
+FPGA - Field-Programmable Gate Array (Programowalna Macierz Bramek) jest to układ składający się z wielu \emph{bloków logicznych} i \emph{rejestrów} połączonych między sobą z użyciem \emph{macierzy połączeń}. Po więcej szczegółów, jak to działa zapraszam tutaj: [\cite{fpga:hiw}] (nie powinny być potrzebne na egzaminie)
+
+Aby użyć tego układu, trzeba go najpierw zaprogramować. Stosuje się do tego między innymi języka opisu sprzętu VHDL. Pierwotnie powstał by dokumentować elektronikę, później znalazł zastosowanie w syntezie układów między innymi na FPGA.
+
+Przykładowy kod na licznik 4-bitowy:
+
+\begin{lstlisting}[language=VHDL]
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Counter2_VHDL is
+   port( Clock_enable_B: in std_logic;
+ 	 Clock: in std_logic;
+ 	 Reset: in std_logic;
+ 	 Output: out std_logic_vector(0 to 3));
+end Counter2_VHDL;
+ 
+architecture Behavioral of Counter2_VHDL is
+   signal temp: std_logic_vector(0 to 3);
+begin   process(Clock,Reset)
+   begin
+      if Reset='1' then
+         temp <= "0000";
+      elsif(Clock'event and Clock='1') then
+ 	 if Clock_enable_B='0' then
+	    if temp="1001" then
+	       temp<="0000";
+	    else
+	       temp <= temp + 1;
+	    end if;
+         end if;
+      end if;
+   end process;
+   Output <= temp;
+end Behavioral;
+\end{lstlisting}
+
+Wyjaśnienie co poniektórych fragmentów:
+\begin{itemize}
+\item \emph{REJESTR <= WARTOSC} - przypisanie wartości
+\item \emph{REJESTR = WARTOSC} - porównanie wartości
+\item \emph{REJESTR'event} - test, czy wejście spowodowało wywołanie procesu
+\item \emph{entity NAZWA is port (PORTY) end NAZWA;} - definicja interfejsu układu
+\item \emph{architekture NAZWA\_ARCH of NAZWA\_ENTITY is LOKALNE\_REJESTRY begin (process(AKTYWATORY) ZACHOWANIE) end NAZWA\_ENTITY;} - definicja implementacji; procesów może być bądź ile; warto wspomnieć, że zachowanie rejestrów jest inne niż zachowanie zmiennych w tak bliskich nam programach impreatywnych; to znaczy taki kod: \lstinline|temp <= "1010"; if temp = "1010";| nie zakończy się zawsze wejściem do bloku \emph{if}! Wartość jest zachowana w rejestrze dopiero po wyjściu z bloku i widoczna przy kolejnym wykonaniu procesu
+\item 
+\end{itemize}
 
 \answer
 {Do czego służy jednostka sterująca}
@@ -154,11 +209,11 @@ Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowa
 {Na FPGA można praktycznie stworzyć dowolne układy}
 
 \answer{Procesor}
-{możemy wykonać przy użyciu FPGA ale tylko jednordzeniowy}{}
+{możemy wykonać przy użyciu FPGA ale tylko jednordzeniowy}{F}
 {
 Sekwencyjne urządzenie cyfrowe zawierające jednostkę arytmetyczno-logiczną, jednostkę sterującą i rejestry. Wykonuje proste instrukcje z listy rozkazów procesora. W procesorze można wyróżnić dwie części: blok sterujący i blok wykonawczy. Blok sterujący ma za zadanie pobieranie rozkazów z pamięci, dekodowanie ich, przygotowanie argumentów oraz generowanie sygnałów sterujących operacjami podczas fazy wykonywania. Blok wykonawczy zawiera ALU.
 }
-{}
+{FPGA pozwala z łatwością tworzyć układy wykonujące zadania równoległe. Gdy mamy zaprojektowany jeden rdzeń procesora, to stworzenie wielordzeniowego procesora jest trywialne. Wystarczy skopiować taki rdzeń potrzebną ilość razy}
 
 \answer{Lista rozkazów procesora}
 {musi zawierać rozkazy z różnymi trybami adresowania}{}
@@ -168,11 +223,11 @@ Zestaw instrukcji, jakie dany procesor jest w stanie wykonać. Każdy procesor m
 {}
 
 \answer{Karta graficzna}
-{przy użyciu FPGA nie można zbudować karty graficznej ze sprzętowym wspomoaganiem OpenGL}{}
+{przy użyciu FPGA nie można zbudować karty graficznej ze sprzętowym wspomoaganiem OpenGL}{F}
 {
 OpenGL to specyfikacja otwartego i uniwersalnego API do tworzenia grafiki. Jest to zestaw podstawowych funckji umożliwiających tworzenie grafiki.
 }
-{}
+{Da się \cite{fpga:logi3D} (dafuq! skąd to mamy wiedzieć?? było na wykładzie??}
 
 \answer{Klawiatura}
 {kody wysyłane przez klawiature to kody ascii}{}
@@ -226,4 +281,6 @@ Dane z klawiatury wysyłane są w postaci scancodeów generowanych przez naciśn
 \bibitem{dram} Dynamiczna pamięć RAM \url{http://eduinf.waw.pl/inf/alg/002_struct/0044.php}
 \bibitem{dwuport} Pamięć dwuportowa \url{https://pl.wikipedia.org/wiki/Pami%C4%99%C4%87_dwuportowa}
 \bibitem{licz} Licznik asynchroniczny \url{http://eduinf.waw.pl/inf/alg/002_struct/0035.php}
+\bibitem{fpga:hiw} How does an FPGA work? \url{https://embeddedmicro.com/tutorials/mojo-fpga-beginners-guide/how-does-an-fpga-work}
+\bibitem{fpga:logi3D} Logi3D \url{http://www.logicbricks.com/Documentation/Flyers/logi3D_Graphics_Accelerator_01.pdf}
 \end{thebibliography}
