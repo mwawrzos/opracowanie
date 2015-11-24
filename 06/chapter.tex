@@ -87,6 +87,7 @@ Wyjaśnienie co poniektórych fragmentów:
 \cite{uw} Taki moduł pojawił się w pierwszym modelu architektury komputerowej von Neumanna. W tym modelu, jednostka sterująca zawiera: licznik programu (PC - program counter), rejestr adresowy (MAR - memory adress register), rejestr instrukcji (Instruction Register) i pomocnicze rejestry (Instruction Buffer Register)
 
 \cite{js} Instrukcje procesora są rozkładane na mikrooperacje wykonywane w kolejnych taktach procesora. Cykl procesora dzieli się na takty (np. 1 ustawienie adresu pamięci do odczytu, 2 pobranie wartości z pamięci, 3 podniesienie licznika programu)
+
 }
 {Zgodnie z odpowiedzią [\ref{odp:90}] licznik jest sensu stricto sekwencyjny.}
 \label{odp:87}
@@ -95,6 +96,7 @@ Wyjaśnienie co poniektórych fragmentów:
 {musi byc układem sekwencyjnym}{F}
 {
 Jednostka arytmetyczno-logiczna (Arythemtic-logical unit) - odpowiada za obliczenia i operacje logiczne. Sterowana przez jednostkę sterującą [\ref{odp:87}]
+
 }
 {\cite{uk} ALU jest blokiem kombinacyjnym [\ref{odp:90}]}
 
@@ -109,6 +111,7 @@ Jednostka arytmetyczno-logiczna (Arythemtic-logical unit) - odpowiada za oblicze
 Układ cyfrowy, w którym stan wyjść zależy wyłącznie od stanu wejść.
 
 Hazard w układach komibnacyjnych - wynika z niezerowego czasu propagacji sygnału przez kolejne elementy układu.
+
 }
 {Przerzutnik jk (ogólnie przerzutniki) jest układem sekwencyjnym [\ref{odp:91}]}
 \label{odp:90}
@@ -140,6 +143,7 @@ Układ asynchroniczny spełnia warunek
 Znaczy to tyle, że tylko zmiana stanu wejść może wpłynąć na zmianę stanu wyjść i stanu wewnętrznego.
 
 Układ synchroniczny - różni się od układu asynchronicznego tym, że stan na wejściach ma wpływ na układ tylko, gdy pojawi się sygnał na wejściu zegarowym. (szczególny przypadek układu asynchronicznego, jeśli traktować sygnał zegarowy jako jedno z wejść)
+
 }
 {Może, ale nie musi. Przykładowo przerzutnik RS można zbudować wykorzystując jedynie 2~bramki NAND. Przykład na układ składający się nie tylko z bramek: DRAM [\ref{odp:92}]}
 \label{odp:91}
@@ -154,6 +158,7 @@ Pamięć ram jest wytwarzana w dwóch technologiach:
 \item SRAM - \cite{sram} bity są zapamiętane w przerzutnikach. Pozwala na szybszy dostęp do wartości niż w pamięciach DRAM, lecz na jej konstrukcję potrzeba 6 tranzystorów (1 tranzystor i 1 kondensator dla DRAM), więc jest droższa w produkcji. Jest stosowana w pamięciach cache;
 \item DRAM - \cite{dram} zaprojektowana jako zastępnik pamięci SRAM. Jej konstrukcja jest dużo prostsza (poprzedni punkt), przez co jest tańsza w produkcji i można upakować więcej bitów na tej samej powierzchni. Wadą tego typu pamięci jest konieczność cyklicznego odświeżania stanu pamięci, by zniwelować zjawisko wycieku pamięci (szczegóły w źródle);
 \end{itemize}
+
 }
 {
 Bramka NAND pełni \emph{system funkcjonalnie pełny}, czyli możemy z jej pomocą skonstruować dowolny układ kombinacyjny. Pojedynczy tranzystor to układ kombinacyjny, który daje na wyjściu taką wartość, jaką dostał na wejściu.
@@ -168,6 +173,7 @@ Z tego wynika, że możemy wykonać pamięć RAM z bramek NAND.
 \cite{dwuport} rodzaj pamięci RAM umożliwiający dwóm niezależnym procesom dostęp do wspólnych danych.
 
 Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowanie danej komórki, jeśli drugi proces zapisuje do niej.
+
 }
 {Znalazłem artykuły, które sugerują że takie pamięci są dostępne \url{http://bfy.tw/2n7S} (czy ktoś kojarzy to na wykładach??)}
 
@@ -175,6 +181,7 @@ Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowa
 {możemy wykonać przy użyciu FPGA ale tylko jednokierunkowy}{F}
 {
 \cite{licz} Urządzenie zliczające impulsy zegarowe. Na wejściu ma sygnał impulsu zegara, ilość wyjść zależy ilobitowy jest licznik i podają wartość w postaci binarnej.
+
 }
 {Na FPGA można praktycznie stworzyć dowolne układy}
 
@@ -182,6 +189,7 @@ Ma dwa oddzielne zestawy linii adresowych i sterujących. Uniemożliwia adresowa
 {możemy wykonać przy użyciu FPGA ale tylko jednordzeniowy}{F}
 {
 Sekwencyjne urządzenie cyfrowe zawierające jednostkę arytmetyczno-logiczną, jednostkę sterującą i rejestry. Wykonuje proste instrukcje z listy rozkazów procesora. W procesorze można wyróżnić dwie części: blok sterujący i blok wykonawczy. Blok sterujący ma za zadanie pobieranie rozkazów z pamięci, dekodowanie ich, przygotowanie argumentów oraz generowanie sygnałów sterujących operacjami podczas fazy wykonywania. Blok wykonawczy zawiera ALU.
+
 }
 {FPGA pozwala z łatwością tworzyć układy wykonujące zadania równoległe. Gdy mamy zaprojektowany jeden rdzeń procesora, to stworzenie wielordzeniowego procesora jest trywialne. Wystarczy skopiować taki rdzeń potrzebną ilość razy}
 
@@ -219,7 +227,6 @@ Szeregowy interfejs RS232 służy do przesyłania danych pomiędzy dwoma urządz
 Standard RS-232 opisuje sposób połączenia urządzeń DTE (ang. Data Terminal Equipment) tj. urządzeń końcowych danych (np. komputer) oraz urządzeń DCE (ang. Data Communication Equipment), czyli urządzeń komunikacji danych (np. modem). Standard określa nazwy styków złącza oraz przypisane im sygnały a także specyfikację elektryczną obwodów wewnętrznych.
 }
 
-\label{odp:100}
 \answer
 {Licznik rozkazów}
 {słuzy do pamiętania adresu mającego się wykonać rozkazu lub adresu aktualnie pobieranego argumentu z pamięci programu}
@@ -230,6 +237,7 @@ Licznik rozkazów jest podstawowym rejestrem znajdującym się w każdym proceso
 {
 Procesor pobiera z pamięci kod rozkazu wskazywanego przez licznik rozkazów i umieszcza go w rejestrze rozkazów. Układ sterowania dekoduje go i na jego podstawie steruje pracą rejestrów, układu arytmetyczno-logicznego oraz wewnętrznych szyn.
 }
+\label{odp:100}
 
 \label{odp:101}
 \answer
@@ -289,42 +297,93 @@ Przy restarcie sprzętowym licznik cykli procesora ustawiany jest na zero a nast
 {
 }
 
-\begin{opracowanie}[87]
-\pytanie{Lista rozkazów procesora}
+\answer{W procesorze wykorzystującym przetwarzanie potokowe}{rozpoczęcie wykonania pierwszego etapu rozkazu moze nastąpić dopiero po zakończeniu wykonania pierwszego etapu poprzedniego rozkazu
+}{T}
+{
+Przy przetwarzaniu potokowym korzysta się z faktu, że instrukcje procesora są dzielone na mikrooperacje [\ref{odp:87}]. W takich procesorach instrukcja dzieli się na stałą ilość mikroinstrukcji. Mikrooperacje są od siebie zależne w zakresie jednej instrukcji, jednak często kolejne instrukcje można wykonywać równocześnie na różnych etapach. Procesor potokowy posiada osobny potok dla każdego etapu na jakie składa się jedna instrukcja.
 
-\pytanie{Karta graficzna}
+Procesor zaczyna przetwarzanie pierwszej instrukcji, pierwszy potok wykonuje na niej pierwszą mikrooperację. W drugim cyklu, drugi potok korzysta z rezultatów działania pierwszego potoku w poprzednim cyklu i wykonuje kolejną mikrooperację na pierwszej instrukcji. Równocześnie, w drugim cyklu, pierwszy potok zaczyna przetwarzanie drugiej instrukcji. I tak dalej.
 
-\pytanie{Interfejs rs232}
+Problemem w wprzetwarzanu potokowym są instrukcje zależne od siebie. Przykładem może być instrukcja skoku warunkowego. W takiej instrukcji rezultat działania jest zależny od tego, jakie flagi ustawią wcześniejsze instrukcje. W takich wypadkach stosuje się wstrzymywanie potoku (pipeline buble), jump prediction i inne metody.
 
-\pytanie{Licznik rozkazów}
+\subsection{Przykład procesora potokowego [\ref{pic:pip}].}
+Przedstawiony procesor przetwarza instrukcje korzystając z czterech potoków:
+\begin{enumerate}
+	\item wczytujący - zajmuje się mikroinstrukcjami związanymi z wczytaniem danych z RAM do rejsetrów
+	\item dekodujący - obsługuje mikroinstrukcje związane z  przesyłaniem sygnałów sterujących
+	\item wykonawczy - mikroinstrukcje przetwarzane przez ALU
+	\item zapisujący - wrzucenie wyników z rejsetrów (lub akumulatorów) do RAM
+\end{enumerate}
 
-\pytanie{Rozkaz skoku bezwarunkowego procesora}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.4\textwidth]{pipeline}
+	\caption{Schemat przykładowego procesora potowego}
+	\label{pic:pip}
+\end{figure}
 
-\pytanie{Rozkaz procesora wykonujący dodanie dwóch liczb}
+Każda instrukcja składa się z czterech mikroinstrukcji. Kolorami (zielony, fioletowy, granatowy, czerwony) są zaznaczone kolejne instrukcje tego procesora, z których każda składa się z czterech mikroinstrukcji. Kolejne kolumny, to cykle procesora. Jak widać, od czwartego cyklu procesor kończy przetwarzanie jednej instrukcji w każdym cyklu, mimo że jedna instrukcja potrzebuje czterech cykli.
 
-\pytanie{Licznik cykli procesora}
+}
+{W przetwarzaniu potokowym może być wykonywanych kilka instrukcji na raz, lecz te przetwarzanie każdej z tych instrukcji jest na różnych etapach.}
 
-\pytanie{W procesorze wykorzystującym przetwarzanie potokowe}
+\answer{Sumator jednobitowy}{pozwala uzyskac sumę dwóch liczb jednobitowych z uwzględnieniem przeniesienia z poprzedniej pozycji}{T}
+{
+Układ kombinacyjny \ref{odp:90}. Implementacja [\ref{pic:sum}]
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{sumator}
+	\caption{Sumator jednobitowy}
+	\label{pic:sum}
+\end{figure}
 
-\pytanie{Sumator jednobitowy}
-
-\pytanie{Rejestr rozkazów}
-
-\pytanie{Przykłady układów kombinacyjnych, to}
-\odp
-
+Sumatory wykonane tak jak na rysunku \ref{pic:sum}, można składać ze sobą tworząc sumator n-bitowy.
+Dla i-tego sumatora jednobitowego w n-bitowym sumatorze:
 \begin{itemize}
-\item ALU
-\item sumator
-\item komparator
-\item (de)multiplexer
+	\item wejście $A$, to i-ty bit pierwszego argumentu
+	\item wejście $B$, to i-ty bit drugiego argumentu
+	\item wejście $C_{in}$ jest podłączone do $C_{out}$ poprzedniego sumatora
+	\item wyjście $S$, to i-ty bit sumy
+	\item $C_{out}$, to i-ty bit przeniesienia.
 \end{itemize}
 
-\pytanie{Przykłady układów sekwencyjnych, to}
+}
+{Służy po temu połączenie $C_{in}$ z $C_{out}$ poprzedniego sumatora}
 
-\pytanie{Transmisja asynchroniczna}
+\answer{Rejestr rozkazów}
+{w trakcie wykonywania rozkazu zawartosć rejestru rozkazów musi zmienić się bezpośrednio przed pobraniem argumentu rozkazu z pamięci programu
+}{T}
+{
+	Rejestr przechowujący obecnie przetwarzaną instrukcję. Którą instrukcję trzeba pobrać, określa licznik rozkazów \ref{odp:100}. Rejestr ten jest elementem jednostki sterującej \ref{odp:87} i wykorzystywany przez dekoder rozkazów.
+}
+{Rozkaz może określać sposób pobierania wartości. Argument nie musi być pobierany z pamięci, może być użyta wartość zachowana w rejestrach. Zastanawiające jest jednak słówko ,,bezpośrednio''.}
 
-\end{opracowanie}
+\answer{Przykłady układów kombinacyjnych, to}
+{żaden z powyższych}{F}
+{
+	\begin{itemize}
+		\item ALU
+		\item sumator
+		\item komparator
+		\item (de)multiplexer
+	\end{itemize}
+	
+}{nie żaden i tyle}
+
+\answer{Przykłady układów sekwencyjnych, to}
+{żaden z powyższych}{F}
+{
+Wszelkiego rodzaju przerzutniki i układy, w których skład one wchodzą (liczniki, rejestry itp.)
+	
+}{nie żaden i tyle}
+
+\answer{Transmisja asynchroniczna}
+{żaden z powyższych}{T}
+{
+	sposób przesyłania danych pozwalający na nieregularne ich wysyłanie, przy czym początek i koniec transmisji oznaczane są wydzielonym (ustalonym) symbolem.
+	
+}
+{}
 
 \begin{thebibliography}{99}
 \bibitem{uw} Marcin Peczarski, \emph{Notatki do wykładu z architektury komputerów}, 17 lutego 2008
