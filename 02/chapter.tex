@@ -1,0 +1,295 @@
+\chapter{Wstep do systemow uniksowych}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+\vspace{0.4cm}
+\noindent  
+
+\answer
+{IT1A\_U09 Podstawowa architektura Unixa obejmuje:}
+{przykładowa odp.) Stos TCP/IP}
+{F}
+{jądro systemu, powłoki, oprogramowanie systemowe, pliki i katalogi}
+{
+\begin{itemize}
+\item Jądro - serce systemu operacyjnego. Zapewnia interakcję ze sprzętam. Główne zadania: zarządzanie pamięcią, scheduling, zarządzanie plikami.
+
+\item Powłoka - przetwarza żądania i polecenia wywołuje programy. Najbardziej znane powłoki w systemie Unix: C Shell, Bourne Shell and Korn Shell
+
+\item Polecenia i komendy(oprogramowanie systemowe) - ponad 250 standardowych komend plus licznych dostarczonych przez 3rd party software. Przykłady: cp, mv, cat and grep etc.
+
+\item Pliki i katalogi - Dane przechowywane w plikach. Wszystkie pliki są zebrane w katalogach o strukturze drzewiastej(system plików)
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_U09,IT1A\_W09 W systemie plików Unix:}
+{pliki które zmieniają się często są w katalogu /var}
+{T}
+{
+
+System plików jest logiczną strukturą organizacji plików
+\begin{itemize}
+\item ma strukturę drzewiastą,
+\item jest zawsze tylko jedna taka struktura,
+\item bezwględny początek '/' systemu plików (root),
+\item inne systemy mogą być włączane jako kolejne gałęzie,
+\item katalog bieżący '.', katalog nadrzędny '..',
+\item wszystkie pliki i katalogi mają nazwy będące ciągami znaków alfanumerycznych,
+\item nazwy mogą być długie i są case sensitive,
+\item katalog rozdziela się znakiem "/",
+\item ścieżka dostępu pozwala na umiejscowienie pliku w strukturze systemu,
+\item pełna (bezwzględna) ścieżka określa jego położenie względem początku drzewa i zaczyna się od /, np. /etc/passwd,
+\item względna ścieżka określa położenie względem katalogu bieżącego.
+\end{itemize}
+Ponadto:
+\begin{itemize}
+\item dostęp do wszystkich zasobów systemu Unix jest realizowany przez pliki,
+\item plik jest wygodną abstrakcją,
+\item wszystko jest plikiem,
+\item pliki są reprezentowane w systemie plików przez węzły indeksowe (i-inode),
+\item katalog jest szczególnym przypadkiem pliku, który zawiera listę w postaci (nazwa pliku, i-node),
+\item i-node jest podstawowym elementem składowym systemu plików,
+\item zawiera wszystkie informacje o pliku, poza jego nazwą (ta jest w katalogu!),
+\item wskazuje na to, gdzie się fizycznie znajdują dane zawarte w pliku,
+\item przechowuje daty: modyfikacji węzła ctime, modyfikacji (danych pliku mtime, dostępu do pliku atime,
+\item opisuje: typ i rozmiar obiektu, wraz z liczbą dowiązań (nazw),
+\item określa właściciela i grupę pliku, oraz prawa dostępu.
+\end{itemize}}
+{
+(...)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_U09 Prawo dostępu do pliku 453 pozwala}
+{Wszystkim czytać plik}
+{F}
+{użytkownikowi na odczyt, grupie na odczyt i uruchomienie, pozostałym na zapis
+}
+{Każde z praw dostępu ma swoją wartość(4 - odczyt, 2-zapis, 1- uruchomienie) nadawane kolejno dla usera, grupi i reszty. Dodawane są one do siebie i na tej podstawie ustala się prawa  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_U09 W systemie plików}
+{pliki które zmieniają się często są w katalogu /var}
+{T}
+{(...)}
+{Jak dwa pytania wyżej}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_U09 Które z poniższych stwierdzeń sa prawdziwe?:}
+{przykładowa odp.) każde konto musi należeć do co najmniej jednej grupy}
+{"F"}
+{}
+{
+Konto użytkownika to identyfikator <user name> oraz dołączone do niego zasoby, pliki i dane. Maksymalna  długość  identyfikatora  użytkownika  wynosi 8 znaków.
+Wszystkie potrzebne informacje na temat kont użytkowników zawarte są w pliku \textit{/etc/passwd}.\\
+Struktura jednego wpisu to: \\
+username:x:UID:GID:GECOS:home\_dir:shell
+UID – liczbowy identyfikator użytkownika \\
+GID – liczbowy identyfikator grupy \\
+GECOS – General Electric Comprehensive Operating System \\ 
+
+W większości dystrybucji są narzędzia do obsługi kont (np. userconfig). Informacje o użytkownikach dostarczają polecenia: \textit{w, who, finger}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_W09 Przy zarządzaniu systemami plików}
+{system plików sprawdzamy przez checkfs}
+{F}
+{poprawna komenda do sprawdzenia intergralności systemu plików to fsck}
+{
+
+Komendy zarządzania systemami plików:
+\begin{itemize}
+\item badblocks – kontroluje badblocks (złe bloki urządzeń)
+\item df – sprawdzanie przestrzeni (również wolnej) na dyskach
+\item fsck – sprawdzanie integralności systemu plików
+\item fdisk – manipulacje w tabeli partycji także cfdisk, sfdisk, parted
+\item mkfs – tworzenie systemu plików , 'formatowanie'
+\item lvm – narzędzia do LVM (zarządzanie przestrzenią pamięci masowej)
+\item mount – montowanie urządzeń/zasobów w systemie plików
+\item umount – odmontowanie zasobu z systemu plików
+\item dd – operacje io na dysku z pominięciem systemu plików
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_U09 W trakcie startu systemu Unix}
+{przykładowa odp.) pierwszym tworzonym procesem jest Init}
+{F}
+{}
+{
+Procedura uruchomieniowa systemu Unix: \\
+- sprzętowy program uruchomieniowy wczytuje program uruchomieniowy z dysku. Ten z kolei ładuje plik /vniunix (czasem nazwany /unix) z głównego katalogu głównego dysku. Są już w nim zawarte wszystkie programy obsługi urządzeń. Każdy z nicli sprawdza, czy odpowiednie urządzenie w systemie jest obecne i działa. Jeżeli coś jest nie w porządku, informacja o tym jest przechowywa-na na później, gdyby ktoś się odwoływał do urządzenia. Dodanie nowych urządzeń wymaga powtórnego zbudowania systemu. Zagadnienie to jest wyjątkowo obszerne i skomplikowane, ale odpowiednie informacje można znaleźć w dokumentacji własnego systemu.
+\\
+-następnie są uruchamiane trzy procesy. Dwa z nich zajmują się zarządzaniem pamięcią fizyczną (pagedaemon o numerze 2) i obsługą pamięci wirtualnej fswapper o numerze 0), trzeci inicjalizuje resztę systemu (init o numerze l).
+-W Systemie V spis programów, które mają być uruchomione przez init, jest zawarty w pliku /etc/inittab. Programy te wykonują operacje zbli-żone do poleceń zawartych w plikach /etc/rc i /etc/rc. local. Kiedy użytkownik odpowiada na znak zachęty "login:", program getty uruchamia program login, który pobiera od użytkownika hasło i porównuje je z zawartym w pliku /etc/passwd. Jeżeli hasło się zgadza, login tworzy środowisko i wypisuje komunikat dnia (/etc/motd). Na końcu jest uruchamiany program początkowy określony przez plik /etc/passwd, zazwyczaj powłoka. Powłoka wykonuje wtedy skrypt uru-chomieniowy (na przykład .profile) i czeka na wprowadzanie poleceń. Kiedy użytkownik opuszcza powłokę, zazwyczaj za pomocą <control-D>, dowiaduje się o tym proces init i powtórnie uruchamia program getty na danym terminalu.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_W09 Procesy w systemie Unix }
+{Działają dynamicznie i synchronicznie}
+{T}
+{"-"}
+{Wykonanie instrukcji jednego procesu musi być sekwencyjne. \\
+Każdy proces ma własny licznik instrukcji, który wskazuje następną instrukcję do wykonania, oraz własny obszar przydzielonej mu pamięci operacyjnej.\\
+W systemie Unix nowy proces jest tworzony w wyniku wywołania przez proces macierzysty funkcji systemowej fork. Powstaje wówczas nowy proces, który jest dokładną kopią macierzystego.\\
+Każdy proces ma m.in. unikatowy identyfikator- PID (ang. process identifier), który jednoznacznie określa działający proces oraz identyfikator procesu macierzystego PPID\\
+Proces jest podstawową aktywną jednostką pracy zarządzaną przez system.\\
+Procesy mogą być dynamicznie tworzone i usuwane. \\
+Pamięć operacyjna zwykle jest podzielona na cztery części (nazywane segmentami):
+\begin{itemize}
+\item segment kodu -- zawiera instrukcje wykonywanego programu
+\item segment danych -- zawiera zmienne globalne programu
+\item stos -- jest używany do wywoływania procedur, przekazywania parametrów i wyników, oraz przechowywania zmiennych lokalnych 
+\item sterta -- z tego obszaru przydzielana jest pamięć dla zmiennych dynamicznych
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_U09 Przykłady komunikacji międzyprocesowej w Unixie to}
+{pamięc dzielona}
+{T}
+{
+\begin{itemize}
+\item sygnały
+\item pliki i blokady – najprostsza i najstarsza forma IPC (Inter-Process Communication)
+\item łącza nienazwane- FIFO, identyfikowane przez nazwę, istnieje jako plik, po zakończeniu procesów nie jest usuwane
+\item łącza nazwane- zapisywane w deskryptorach plików, dostęp tylko przez procesy pokrewne(dziedziczenie deskryptorów), po realizacji ostatniego procesu są zamykane
+\item semafory- Używane są do kontroli dostepu do zasobów systemu dzielonych przez kilka procesów, dostarczają lepsze blokady
+\item kolejki komunikatów- rodzaj FIFO,Istnieje mozliwosc umieszczania komunikatow w okreslonych kolejkach (z zachowaniem kolejnosci ich wysylania przez procesy) oraz odbierania komunikatu na pare roznych sposobow (zaleznie od typu, czasu przybycia itp.).
+\item pamięć dzielona- Jest to obszar pamięci dzielony pomiędzy kilkoma procesami. Dane umieszczane są przez proces w tzw. segmentach, w obszarze adresowym procesu wywołującego. Może z nich korzystać wiele procesów. Pamięć dzielona jest najszybszym sposobem komunikacji pomiędzy procesami.
+\item gniazda- wykorzystywane do komunikacji przez sieć, umożliwiają komunikacje dwukierunkową, Gniazda posiadają takie właściwości jak: swój typ, lokalny adres, oraz opcjonalnie port. Typ gniazda określa sposób wymiany danych, adres IP określa węzeł w sieci a numer portu określa proces w węźle.
+\end{itemize}
+}
+{"up"}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_W09 Rejestrowanie zdarzeń w Unixie}
+{logi mogą być porządkowane cyklicznie z użyciem Cron-a}
+{T}
+{"-"}
+{Cron umożliwia cykliczne uruchamianie programów. Linux ma mechanizmy rejestrujace kazde zdarzenie w systemie. Logowanie jest wykonywane przez pracujacy bez przerwy system \textit{Sysklogd}, składajacy sie z demonów: \textit{klogd} i \textit{syslogd}.
+System \textit{Sysklogd} zapisuje (loguje) informacje do plików rejestrów/„logów”
+systemowych, w katalogu \textit{/var/log}.
+Pliki rejestrów sa cyklicznie porzadkowane przy pomocy specjalnych programów wywoływanych przez Cron.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_U10,IT1A\_W10 Przy konfiguracji komunikacji sieciowej w Unix:}
+{kernel automatycznie okresla adres IP }
+{"F"}
+{"Adres IP jest określany ręcznie podczas konfiguracji interfejsu sieciowego"}
+{Przed przystapieniem do konfigurowania interfejsu trzeba ustalic jego podstawowe
+parametry. Są to:
+\begin{itemize}
+\item adres IP,
+\item maska sieci IP,
+\item broadcast IP,
+\item adres MAC, jezli wykorzystuje sie DHCP.
+\end{itemize}
+Konfigurowanie interfejsu sieciowego mozna podzielic na kilka etapów.
+\begin{itemize}
+\item okreslenie parametrów (IP, maska, itp.),
+\item konfigurownie przy pomocy ifconfig,
+\item testowanie przy pomocy ping,
+\item zapis konfiguracji w plikach dystrybucji systemu.
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\answer
+{ IT1A\_U09 Pliki konfiguracyjne powłoki Bash w systemie Unix:}
+{/etc/profile – jest wczytywany przy kazdym starcie powłoki }
+{F}
+{
+Kolejność uruchamiania plików jest następująca:
+\begin{enumerate}
+\item  interaktywna powłoka logowania – czytane są kolejno pliki: /etc/profile, /.bash\_profile, /.bash\_login i /.profile,
+\item powłoka interaktywna, nie będąca powłoką logowania – czytany jest tylko plik /.bashrc,
+\item  powłoka nieinteraktywna – czytany jest plik, którego nazwa jest zawarta w zmiennej \$BASH ENV,
+\item jeżeli Bash jest uruchamiany jako Sh (na przykład poprzez link symboliczny) to uruchamiane
+są pliki /etc/profile i /.profile.
+\end{enumerate}
+
+
+}
+{
+\\
+Pliki konfiguracyjne w katalogu /etc/
+\begin{enumerate}
+\item profile - ten plik zawiera podstawowe ustawienia nadawane przez administratora.
+\item bashrc - w pliku tym najczęściej znajduje się tylko definicja znaku gotowości. Mimo iż znajduje się ona także
+                w pliku profile, bash czasami nie wyświetla znaku gotowości, dlatego konieczne jest ustawienie go także w bashrc.
+\item inputrc - zawiera opcje do edytora poleceń basha.
+\end{enumerate}
+Pliki konfiguracyjne z katalogu użytkownika
+\begin{enumerate}
+\item .bash\_profile lub .bash\_login lub .profile - komendy wykonywane przy logowaniu do systemu
+\item .bashrc - komendy wykonywane przy uruchomieniu nowego interaktywnego shella bez logowania
+
+\item .bash\_logout - komendy wykonywane przy wylogowaniu z systemu (wyjście z login shella)
+\end{enumerate}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_U09  W wyniku którego z poniższych poleceń członkowie grupy, do której należy plik, stracą prawo  do jego modyfikacji
+}
+{chmod 731 plik}
+{F}
+{ta w ktorej na drugim miejscu w prawach jest 5,4,1 lub 0}
+{Prawa do modyfikacji(zapisu) mają wartosc 2 i dla grupy są na drugim miejscu. Prawidłowa odpowiedź jest ta, na której na drugim miejscu nie ma tej dwójki uwzględnionej}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{IT1A\_U09 Które z ponizszych stwierdzeń dotyczących sygnałów przesyłanych do procesów systemie Unix są poprawne}
+{sygnał SIGHUP nie zawsze zatrzymuje proces}
+{T}
+{-}
+{
+\begin{itemize}
+\item W przypadku odebrania sygnału proces może: zezwolić na domyślną obsługę sygnału, zignorować sygnał, obsłużyć sygnał samodzielnie
+\item są sygnały, których nie można ignorować - SIGKILL i SIGSTOP
+\item sygnały są jedną z podstawowych metod komunikacji między procesami,
+\item umożliwiają specjalną komunikację użytkownika z procesami,
+\item jądro systemu wysyła sygnały do procesów,
+\item większość sygnałów jest związanych z różnymi warunkami zakończenia procesów,
+niektóre mogą być przechwytywane,
+\item nieprzechwytywalnym sygnałem powodującym bezwarunkowe usunięcie procesu jest SIGKILL (9).
+\end{itemize}
+Ponadto:
+\begin{itemize}
+\item są mechanizmem powiadamiania procesów o zajściu pewnych zdarzeń w systemie,
+\item stosuje się je jako prymitywny mechanizm synchronizacji procesów w systemie,
+\item nie są mechanizmem komunikacji, tj. istotne jest pojawienie się sygnału, nie można z nim związać dodatkowej informacji.
+\end{itemize}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\answer
+{ IT1A\_W10,IT1A\_U10 Przy konfiguracji obsługi sieci w Unixie:}
+{plik /etc/hosts przechowuje listę znanych hostów i interfejsów sieciowych}
+{T}
+{-}
+{ Plik \textit{/etc/hosts} to prosty plik tekstowy, który łączy adres IP z nazwą hosta.
+Plik \textit{/etc/hosts} zawiera informacje istotne dla funkcjonowania \textit{resolvera} (biblioteka będąca częścia biblioteki systemowej, Zajmuje sie
+odnajdywaniem nazw maszyn pracujacych w sieci). Znajduja sie w nim miedzy innymi:
+\begin{itemize}
+\item adresy IP lokalnych interfejsów (w tym musi byc loopback),
+\item nazwa FQDN maszyny,
+\item  sieci podłaczonych do interfejsów lokalnych,
+\item  innych maszyn i sieci.
+\end{itemize}
+Plik \textit{/etc/networks} zawiera adresy znanych sieci IP.
+}

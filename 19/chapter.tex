@@ -1,0 +1,311 @@
+\chapter{Teoria kompilacji i kompilatory}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+\answer
+{Typowy skaner języka formalnego ma za zadanie}
+{Zliczyć lewe i prawe nawiasy sprawdzając wstępnie ich sparowanie}
+{F}
+{Wczytać kod źródłowy programu do postaci tokenów, innymi słowy - wykonuje analizę leksykalną.}
+{\textbf{Według wykładu Klimka, skaner:}
+
+\begin{itemize}
+\item wyodrębnia podstawowe symbole języka zwane \textit{atomami} lub \textit{tokenami}
+\item usuwa znaki nie mające wpływu na sam program, np. odstępy, tabulacje,
+\item usuwa komentarze umieszczone w programie,
+\item dane wejściowe to postać pośrednia programu źródłowego zawierająca atomy wraz z krótkim opisem
+\end{itemize}}
+
+\answer
+{Typowy parser języka formalnego ma za zadanie}
+{Wstępnie przydzielić adresy zmiennym kontrolnym pętli programu źródłowego}
+{}
+{Parser, nazywany też analizatorem syntaktycznym, dokonuje rozbioru syntaktycznego. Powinien odtworzyć wywód oraz go zapamiętać (np. przez kolejne numery produkcji). Parser korzysta z wcześniej zdefiniowanej gramatyki.}
+{\textbf{Według wykładu Klimka}, parser ma na celu sprawdzenie poprawności syntaktycznej przez:
+
+\begin{itemize}
+\item dokonanie rozbioru programu na części składowe,
+\item zbudowanie odpowiedniego drzewa składniowego
+\end{itemize}
+\textbf{Dodatkowo:}
+Parser można podzielić na:
+\begin{itemize}
+\item \textit{analizator syntaktyczny} - dokonuje ścisłej analizy składniowej,
+\item \textit{analizator semantyczny} - sprawdza pewne aspekty poprawności semantycznej(np. wielokrotna deklaracja tej samej zmiennej, a także inne).
+\end{itemize}
+}
+
+\answer
+{Przez rozbiór kanoniczny rozumiemy rozbiór, który:}
+{W pierwszej kolejności redukuje prawostronne symbole formy zdaniowej}
+{F}
+{Jest to rozbiór, który zawsze rozpoczyna redukcję formy zdaniowej od lewej strony}
+{}
+%\section{K\_W15, K\_W03, K\_W04, K\_W07, K\_W20, K\_K01, K\_K06}
+
+\answer
+{Metoda generacyjna rozbioru gramatycznego polega na tym, że:}
+{Rozpoczynając od symbolu początkowego gramatyki usiłuje się przejść do napisu wejściowego}
+{T}
+{Polega na tym, że rozpoczynamy analizę od ``najbardziej ogólnego'' elementu gramatyki (symbolu startowego) i dążymy do otrzymania terminali pasujących do analizowanej formy gramatycznej}
+{\textbf{Według wykładu Klimka:}
+
+Metoda \textit{generacyjna} polega na tym, iż rozpoczynając od symbolu startowego gramatyki, korzystając ze wszystkich jej produkcji, próbuje się utworzyć końcowy cel analizy, tzn. wygenerować analizowany ciąg symboli. Analiza ta zwana jest także \textit{zstępującą}, ze względu na fakt rozpoczęcia analizy od symbolu początkowego i posuwania się w analizie w dół, tj. budowania drzewa syntaktycznego od jego korzenia do liści.}
+%\section{K\_W15, K\_W03, K\_W04, K\_W07, K\_W20, K\_U24}
+
+\answer
+{Metoda redukcyjna rozbioru gramatycznego polega na tym, że:}
+{Rozpoczynając od symbolu początkowego gramatyki usiłuje się przejść do napisu wejściowego}
+{F}
+{Polega na próbie otrzymania symbolu początkowego gramatyki wychodząc od napisu wejściowego.}
+{\textbf{Według wykładu Klimka:}
+
+Metoda \textit{redukcyjna} polega na tym, iż rozpoczynając od analizowanego ciągu symboli sprawdza się możliwości zredukowania go do symbolu początkowego gramatyki korzystając z jej produkcji. Analiza ta zwana jest także \textit{wstępującą}, ze względu na fakt prowadzenia analizy od liści drzewa syntaktycznego i posuwania się do góry w stronę jego korzenia.
+
+\textbf{Dodatkowo}: Do analizy generacyjnej można stosować algorytmy zarówno z \textit{wolymi} jak i z \textit{szybkimi powrotami}. Ograniczeniem analizatorów generacyjnych jest to, iż zasadniczo nie pozwalają na lewostronną rekursję języków. Wymaga to albo przekształcenia produkcji, albo modyfikacji analizatora. W analizie generacyjnej warto zwrócić uwagę na kolejność, a także postać samych produkcji. Jeśli chodzi o kolejność -- wskazane jest by produkcje opisujące ten sam symbol, a którycj prawe strony są przedrostkami innych produkcji, następowały po tych innych produkcjach. Jeśli chodzi o postać produkcji -- to należy unikać produkcji o tych samych przedrostkach, np.
+$$ E \rightarrow Ba $$
+$$ E \rightarrow Bb $$
+}
+%\section{K\_W15, K\_W03, K\_W04, K\_W07, K\_W20, K\_U24}
+
+\answer
+{Dla analizatorów klasy $LL(k)$ prawdziwe są następujące stwierdzenia}
+{Parametr k oznacza liczbę symboli wejsciowych używanych do podejmowania decyzji w każdym kroku pracy}
+{T}
+{(314==315)\\
+\begin{itemize}
+\item Odtwarzamy wywód lewostronny
+\item k - ilość tokenów używanych do określenia dalszej ścieżki
+\item nie wykonują nawrotów (no tak mi się przynajmniej wydaje, bo niby w którym etapie analizy są wykonywane nawroty)
+\end{itemize}
+
+\textbf{Dane o analizatorze $LL(k)$}
+\begin{itemize}
+\item Analizator generacyjny ze stosem,
+\item pierwsza liera $L$ odnosi się do kierunku analizowania wejścia (od lewej do prawej),
+druga litera $L$ do wywodu(wywód lewostronny),
+\item $k$ wskazuje ile symboli wprzód musi być podglądanych aby jednoznacznie określić produkcję niezbędną do poprowadzenia wywodu,
+\item analizatory pracują w sposób deterministyczny,
+\item Gramatyki $LL(k)$ są jednoznaczne,
+\item Przed budowaniem parsera $LL(k)$ należy z gramatyki usunąć lewostronną rekursję,
+\item Rekursją prawostronna jest dopuszczalna dla analizatrów typu $LL(k)$,
+\item bład składniowy rozpoznawany jest bezpośrednio po natrafieniu na symbol, który nie należy do programu poprawnego,
+\item ceną takiego analizatora jest gramatyka o odpowiednich własnościach pozwalająca zrealizować determizm (Sprawdzenie gramatyki pod tym kątem jest stosunkowo łatwe i może odbywać się recznie),
+\item O analizatorach $LL(k)$ mówimy, że nie znają historii (może być to uznawane za słabość w porównaniu z np. analizatorami klasy $LR(k)$),
+\item związane z analizatorem $LL(k)$ : $PRFX_{k}$ i $FOLLOW_{k}$ (Pozwalają na wyznaczenie odpowiednio prefiksów i następników łańcuchów symboli).
+\end{itemize}
+}
+{}
+
+\answer
+{Usunięcie $\epsilon$-produkcji z gramatyki klasy $G_{LL(k)}$ powoduje}
+{Zwiększenie wartości parametru $k$ w tej gramatyce/parserze}
+{T}
+{W analizatorach typu $LL(k)$ $\epsilon$-produkcje gramatyki są dopuszczalne, jednak warto produkcje takie zastąpić produkcją pojedyńczą. Można również w ogóle usunąć $\epsilon$-produkcje.
+
+}
+{\textbf{Twierdzenie}
+
+Dla każdej gramatyki $G$ można skonstruować gramatykę $G'$ bez $\epsilon$-produkcji taką, że $L(G') = L(G)\setminus \{ \epsilon \}$
+Jeżeli gramatyka $G$ jest $LL(k)$, to $G'$ jest $LL(k+1)$. }
+%\section{K\_W15, K\_W03, K\_W04, K\_W07, K\_W20, K\_U24}
+
+\answer
+{W odniesieniu do parserów klasy $LR(k)$ prawdziwe są następujące ogólne stwierdzenia:}
+{Na stosie trzymane są prefiksy i sufiksy form zdaniowych, co do których jest nadzieja na ich wykorzystanie}
+{F}
+{Na stosie trzymane są odwiedzone stany automatu parsującego
+
+\textbf{Troszke o $LR(k)$}:
+\begin{itemize}
+\item Gramatyka bezkontekstowa nazywana jest gramatyką $LR(k)$, jeżeli istneje dla niej parser $LR(k)$,
+\item Parser $LR$ wykonuje analizę metodą wstępującą (\textit{bottom-up}), ponieważ próbuje wyprowadzić produkcję najwyższego poziomu poprzez analizowanie liści.
+\item paresery $LR$ są trudne do ręcznego zaprogramowania, dlatego są one zwykle konstruowane przez generator parserów,
+\item budowa parsera:
+    \begin{itemize}
+    \item bufor \textit{wejścia},
+    \item stos na którym przechowywana jest lista stanów, w których był automat,
+    \item \textit{tabela goto} w której opisane jest, do którego nowego stanu powinniśmy przejść,
+    \item \textit{tabela action} daje regułę gramatyki do zastosowania w bieżącym stanie i dla aktualnego symbolu terminalnego w strumieniu wejściowym,
+    \item parser $LR$ czyta strumień wejściowy od lewej do prawj, ale potrzebuje wyprowadzić prawostronne wyprowadzenie, używa \textbf{redukcji} zamiast wyprowadzeń do przetwarzania strumienia wejściowego (Oznacza to, że algorytm działa tworząc "lewostronną redukcję" wejścia). Końcowym rezultatem po odwróceniu będzie prawostronne wyprowadzenie,
+    \item ważne pojęcie w parserach $LR$ - sytuacja (\textit{en.item}) (symbol kropki dodawanej na którymś miejscu po prawiej stronie w produkcji np. $E \rightarrow E\bullet + B$). używane w celu określenia stanu parsera.(Zazwyczaj nie można opisać stanu parsera pojedyńczą sytuacją, ponieważ może on nie wiedizeć z wyprzedzeniem, którą regułę będzie używał do redukcji.
+    \end{itemize}
+\end{itemize}
+
+Algorytm działania:
+
+\begin{enumerate}
+\item Stos jest inicjowany przez [0]. Bieżącym stanem będzie zawsze ten stan, który jest na szczycie stosu
+\item Biorąc bieżący stan i bieżący symbol terminalny w strumieniu wejściowym, akcja jest brana z tabeli action (tabela action opisana w pytaniu niżej)
+\item Krok 2 jest powtarzany dotąd aż strumień zostanie zaakceptowany lub zostanie zgłoszony błąd składni
+\end{enumerate}
+}
+{}
+
+\answer
+{W odniesieniu do pracy parserów klasy $LR(k)$ i funkcji action prawdziwe są stwierdzenia:}
+{funkcja $action$ przyjmuje wartości ze zbioru $\{shift, reduce, accept, error\}$}
+{T}
+{
+% o LR można przenieść do pytania wyżej
+% i, o szumiący borze, ale żeś się upisała! :D
+% teraz mi strasznie wstyd, że tak mało zrobiłem :(
+% hahaha, panie ja nie czytam komentarzy :)
+% spoko loko, akurat to miałam pod ręką, jak człowiek chodzi na drugie terminy, to cos mu tam po nich zostaje.
+Tabela action -- daje regułę gramatyki do zastosowania w bieżącym stanie i dla aktualnego symbolu terminalnego w strumieniu wejściowym.
+\\
+\textbf{Tabela \textit{action}}. Mamy 4 przypadki:
+\begin{itemize}
+\item{przesunięcie(\textit{shift}) $s_{n}$:}
+    %tak nie lepiej?
+    \begin{itemize}
+    \item bieżący symbol terminalny jest usuwany ze strumienia wejściowego,
+    \item stan \textit{n} jest wkładany na stos i staje się bieżącym stanem.
+    \end{itemize}
+    %\subitem *bieżący symbol terminalny jest usuwany ze strumienia wejściowego,
+    %\subitem *stan \textit{n} jest wkładany na stos i staje się bieżącym stanem.
+\item{redukcja(\textit{en.reduce}) \textit{rm}:}
+    \begin{itemize}
+    \item liczba \textit{m} oznaczająca numer reguły wyprowadzenia jest wpisywana do strumienia wyjściowego,
+    \item dla każdego symbolu(terminalnego lub nieterminalnego) z prawej strony reguły \textit{m} stan jest usuwany ze stosu,
+    \item biorąc stan który jest następnie na szczycie stosu i symbol nieterminaly, któy jest po lewej stronie \textit{m}, nowy stan jest brany z tabeli \textit{goto} i staje się nowym bieżącym stanem przez włożenie go na stos.
+    \end{itemize}
+    %\subitem *liczba \textit{m} oznaczająca numer reguły wyprowadzenia jest wpisywana do strumienia wyjściowego,
+    %\subitem *dla każdego symbolu(terminalnego lub nieterminalnego) z prawej strony reguły \textit{m} stan jest usuwany ze stosu,
+    %\subitem *biorąc stan który jest następnie na szczycie stosu i symbol nieterminaly, któy jest po lewej stronie \textit{m}, nowy stan jest brany z tabeli \textit{goto} i staje się nowym bieżącym stanem przez włożenie go na stos. 
+\item{akceptacja(\textit{en.accept}) \textit{acc} -- strumień symboli terminalnych jest zaakceptowany,}
+\item{brak akcji(\textit{en. error}) \textit{err} -- zgłaszany jest błąd syntaktyczny.}
+\end{itemize}
+}
+{}
+
+\answer
+{Dla tablic sterujących parserów klasy $LR(0)$ i przykładowej produkcji $A \rightarrow XYZ$ mamy:}
+{Cztery możliwe sytuacje minus przypadki gdy z danego symbolu po prawej stronie wyprowadzamy tylko symbol pusty}
+{T}
+{W przypadku tego pytania, sytuacje będą takie:
+\begin{enumerate}
+\item $A \rightarrow \bullet XYZ$
+\item $A \rightarrow X\bullet YZ$
+\item $A \rightarrow XY\bullet Z$
+\item $A \rightarrow XYZ\bullet$
+\end{enumerate}
+Jeżeli któryś z symboli będzie dawał tylko symbol pusty, wtedy sytuacji będzie mniej, np. przy założeniu, że $X \rightarrow \epsilon$, sytuacje będą takie:
+\begin{enumerate}
+\item $A \rightarrow \bullet YZ$
+\item $A \rightarrow Y\bullet Z$
+\item $A \rightarrow YZ\bullet$
+\end{enumerate}
+}
+{}
+
+\answer
+{Budowa tablic sterujących dla analizatorów klasy $LR$ może stwarzać pewne trudności, szczególnie w zakresie automatyzacji, co ma pośredni wpływ na istnienie
+wielu odmian tych parserów. Które z poniższych prostych stwierdzeń są poprawne:}
+{pierwsze litery w nazwie $LALR$ oznaczają $Look Ahead$}
+{T}
+{\begin{itemize}
+\item wspomniane odmiany to:
+    \begin{enumerate}
+    \item $SLR$ - Simple $LR$ (jeżeli nie pojawia się k, to jest to $SLR(1)$)
+    \item $LALR$ - Look Ahead $LR$ - potrafi przetwarzać gramatyki niebędące $LR(0)$ wymagając takiej ilości stanów co $LR(0)$
+    \item $GLR$ - General $LR$ - umożliwia obsługę niedeterministycznych i niejednoznacznych gramatyk
+    \end{enumerate}
+\end{itemize}
+
+Normalnie w parserach $LR(0)$ w tablicy parsingu akcje redukcji muszą zajmować cały wiersz tabeli powodując to, ze redukcja wykonana jest niezależnie od następnego symbolu w strumieniu wejściowym. Z tego powodu tabele $LR(0)$ nie zaglądają w przód przed decyzją, której redukcji użyć. 
+\\~\\
+Gramatyka, która potrzebuje spojrzeć w przód aby wybrać redukcję będzie potrzebowała tabeli parsingu, której wiersz będzie zawierał różne akcje redukcji w różnych kolumnach. 
+\\~\\
+Prcedury konstruujące $SLR$ lub $LALR$ mają możliwość tworzenia wierszy tabeli dla których akcja redukcji nie zajmuje całych wierszy. Dlatego parsery te mają możliwość analizy większej ilości gramatyk niż $LR(0)$.
+\\~\\
+Automat($LR(0)$) konstruowany jest w sposób, który gwarantuje determinizm. Jednak kiedy akcje redukcji są dodawane do tabeli \textit{action}, może się zdarzyć, że ta sama komórka jest wypełniona przez akcję redukcji i akcję przesunięcia (\textit{konfilkt przesunięcie-redukcja}) lub przez dwie różne akcje redukcji(\textit{konflikt redukcja-redukcja}. Kiedy to się zdarza, to znaczy, że gramatyka nie jest $LR(0)$.
+
+\begin{itemize}
+\item $E \leftarrow 1 E $ (akcja przesunięcia)
+\item $ E \leftarrow 1 $ (akcja redukcji)
+\end{itemize}
+konflikt przesunięcie redukcja, ponieważ w komórce tabeli action dla stanu i symbolu '1' jest jednocześnie możliwe przesunięcie stanu i redukcja regułą 2. Rozwiązaniem dla tego problemu może być zastosowanie zboiru \textit{FOLLOW} takie rozwiązanie jest charakterystyczne dla parsera $SLR$.
+\\~\\
+Parser $SLR$ to parser typu $LR$, jego tabela parsingu kostruowana jest na podstawie kanonicznej rodziny zbiorów sytuacji $LR(0)$ oraz zbiorów $FOLLOW$ dla gramatyki \textit{G}. Sam parser różni się od innych parseró typu $LR$ sposobem konstrukcji(i zazwyczaj zawartością) tej tablicy, natomiast sam algorytm analizy jest identyczny. Jeśli w tabeli parsingu istnieje konfilkt to znaczy, że powstąły parser nie jest deterministyczny i w zasadzie do celów praktycznych sie nie nadaje i trzeba albo zmodyfikować gramatyke albo zastosować lepszy generator (np. $LALR$).  Problemem parserów $SLR$ jest to, że wyznaczenie zbioru \textit{look-ahead} jest zbyt uproszczone, ponieważ używa jedynie reguł gramatyki. Dokladniejsze zbiory \textit{look-ahead} są nazywane zbiorami parsingu $LALR$.
+\\~\\
+Zaletą $SLR$ w porównaniu z $LALR$ jest łatwość konstrukcji, płaci się za to zmniejszeniem ilości rozpoznawanych gramatyk, gdyż dosyć często interesujące gramatyki nie są $SLR$, natomiast są już $LALR$.
+}
+{}
+
+\answer
+{Dla pewnej gramatyki mówimy, że sytuacja $LR(0)$ oznaczona $[N \rightarrow \beta_1\bullet\beta_2]$ dla $\gamma \in V^*$ jest poprawna, gdy przy założeniu $\alpha\beta_1 = \gamma$ prawdziwe jest:}
+{$S \xRightarrow{rm*} \alpha N \omega \Rightarrow \alpha \beta_1 \beta_2 \omega$}
+{}
+{Według moich notatek z wykładu Klimka poprawne jest coś takiego:
+$S \xRightarrow{rm*} \alpha N \omega \Rightarrow \alpha \overset{*}{\beta_1} \beta_2 \omega$
+%Tylko czy ta gwiazdka ma znaczenie? Pamiętam, że wykład prowadził Piwowarczyk i on nie miał pojęcia co ta gwiazdka tak właściwie oznacza...
+%brzmi jak Klimek, nie? ;)
+%stawiam ze ta gwiazdka odnosi sie do sytuacji, albo...do aktualnie analizowanego symbolu, nie iwem...
+\\
+(Pytanie dziwne...) Wyjaśnijmy użyte symbole:
+\\
+$S$ -- zwyczajowo zawsze bedzie oznaczać symbol startowy Gramatyki,
+\\
+$rm*$ -- oznacza ciąg redukcji (0 lub więcej), które do tej pory zastosowaliśmy,
+\\
+$\omega$ -- słowo, string, zawiera 1 lub więcej symboli terminalnych,
+\\
+$\alpha, \beta$ -- podciągi słowa może zawierać terminale i nieterminale.
+\\
+$\gamma$ -- aktywny prefiks gramatyki $G$, $\gamma$ prefiks łańcucha $\alpha\beta_{1}$
+\\
+$v$ -- symbol terminalny lub koniec strumienia(dolar), nazywany symbolem podglądanym(lookahead).
+\\
+Aktywny prefiks - łańcuch będący prefiksem pewnej prawostronnie wyprowadzalnej formy zdaniowej, nie wychodzący poza prawy koniec jej osnowy(Każdy wiersz tablicy parsingu $LR(1)$(czyli stan) odpowiada pewnemu aktywnemu prefiksowi).
+\\
+Sytuacja: $[N \rightarrow \beta_{1}\bullet\beta_{2}, v]$ jest dopuszczalna dla aktywnego prefiksu $\alpha\beta_{1}$ wtedy i tylko wtedy gdy:
+\\
+$S \xRightarrow{rm*} \alpha N \omega \Rightarrow \alpha\beta_{1} \beta_2 \omega$ oraz $v \in FIRST_{k}(\omega)$
+\\
+w związku że dla $LR(0)$ nie trzeba podglądać kolejnych symboli można uprościc do:
+$N \rightarrow \beta_{1}\bullet\beta_{2}$ jest dopuszczalna dla aktywnego prefiksu $\alpha\beta_{1}$ wtedy i tylko wtedy gdy:
+\\
+$S \xRightarrow{rm*} \alpha N \omega \Rightarrow \alpha\beta_{1} \beta_2 \omega$
+\\
+UWAGI:
+\begin{enumerate}
+\item ponieważ $\beta_1$ może być $\epsilon$, więc dla każdego prefiksu aktywnego istnieje co najmniej jedna $LR(k)$ - sytuacja dopuszczalna,
+\item $LR(k)$ - sytuacje postaci $[A \rightarrow \beta\bullet, v]$ są szczególnie ważne gdyż pokazują możliwe redukcje (analiza dobiegła do prawego końca osnowy).
+\end{enumerate}
+}
+{}
+%http://kompilatory.agh.edu.pl/pages/tk-wyklady/2-3-Parser-LR(1)-czesc-1.htm
+
+\answer
+{Pomiędzy parserami $LR$ zachodzą następujące relacje w odniesieniu do zbiorów gramatyk:}
+{$LR(0) \subset SLR(1) \subset LALR(1) \subset LR(1)$}
+{T}
+{$SLR(1)$ tworzy tablicę stanów jak $LR(0)$ oraz zbiory First oraz Follow bazując na gramatyce. Jest to uproszczone podejście przez co istnieje możliwośc wygenerowania konfiktów, które nie istnieją w tablicy stanów $LR(0)$
+
+$LALR(1)$ również tworzy tablicę stanów jak $LR(0)$ oraz wylicza ``look-ahead'' (właściwie nazwę można zapisać jako $LA(1)LR(0)$ czyli - do look-ahead używa jednego tokenu oraz wykorzystuje tablicę $LR(0)$) bazując na tablicy stanów $LR(0)$}
+{}
+
+%https://stackoverflow.com/questions/2676144/what-is-the-difference-between-lr-slr-and-lalr-parsers
+
+\answer
+%{K\_W15, K\_W03, K\_W04, K\_W07, K\_W20, K\_U24}
+{Porównując gramatyki $LL$ oraz $LR$ można powiedzieć, że:}
+{Gramatyki $LR$ opisują szerszą klasę niż $LL$}
+{T}
+{Każdy gramatyka $LL(k)$ jest również gramatyką $LR(k)$, która z kolei jest zawsze gramatyką bezkontekstową.
+Gramatyka $LL(1)$ bez $\epsilon$ jest również gramatyką $SLR(1)$.}
+{(z angielskiej wikipedii):
+The $LL(1)$ languages are a proper subset of the $LR(1)$ languages which in turn are a proper subset of all context-free languages.
+
+Every $LL(k)$ grammar is also a $LR(k)$ grammar. It is also decidable if a given $LR(k)$ grammar is also a $LL(m)$ grammar for some $m$. A $\epsilon$-free $LL(1)$ grammar is also a $SLR(1)$ grammar. A $LL(1)$ grammar with symbols that have both empty and non-empty derivations is also a $LALR(1)$ grammar. A $LL(1)$ grammar with symbols that have only the empty derivation may or may not be $LALR(1)$.
+
+$LR$ parsers can handle a larger range of languages and grammars than precedence parsers or top-down $LL$ parsing}
+
+
+%The LL(1) languages are a proper subset of the LR(1) languages which in turn are a proper subset of all context-free languages.
+
+%Every LL(k) grammar is also a LR(k) grammar. It is also decidable if a given LR(k) grammar is also a LL(m) grammar for some m.[4] A ε-free LL(1) grammar is also a SLR(1) grammar. A LL(1) grammar with symbols that have both empty and non-empty derivations is also a LALR(1) grammar. A LL(1) grammar with symbols that have only the empty derivation may or may not be LALR(1).
+
+%LR parsers can handle a larger range of languages and grammars than precedence parsers or top-down LL parsing

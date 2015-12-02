@@ -1,0 +1,151 @@
+\chapter{Metody numeryczne}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+%112
+\answer
+{EKK\_1, EKK\_7 W pewnym hipotetycznym binarnym systemie zmiennoprzecinkowym zakres danych ujemnych wynosi $<-b,-a>$, chcemy zapisać liczbę $c$, która jest liczbą mniejszą od $-b$ i która ma nieskończone rozwinięcie. W związku z tym zastępujemy ją majbliższą liczbą, którą da się zpisać w tym systemi, czyli liczbą $-b$. Z jakim błędem numerycznym mamy tutaj do czynienia:}
+{Błędem obcięcia}
+{F}
+{Błędem zaokrąglenia}
+{}
+
+%113
+\answer
+{EKK\_1, EKK\_7 Warunkiem koniecznym i wystarczającym zbieżności metod iteracyjnych prostych (takich jak metoda Jacobiego czy metoda Gaussa-Seidla) rozwiązywania układów równań liniowych:}
+{Promień spektralny macierzy iterowanej w danej metodzie jest zawsze mniejszy od 1.}
+{T}
+{}
+{}
+
+%114
+\answer
+{EKK\_1, EKK\_7 Do metod nazywanych metodami dokładnymi rozwiązywania ukłądów równań liniowych zalicza się: }
+{Metoda rozkładu LU}
+{T}
+{\begin{itemize}
+\item Metoda Cramera
+\item Eliminacja Gaussa
+\item Eliminacja Gaussa z wyborem elementu głównego
+\item Eliminacja Jordana
+\end{itemize}}
+{}
+
+%115
+\answer
+{EKK\_1, EKK\_7 Które z poniżej wymienionych zagadnień numerycznych wykorzystują właściwości przybliżania funkcji wielomianem interpolującym}
+{Obliczanie całki oznaczonej funkcji za pomocą kwadratur Newtona-Cotesa}
+{}
+{}%Całkowanie numeryczne i rozwiązywanie równań rózniczkowych}
+{}
+
+%116
+\answer
+{EKK\_1, EKK\_7 Macierz Hilberta osiąga wysokie wartości współczynnika uwarunkowania(ang. Condition number) na tej podstawie możemy stwierdzić, że:}
+{Macierz Hilberta jest zawsze diagonalnie dominująca}
+{}
+{}
+{}
+
+%117
+\answer
+{EKK\_1, EKK\_7 Wielomiany sklejane (ang. spline) trzeciego stopnia muszą spełniać następujące warunki w punktach sklejań:}
+{Ciągłość pierwszej pochodnej funkcji interpolującej}
+{T}
+{\begin{itemize}
+\item Przechodzenie funkcji interpolującej przez węzły interpolacji
+\item Ciągłość fukncji interpolującej
+\item Ciągłość pierwszej i drugiej pochodnej funkcji interpolującej w punktach sklejań
+\end{itemize}}
+{W celu znalezienia funkcji interpolującej funkcjami sklejanymi ustalamy przediał $[a,b]$ oraz jego podział węzłami interpolacji takimi, że: $a=x_0<x_1\ldots<x_n=b$ Dane są równieź wartości w węzłach, odpowiednio: $y_0, y_1,\ldots,y_n$. 
+
+Dla $k=0,1,2,\ldots,n-1$ funkcje łączące punkty $(x_{k},y_{k})$ oraz $(x_{k+1},y_{k+1})$ są wielomianami trzeciego stopnia postaci: 
+$$s_{k}(x)=a_{k,0}+a_{k,1}(x-x_{k})+a_{k,2}(x-x_{k})^{2}+a_{k,3}(x-x_{k})^{3}\]\[x\in[x_{k},x_{k+1})$$
+który ma spełniać następujące warunki:
+$$s_{k}(x_{k})=y_{k}; s_{k}(x_{k+1})=s_{k+1}(y_{k+1}); s'_{k}(x_{k+1})=s'_{k+1}(y_{k+1}); s''_{k}(x_{k+1})=s''_{k+1}(y_{k+1})$$
+}
+%118
+\answer
+{EKK\_1, EKK\_7 Należy wskazać zdanie prawdziwe dotyczące zagadnienia interpolacji wielomianowej z wykorzystaniem jednomianów (tzw bazy naturalnej):}
+{Jest to zadanie źle uwarunkowane}
+{T}
+{Interpolacja jednomianami jest zagadnieniem źle uwarunkowanym, stąd jej praktyczne zastosowanie jest znikome, chociaż jest najprostszą metodą interpolacji. Macierz bazowa V (Vandermonde'a) jest źle uwarunkowana, więc zwiększenie liczby węzłów interpolacji powoduje znaczny wzrost współczynnika uwarunkowania tej macierzy (niekorzystne ze względów numerycznych).}
+{Interpolacja wielomianowa jest szczególnym przypadkiem interpolacji liniowej. Jej zadaniem jest wyznaczenie wielomianu stopnia co najwyżej $n$ przechodzącego przez $n+1$ węzłów interpolacji. Najprostszym wyborem funkcji bazowych jest baza naturalna: $\varphi_0(x)=1, \varphi_1(x)=x, \varphi_2(x)=x^2, \ldots, \varphi_n(x)=x^n$. Funkcja interpolująca ma postać: $F(x)=a_0+a_1x+a_2x^2+\ldots+a_n+x^n$, a układ równań przyjmuje postać:
+$$\left[ \begin{array}{ccccc}
+1 & x_0 & x_0^2 & \cdots & x_0^n \\
+1 & x_1 & x_1^2 & \cdots & x_1^n \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_n & x_n^2 & \cdots & x_n^n
+\end{array} \right] \left[ \begin{array}{c}
+_0\\
+a_1\\
+\vdots\\
+a_n
+\end{array} \right] = \left[ \begin{array}{c}
+y_0\\
+y_1\\
+\vdots\\
+y_n
+\end{array} \right]$$ }
+
+%119
+\answer
+{EKK\_1, EKK\_7 Błędy związane z ograniczeniem nieskończonego ciągu wymaganych obliczeń do skończonej liczby działań nazywamy:}
+{Błędami nadmiaru (ang. overflow errors)}
+{F}
+{Błędami obcięcia}
+{ }
+
+%120
+\answer
+{EKK\_1, EKK\_7 Jeśli niewielkie względne zaburzenia danych wejściowych powodują niewielkie względne zmiany wyników to wówczas}
+{Współczynnik uwarunkowania osiąga niską wartość}
+{T}
+{zadanie jest dobrze uwarunkowane}
+{Uwarunkowanie zadania możemy mierzyć za pomocą współczynników uwarunkowania zadania. Niska wartość współczynnika świadczy o dobrym uwarunkowaniu, wysoka o złym.}
+
+%121
+\answer
+{EKK\_1, EKK\_7 Warunkami wystarczającymi, gwarantującymi zbieżność poszukiwania miejsc zerowych funkcji $f(x)$ metodą bisekcji są:}
+{Pierwsza i druga pochodna mają stały znak w całym przedziale}
+{F}
+{\begin{itemize}
+\item Funkcja $f(x)$ jest ciągła w przedziale domkniętym $[a,b]$
+\item Na końcach przedziału $[a,b]$ wartości funkcji $f(x)$ przyjmują przeciwne znaki, czyli zachodzi 
+$f(a)\cdot f(b)<0$
+\end{itemize}}
+{Przypomnienie: pierwsza pochodna - badanie monotoniczności, druga pochodna - wypukłość funkcji}
+
+% 122
+\section{EKK\_1,EKK\_7}
+\textbf{Stosując algorytm stycznych poszukiwania jednokrotnego miejsca zerowego funkcji $f(x)$ w przedziale domkniętym $[a, b]$ w dostateczniej bliskości pierwiastka uzyskujemy zbieżność:} \\
+\vspace{0.4cm}
+\noindent  Kwadratową. \\ Z twierdzenia O rzędzie zbieżności metody Newtona(stycznych): Wykładnik zbieżności metody Newtona (stycznych) wynosi $p^*=2$ w klasie funkcji o zerach jednokrotnych, oraz $p^*=1$ w klasie funkcji o zerach wielokrotnych.
+
+% 123
+\section{EKK\_1,EKK\_7}
+\textbf{Do całkowania numerycznego używa się m. in. kwadratur Newtona - Cotesa. Do prostych kwadratur Newtona - Cotesa należą:} \\
+\vspace{0.4cm}
+\noindent  Wzór trapezów. Wzor Simpsona. 
+
+% 124
+\section{EKK\_1,EKK\_7}
+\textbf{Efekt Rungego jest charakterystyczny dla następujących metod interpolacji: } \\
+\vspace{0.4cm}
+\noindent Efekt Rungego jest zjawiskiem typowym dla interpolacji za pomocą wielomianów wysokich stopni przy stałych odległościach węzłów, np. interpolacji Lagranga dla węzłów równoodległych. 
+
+% 125
+\section{EKK\_1,EKK\_7}
+\textbf{Które zdania dotyczące Metody Eliminacji Gaussa rozwiązywania  układów równań są prawdziwe:} \\
+\vspace{0.4cm}
+\noindent \begin{itemize}
+ \item iteracyjne przekształcenie układu równań  $A*x=b$ z macierzą kwadratową do układu postaci $A^nx=b^n$ dla $k=1..n$, który oznacza równoważną postać układu równań w kolejnych etapach przekształceń. 
+ \item przekształca macierz do postaci macierzy schodkowej(pierwsze niezerowe elementy kolejnych niezerowych wierszy, znajdują się w coraz dalszych kolumnach, a powstałe wiersze zerowe umieszcza się jako ostatnie)
+\end{itemize}
+
+% 126
+\section{EKK\_1,EKK\_7}
+\textbf{Aby wyeliminować lub znacząco ograniczyć efekt Rungego przy zadaniu iterpolacji można: } \\
+\vspace{0.4cm}
+\noindent Zastosować interpolację z węzłami gęściej upakowanymi na krańcach przedziału interpolacji.

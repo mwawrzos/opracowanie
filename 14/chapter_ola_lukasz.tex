@@ -1,0 +1,175 @@
+OverallPrettyNormalPassword
+\chapter{Systemy operacyjne}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{Inicjalna wartość semafora uogólnionego implementującego sekcję krytyczną wynosi}
+
+\vspace{0.4cm}
+
+Odpowiedź: Dowolna liczba dodatnia (brak 100 pewności -- patrz wyjaśnienie)
+
+Semafor - mechanizm synchronizacji procesów, został zaproponowaniy przez Dijkstrę.
+Semafor jest zmienną całkowitą, która z logicznego punktu widzenia (z punktu widzenia aplikacji) przyjmuje wartości nieujemne (>0) lub — w przypadku semaforów binarnych — logiczne. Zmienna semaforowa musi mieć nadaną początkową wartość (oczywiście nieujemną).
+
+Semafor uogólniony (semafor zliczający) można zwiększać lub zmniejszać o dowolną podaną wartość pod warunkiem, że w wyniku zmniejszenia zmienna semaforowa nie osiągnie wartości ujemnej. Jeśli zatem wartość parametru, o którą ma być zmniejszona zmienna semaforowa jest większa od wartości tej zmiennej, następuje zablokowanie procesu.
+
+Wyjaśnienie: W początkowej sytuacji żaden proces nie jest w sekcji krytycznej ,więc semafor musi “dać się zmniejszyć” pozwalając na wejście do sekcji krytycznej, czyli musi być na pewno różny od 0. Jeżeli mówimy o semaforze uogólnionym to zasadniczo dowolna całkowita liczba dodatnia może być wartością początkową, jeżeli tylko zaimplementujemy tą sekcję krytyczną w ten sposób aby opuszczała i podnosiła semafor o tą stałą wartość początkową to to będzie działać.
+
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{Proces transferowania danych, które mają być docelowo wyprowadzone na urządzenie peryferyjne do przestrzeni pamięci pomocniczej i~transferowanie ich na to urządzenie w~dogodniejszym czasie nosi nazwę}
+
+\vspace{0.4cm}
+
+Odpowiedź: buforowanie / przechowywanie podręczne (może cachowanie?)
+
+Szczegóły: http://smurf.mimuw.edu.pl/node/919
+System operacyjny np. pisząc na dysk nie zapisuje od razu wszystkiego “twardo” na dysk, tylko trzyma to w buforach, które są transferowane na dysk w późniejszym czasie. Pozwala to na szybsze zakończenie operacji IO.
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{Problem producent-konsument może być rozwiązany przy pomocy}
+
+\vspace{0.4cm}
+\begin{itemize}
+	\item semafory
+	\item monitory
+	\item mutexy
+	\item pamięć dzielona
+	\item zmienne warunkowe
+	\item bariery
+	\item wirująca blokada
+\end{itemize}
+
+Bariera jest to punkt synchronizacyjny dla grupy procesów, do którego musza dojść wszystkie procesy zanim będą mogły kontynuować.
+
+Wirująca blokada (spinlock) jest to blokada polegająca na ciągłym sprawdzaniu locka w pętli - działa jak jakiś mutex albo coś, przy czym zajmuje czas procesora i dlatego jest niewydajny.
+
+Problem producenta i konsumenta to klasyczny informatyczny problem synchronizacji. W problemie występują dwa rodzaje procesów: producent i konsument, którzy dzielą wspólny zasób - bufor dla produkowanych (konsumowanych) jednostek. Zadaniem producenta jest wytworzenie produktu, umieszczenie go w buforze i rozpoczęcie pracy od nowa. W tym samym czasie konsument ma pobrać produkt z bufora. Problemem jest taka synchronizacja procesów, żeby producent nie dodawał nowych jednostek gdy bufor jest pełny, a konsument nie pobierał gdy bufor jest pusty.
+Rozwiązaniem dla producenta jest uśpienie procesu w momencie gdy bufor jest pełny. Pierwszy konsument, który pobierze element z bufora budzi proces producenta, który uzupełnia bufor. W analogiczny sposób usypiany jest konsument próbujący pobrać z pustego bufora. Pierwszy producent, po dodaniu nowego produktu umożliwi dalsze działanie konsumentowi. 
+
+
+\section{EKK\_IT1A\_W06}
+\textbf{Centralny Procesor, po otrzymaniu informacji o przerwaniu z urządzenia wejścia/wyjścia}
+
+\vspace{0.4cm}
+
+Nie mogę podać konkretnej odpowiedzi, bo kto wie co autor miał na myśli. Warto przeczytać:
+https://pl.wikipedia.org/wiki/Przerwanie\#Przerwania\_sprz.C4.99towe
+http://studianet.pl/kursy/proki/procesor/przerwania.htm
+http://students.mimuw.edu.pl/SO/Linux/Temat07/Linux714.html
+http://students.mimuw.edu.pl/SO/LabLinux/WEJSCIE-WYJSCIE/PODTEMAT\_1/index2.html
+
+
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{Który z problemów rozwiązuje zaproponowany przez Dijkstrę algorytm Bankiera}
+
+\vspace{0.4cm}
+
+unikania zakleszczenia (deadlock avoidance)
+
+Algorytm bankiera:
+Nazwę zawdzięcza temu, że mógłby on posłużyć w systemie bankowym do zagwarantowania, iż bank nigdy nie zainwestuje gotówki w sposób, który uniemożliwiłby mu zaspokojenie wymagań wszystkich jego klientów.
+Gdy proces wchodzi do systemu, wówczas musi zadeklarować maksymalną liczbę egzemplarzy każdego typu zasobu, które będą mu potrzebne.
+Liczba ta nie może przekroczyć ogólnej liczby zasobów w systemie. 
+Kiedy użytkownik zamawia zbiór zasobów, wtedy system musi określić, czy ich przydzielenie pozostawi system w stanie bezpiecznym. Jeśli tak, to zasoby zostaną przydzielone; w przeciwnym razie proces będzie musiał poczekać, aż inne procesy zwolnią wystarczającą ilość zasobów.
+
+\textbf{Algorytm bankiera}
+
+    Dla zasobów wielokrotnych. Każdy proces musi a priori złożyć maksymalne zapotrzebowanie na zasoby. Proces żądający zasobu być może będzie musiał czekać, mimo że zasób jest dotępny.     Gdy proces dostanie wszystkie potrzebne zasoby, to zwróci je w skończonym czasie. Koszt stwierdzania, czy stan jest bezpieczny: m x n2.
+
+\textbf{Szczegóły algorytmu bankiera}
+
+Struktury danych:
+
+Dostępne: wektor o długości m, określający liczbę dostępnych zasobów każdego typu. Dostępne[j]=k oznacza, że jest dostępnych k egzemplarzy zasobu typu Zj.
+Maksymalne: Macierz o wymiarach n x m, definiująca maksymalne żądania każdego procesu. Jeśli Maksymalne[i,j]=k, to proces Pi może zamówić co najwyżej k egzemplarzy zasobu typu Zj.
+Przydzielone: Macierz o wymiarach n x m, definiująca liczbę zasobów poszczególnych typów, przydzielonych do każdego z procesów. Gdy Przydzielone[i,j]=k, wówczas proces Pi ma przydzielonych k egzemplarzy zasobu typu Zj.
+Potrzebne: Macierz o wymiarach n x m, przechowująca pozostałe do spełnienia zamówienia każdego z procesów. Element Potrzebne[i,j]=k oznacza, że do zakończenia swojej pracy proces Pi może jeszcze potrzebować k dodatkowych egzemplarzy zasobu typu Zj. Zauważmy, że
+
+       Potrzebne[i,j] = Maksymalne[i,j] - Przydzielone[i,j]
+
+
+
+\section{EKK\_IT1A\_W06}
+\textbf{Jeżeli wirtualny adres w programie jest 16 bitowy i rozmiar strony jest 0,5 K to możemy maksymalnie zaadresować następującą liczbę stron:}
+
+\vspace{0.4cm}
+
+$$ 2^{16} = 65536 $$ - tyle komórek pamięci możemy zaadresować
+$$ 65536 / 512 = 128 $$ - tyle stron istnieje w danej sytuacji
+
+
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{System operacyjny jest}
+
+\vspace{0.4cm}
+Ciężko określić konkretne - poprawne - odpowiedzi, dlatego podaję kilka linków, które warto przeczytać (wydaje się krótko i na temat):
+http://wazniak.mimuw.edu.pl/images/3/38/Sop\_01\_wyk\_1.0.pdf 
+https://pl.wikipedia.org/wiki/System\_operacyjny
+http://zsel.edu.pl/dydaktyka/cplus/zadania\_so.htm 
+
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{W systemie zarządzania pamięcią rejestry graniczne DATUM i LIMIT}
+
+\vspace{0.4cm}
+
+\begin{itemize}
+	\item są używane dla ochrony kodu programu
+	\item LIMIT - służy do zarządzania ochroną pamięci, specyfikuje zakres pamięci, zawiera zakres adresów logicznych, definiuje logiczną przestrzeń adresową
+	\item DATUM - służy do zarządzania ochroną pamięci, specyfikuje pierwszy dostępny adres pamięci
+\end{itemize}
+
+
+\section{EKK\_IT1A\_W09,EKK\_IT1A\_W06}
+\textbf{Jeżeli system operacyjny chce wykonywać więcej niż jeden program w danym momencie czasu to musi}
+
+\vspace{0.4cm}
+
+Pytanie bardzo szerokie, ciężko wskazać krótką odpowiedź. Polecam przeczytać:
+https://pl.wikipedia.org/wiki/Wielozadaniowo%C5%9B%C4%87
+https://en.wikipedia.org/wiki/Computer\_multitasking (to się wydaje dość sensowne)
+http://wazniak.mimuw.edu.pl/images/a/ab/Sop\_11\_wyk\_1.0.pdf 
+
+
+\section{EKK\_IT1A\_W06}
+\textbf{Szyfrowanie kluczem publicznym w szyfrowaniu asymetrycznym}
+
+\vspace{0.4cm}
+wiadomość zaszyfrowana za pomocą klucza publicznego może być odszyfrowana tylko za pomocą klucza prywatnego
+
+Odbiorca za pomocą specjalnego algorytmu (szyfru) asymetrycznego (np. RSA, ElGamal, DSA, ECC, Diffy-Hellman, Cramer-Shoup) generuje oba klucze. Klucz publiczny odbiorca przekazuję nadawcy. Ponieważ jest on publiczny odbiorca nie musi martwić się o jego przekazanie nadawcy - może to zrobić np. za pomocą Internetu, umieścić na stronie czy forum. To że wszyscy mogą zdobyć ten klucz nie stanowi żadnego problemu.
+Nadawca korzystając z przekazanego mu klucza publicznego szyfruje wiadomość.
+Odbiorca odszyfrowuje wiadomość za pomocą prywatnego klucza.
+
+Jeżeli ktoś postronny zdobył ten klucz publiczny również może zaszyfrować wiadomość. Pamiętajmy jednak że tylko odbiorca dysponuje kluczem prywatnym, a w szyfrowaniu asymetrycznym wiadomość zaszyfrowana za pomocą klucza publicznego może być odszyfrowana tylko za pomocą klucza prywatnego! 
+
+Algorytm asymetryczny, nazywany też algorytmem z kluczem publicznym bądź jawnym, musi spełniać poniższe kryteria:    
+klucze występują w parach: jeden klucz do szyfrowania i jeden do deszyfrowania,
+opublikowanie jednego z kluczy w parze nie zdradza drugiego klucza, nawet przy wykorzystaniu złożonych obliczeń,
+zwykle jeden klucz z pary jest powszechnie dostępny, może pełnić rolę klucza szyfrującego lub deszyfrującego, jest on nazywany kluczem publicznym. Drugi klucz jest trzymany w tajemnicy przez jego posiadacza – jest to klucz prywatny.
+
+Klucz publiczny używany jest do zaszyfrowania informacji, klucz prywatny do jej odczytu. Ponieważ klucz prywatny jest w wyłącznym posiadaniu adresata informacji, tylko on może ją odczytać. Natomiast klucz publiczny jest udostępniony każdemu, kto zechce zaszyfrować wiadomość.
+Ponieważ kryptografia asymetryczna jest o wiele wolniejsza od symetrycznej, prawie nigdy nie szyfruje się wiadomości za pomocą kryptosystemów asymetrycznych. Zamiast tego szyfruje się jedynie klucz jakiegoś szyfru symetrycznego, takiego jak np. AES. Takie protokoły, łączące elementy kryptografii symetrycznej i asymetrycznej, nazywa się hybrydowymi.
+
+
+
+
+\section{EKK\_IT1A\_W06}
+\textbf{Buforowanie plików realizowane jest w celu}
+
+\vspace{0.4cm}
+
+Zwiększenia wydajności komputera, poprzez zmniejszenie tzw. "przestojów" procesora
+zmniejszenie czasu oczekiwania na operację wejścia lub wyjścia
+Oszczędność sprzetu poprzez niewykonywanie operacji zapisu (nie jakiś główny powód, ale na pewno zaleta)
+
+Buforowanie – technologia polegająca na stosowaniu buforów programowych lub sprzętowych, wykorzystywana najczęściej w celu wyrównania różnic prędkości przesyłania danych między różnymi urządzeniami. Działa on zazwyczaj wykorzystując zasadę FIFO.
+Można wykorzystywać bufory o:
+zerowej pojemności (bufor jest tylko przekaźnikiem komunikatów),
+ograniczonej pojemności,
+nieograniczonej pojemności.

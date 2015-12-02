@@ -1,6 +1,7 @@
 \documentclass[11pt]{aghdpl}
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -20,7 +21,26 @@
 \usepackage{titlesec}
 \usepackage{latexsym}
 \usepackage{bbding} 
+%\usepackage{subfig}
+\usepackage{stmaryrd}
+\usepackage{tipa}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\pgfplotsset{compat=1.10}
 
+%----------------------
+% IS 2012
+%---------------------
+
+
+\usetikzlibrary{shapes.geometric,arrows,fit,matrix,positioning}
+\tikzset
+{
+	treenode/.style = {circle, draw=black, align=center, minimum size=1cm},
+	subtree/.style  = {isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=north}
+}
 
 \hypersetup{
     colorlinks,
@@ -56,7 +76,7 @@
 
 \faculty{}
 
-\titleformat*{\section}{\Large\bfseries}
+%\titleformat*{\section}{\Large\bfseries}
 
 \newcommand{\PartialToc}{
 \startcontents[chapters]\vspace{-1cm}\vbox{\bf\large Spis treści}
@@ -78,6 +98,7 @@
 \noindent
 \textbf{Odpowiedź:}
 #4
+
 \ifstrempty{#5}{}{
     \vspace{0.4cm}
     \noindent
@@ -88,6 +109,8 @@
 
 %---------------------------------------------------------------------------
 
+%\includeonly{19/chapter.tex}
+
 \setcounter{tocdepth}{0}
 \begin{document}
 
@@ -96,7 +119,28 @@
 \clearpage
 \setcounter{tocdepth}{1}
 
+\include{01/chapter}
+\include{02/chapter}
+\include{03/chapter}
+\include{04/chapter}
+\include{05/chapter}
 \include{06/chapter}
+\include{07/chapter}
+\include{08/chapter}
+\include{09/chapter}
+\include{10/chapter}
+\include{11/chapter}
+\include{12/chapter}
 \include{13/chapter}
+\include{14/chapter}
+\include{15/chapter}
+\include{16/chapter}
+\include{17/chapter}
+\include{18/chapter}
+\include{19/chapter}
+\include{20/chapter}
+
+
+
 
 \end{document}

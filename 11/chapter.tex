@@ -1,0 +1,203 @@
+\chapter{Sieci komputerowe}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+\answer
+{Adres typu broadcast (rozgłoszenia) IP w wersji 4 dla sieci IP, w której
+znajduje się host 110.104.1.10 i która okresla maska 255.0.0.0, to}
+{110.104.1.0}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{110.255.255.255}
+{Adresy broadcast dla IP wersji 4 to adres który w danej sieci bajtowo zapisujemy jako ciąg 1. 
+Dla IP 110.104.1.10 o masce 255.0.0.0 adres sieci to 110.0.0.0 (wszystkie bajty w pierwszym członie adresu zostały zachowane (255 w masce). Oznacza to, iż w 3 kolejnych członach zapisanych bajtowo znajdą się same 1). Jako iż każdy człon składa się z 8 bajtów adres ten zapisany w systemie dziesiętnym będzie miał wartość 110.255.255.255 }
+
+\answer
+{Pole o nazwie Time to Live w datagramie IP, które zabezpiecza przed zapętleniem rutowania datagramu pomiędzy kolejnymi ruterami w sieci zawiera:}
+{Liczbę ruterów przez jakie datagram IP może zostać przekazany dalej }
+{T} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{Liczbę ruterów przez jakie datagram IP może zostać przekazany dalej }
+{W przypadku czasu życia pakietów danych w sieci komputerowej jest to zwykle liczba przeskoków, które może on wykonać na swojej trasie. Każdy kolejny router IP na trasie danego pakietu zmniejsza wartość jego pola TTL o jeden. Jeśli router otrzyma pakiet z TTL równym 1, zmniejsza go do 0, odrzuca go i usuwa z sieci, a nadawca otrzyma komunikat ICMP o błędzie. Czas życia pakietu pomaga unikać przeciążenia sieci w przypadku źle skonfigurowanych tras routingu w routerach, np. występowania pętli w sieci.}
+
+\answer
+{Nazwa ramki stosowanej w technologii IEEE 802.11 i emitowanej przez
+urządzenie Access Point i stosowanej między innymi w celu propagowania informacji o sieci bezprzewodowej,
+to}
+{Checker}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{Beacon frame }
+{Beacon frame to jedna z tzw. Management frames w standardzie IEEE 802.11. Zawiera informacje o sieci. Ramki te wysyłąne są z Access Pointów co jakiś czas i rozgłaszają obecność sieci.}
+
+\answer
+{Protokół UDP definiuje identyfikatory przesyłanych do hosta-odbiorcy datagramów
+zwane numerami portów, o długosci}
+{32}
+{T lub F (patrz wyjąśnienie)} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{32 lub 16 }
+{Nagłówek UDP rozpoczynają 2 pola Port nadawcy oraz port odbiorcy. Każdy po 16 bitów. Ich łączna długość to 32.
+
+UDP jeden z protokołów internetowych. UDP stosowany jest w warstwie transportowej modelu OSI.
+
+Jest to protokół bezpołączeniowy, więc nie ma narzutu na nawiązywanie połączenia i śledzenie sesji (w przeciwieństwie do TCP). Nie ma też mechanizmów kontroli przepływu i retransmisji. Korzyścią płynącą z takiego uproszczenia budowy jest większa szybkość transmisji danych i brak dodatkowych zadań, którymi musi zajmować się host posługujący się tym protokołem. Z tych względów UDP jest często używany w takich zastosowaniach jak wideokonferencje, strumienie dźwięku w Internecie i gry sieciowe, gdzie dane muszą być przesyłane możliwie szybko, a poprawianiem błędów zajmują się inne warstwy modelu OSI. Przykładem może być VoIP lub protokół DNS.
+}
+
+\answer
+{Wartosci adresu IPv6 oraz maski, określające wszystkie hosty w Internecie, to}
+{ ::/0}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{2000::/3 ???}
+{Prawdopodobnie chodzi tutaj o Global Unicast - w IPv4 jest to publiczny adres IP, czyli taki który jest rutowany w całym internecie.}
+
+
+\answer
+{Istnienie zasady “Longest prefix match“ w rutowaniu IP spowoduje, że adres docelowy 200.200.200.1 datagtramu IP przy istnieniu w tablicy rutowania jednoczesnie reguł o wzorcach i maskach (podano w notacji CIDR): 200.200.200.0/18, 200.200.200.0/20, 200.200.200.0/22, 200.200.200.0/24
+zostanie dopasowany do:}
+{200.200.200.0/20}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{200.200.200.0/24}
+{Longest Prefix Match to algorytm stosowany przez rutery przy wyborze kolejnego rutera z tablicy rutowania. Jako, iż wiele wpisów w owej tablicy może pasować do jednego adresu. (w powyższym przykładzie wszystkie 4 pasują do podanego) to wybierane jest wejście z najdłuższą pasującą maską podsieci (w tym wypadku o długości 24).}
+
+
+\answer
+{Maksymalna długość pakietu IP wersja 4, licząc w bajtach, to}
+{1024}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{65,535}
+{Długość ta wynosi tyle ponieważ w nagłówku pakietu IP znajduje się pole TOTAL LENGTH (oznaczające długość całego pakietu w bajtach). Pole to zajmuje 2 bajty (16 bitów). Oznacza to iż maksymalna liczba jaką można tam zapisać to binarnie $ 2 ^ 16 -1 $ czyli 65535 }
+
+
+\answer
+{Okreslenie stosowane wobec rutera MPLS (MultiProtocol Label Switching), będącego w danej sytuacji odbiorcą datagramów z etykietami MPLS od innego (nie będącego przedmiotem rozwazań to:}
+{ Designated router}
+{F} %należy wpisać "T" (prawda™) lub "F" (FAŁSZ) 
+{Label switch router ? a nie chodzi tu o Downstream Router czyli według wykładów - dla datagramów - ten który odbiera datagramy MPLS ????}
+{MPLS to technika stosowana przez routery, w której trasowanie pakietów zostało zastąpione przez tzw. przełączanie etykiet.
+
+Na brzegu sieci z protokołem MPLS do pakietu dołączana jest dodatkowa informacja zwana etykietą (ang. Label). Router po odebraniu pakietu z etykietą (jest to z punktu widzenia danego routera etykieta wejściowa) używa jej jako indeksu do wewnętrznej tablicy etykiet, w której znajduje się następny punkt sieciowy (ang. next hop) oraz nowa etykieta (etykieta wyjściowa). Etykieta wejściowa jest zastępowana wyjściową i pakiet jest wysyłany do następnego punktu sieciowego (np. do następnego routera). Jeżeli następny router nie obsługuje protokołu MPLS, etykieta jest usuwana.
+
+Przypisanie pakietowi etykiety na brzegu sieci odbywa się w tzw. procesie klasyfikacji. Pakiety, które będą w jednakowy sposób routowane przez sieć MPLS, klasyfikowane są do jednej klasy FEC (ang. Forwarding Equivalence Class) i otrzymują tę samą etykietę. Przykładowo, klasy FEC mogą być budowane na bazie adresów docelowych IP w nagłówku pakietu w taki sposób, że każda klasa FEC pokrywa się z pojedynczym wpisem w tablicy trasowania routera.
+
+Przyporządkowanie danej klasy FEC do etykiety jest sygnalizowane innym routerom za pomocą protokołu dystrybucji etykiet. Pozwala to routerom na zbudowanie tablic etykiet. W zależności od konkretnego zastosowania, jako protokół do dystrybucji etykiet używany jest LDP, albo odpowiednio rozszerzone protokoły: RSVP lub BGP.}
+
+\answer
+{Ruter iBGP (internal Border Gateway Protocol), którego wprowadzenie~do systemu rutowania iBGP umożliwia znaczne zredukowanie ilości otwartych sesji BGP pomiędzy innymi ruterami (rezygnację~z tzw. Full-mesh) nosi nazwę:}
+{Route Reflector}
+{T}
+{Route Reflector}
+{RR - Route Reflector - Dzieli obszary działania na części - radykalnie zmniejszając liczbę sesji pomiędzy ruterami iBGP. W jednym AS(Systemie autonomicznym) może występować wiele RR. Przekazuje od komunikaty od klientów RR do innych routerów iBGP.}
+
+\answer
+{Liczba klas CoS (Class~of Service), definiowanych przez podstawowy mechanizm implementacji QoS (Quality~of Service)~w Ethernet (czyli standard IEEE 802.1p),~to:}
+{16}
+{F}
+{8}
+{Class of Service - jest formą priorytetowego kolejkowania, która jest używana w protokołach sieciowych. W Ethernet przyjmuje wartości od 0 do 7.}
+
+\answer
+{Wariant protokołu STP (Spanning Tree Protocol, IEEE 802.1d) pozwalający~w technologii Ethernet~na logiczne grupowanie sieci VLAN (Virtual LAN)~i budowanie mniejszej liczby drzew rozpinających (po jednym Spanning Tree dla każdej zdefiniowanej grupy),!to:}
+{PVSTP (Per VLAN Spanning Tree Protocol)}
+{F}
+{MSTP - Multiple Spanning Tree Protocol}
+{Nie ma tu zbyt wiele do wyjaśniania}
+
+\answer
+{Rodzaje (grupy) urządzeń fizycznych definiowanych~w technologii ZigBee,~to:}
+{ZigBee End Device, ZigBee Coordinator, ZigBee Router}
+{T}
+{ZigBee End Device, ZigBee Coordinator, ZigBee Router}
+{ZED - ZigBee End Device - urządzenie czujnika, sterownika lub inne, które jest faktycznym źródłem lub odbiorcą danych.
+ZC - ZigBee Coordinator - pełni rolę urządzenia zarządzającego parametrami transmisji, jest centralnym węzłem sieci (do niego podłączone są inne urząddzenia), może być mostkiem do innych sieci.
+ZR - ZigBee Router - komunikuje inne urządzenia ZigBee, służy głównie do przedłużania zasięgu, lecz także komunikuje się~z innymi technologiami (network level).}
+
+\answer
+{Nazwa procesu przekazywania wiedzy o trasach pomiędzy różnymi protokołami rutowania dynamicznego IP w ruterach IP,~to:}
+{Redystrybucja}
+{T}
+{Redystrybucja}
+{Redystrybucja (protokołu) - zabieg przekazywania informacji o trasach pozyskanych z użyciem jednego  z obsługiwanych i działających protokołów rutowania.}
+
+\answer
+{Symbole literowe, określające rodzaje popularnych~w sieciach komputerowych wtyków światłowodowych,~to:}
+{LC, SC, MTRJ}
+{T}
+{LC, SC, MTRJ}
+{LC - najbardziej popularne złącze światłowodowe - simplex/duplex.
+SC - poprawiona polaryzacja, większa stabilnośc mechaniczna łącza w porównaniu do simplex-ST.
+MTRJ - ostatnio bardzo popularyzowane (tylko duplex)}
+
+\answer
+{Co określa standard IEEE 802.1Q?}
+{Wirtualne sieci LAN (VLAN) budowane~w środowisku transportującym ramki}
+{T}
+{Wirtualne sieci LAN (VLAN) budowane~w środowisku transportującym ramki}
+{Standard ten opisuje działanie wirtualnych sieci LAN (VLAN) budowanych w środowisku transportującym ramki}
+
+\answer
+{Protokół umożliwiający konwersję adresu IP zdalnej stacji~na jej adres MAC~w Ethernet,~to:}
+{MLD (Multicast Listener Discovery)}
+{F}
+{ARP}
+{ARP - Address Resolution Protocol -  protokół sieciowy umożliwiający mapowanie logicznych adresów warstwy sieciowej (warstwa 3 - IP) na fizyczne adresy warstwy łącza danych (2 - MAC).}
+
+\answer
+{Co zawiera pole Extended Unique Identifier (EUI) w adresie IPv6?}
+{Adres IP w wersji 4 przypisany do stacji}
+{F}
+{Zawiera adres MAC urządzenia uzupełniony pośrodku o wartość: 0xFFFE}
+{EUI - Extended Unique Identifier - adres MAC (48 bitów) zostaje uzupełniony pośrodku wartością 0xFFFE np. adres MAC - 00:0C:29:0C:47:D5, uzupełniony - 00:0C:29:FF:FE:0C:47:D5.}
+
+\answer
+{Domyślna wartość metryki Administrative Distance~w tablicy rutowania IP ruterów (np. Cisco, Juniper, Helwet Packard) przewidziana dla protokołu RIP (Routing Information Protocol),~to:}
+{110}
+{F}
+{120}
+{Tak zostało z góry ustalone.}
+
+\answer
+{W technologii Fibre Channel (stotowanej w sieciach SAN) port przełącznika Switch Fabric mogący pracować w topologii pętli arbitrażowej (pętli~z arbitrażem) sieci Fibre Channel, to port typu:}
+{FL}
+{T???????}
+{FL}
+{FL - Fabric-Loop Port, FL\_Port - port przełącznika mogący pracować~w topologii sieci arbitrażowej, używany do podłączenia portów NL do przełącznika.}
+
+\answer
+{Dwie pod-warstwy definiowane~w ramach warstwy drugiej modelu ISO-OSI to odpowiednio:}
+{LAN i WAN}
+{F}
+{LLC i MAC}
+{LLC - Logical Link Control, MAC - Media Access Control)}
+
+\answer
+{Zadaną~w jednostce dBm efektywną moc wypromieniowaną (Effective Isotropic Radiated Power, EIRP) bezprzewodowego urządzenia nadawczego stosowanego~w technologii sieciowej~na podstawie mocy wypromieniowanej P zadanej w watach można obliczyć stosujżc wzór:}
+{EIRP = 1 / (P*1mW)}
+{F}
+{$EIRP = 10*log_{10}(\frac{P}{1mW})$}
+{P - moc wypromieniowana}
+
+\answer
+{Jednostka wysokości urządzenia sieciowego montowanego~w standardzie RACK wynosząca 1,75 cala (44,45 mm) oznaczana jest symbolem:}
+{h}
+{F}
+{U}
+{U - najmniejsza możliwa wysokość urządzenia 1U = 1.75cala = 44.45mm}
+
+\answer
+{Rodzaj obszaru (area)~w domenie OSPF (Open Shortest Path First) nie otrzymującego żadnych informacji~o zewnętrznych (external) trasach rutowania OSPF,~to:}
+{backbone}
+{F}
+{Stub area}
+{Stub area - obszar wyizolowany - otrzymuje jedynie wyjście na zewnątrz, nie otrzymuje i nie wysyła informacji o sieciach.}
+
+\answer
+{Parametr~o nazwie "Wielkość okna"(Window size), którego wartość przekazywana jest~w datagramach potwierdzenia TCP (Transmission Control Protocol Acknowledgment)~w kierunku od odbiorcy do nadawcy ma na celu:}
+{Określić ilość danych, jaką nadawca może~w danej chwili wysłać (służy do sterowania przepływem)}
+{T?????? - w dobrą stronę ja myślę, bo już mi się miesza :/}
+{Określić ilość danych, jaką nadawca może~w danej chwili wysłać (służy do sterowania przepływem)}
+{Rozmiar okna - 16-bitowe pole używane przez komputer docelowy w celu poinformowania komputera źródłowego o tym, ile danych jest gotów przyjąć~w jednym segmencie TCP.}
+
+\answer
+{Dwa rodzaje obszarów (area)~w protokole rutowania dynamicznego IS-IS (Intermediate System to Intermediate System), to:}
+{LAN i WAN}
+{F}
+{Level 1, Level 2}
+{Level 1 - intra-area - traktowany jako backbone szkieletu sieci objętej protokołem, routery Level 1 komunikują się tylko z routerami Level 1.
+Level 2 - inter-area - routery Level 2 komunikują się tylko z routerami Level 2.}

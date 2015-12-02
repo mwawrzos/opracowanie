@@ -1,0 +1,294 @@
+
+\chapter{Paradygmaty programowania}
+\lstloadlanguages{Prolog}
+\lstset{language=Prolog}
+
+% 198
+\section{IT1A\_W05}
+\textbf{Podstawowym, deklaratywnym językiem programowania logicznego jest?}
+\vspace{0.4cm}
+Odpowiedź: \newline
+Do grupy deklaratywnych języków programowania logicznego zaliczamy:
+\begin{itemize}
+\item SQL
+\item \textsc{Prolog}
+\end{itemize}
+\vspace{0.4cm}
+Żródło: \url{http://ai.ia.agh.edu.pl/wiki/_media/pl:dydaktyka:miw:2011:jezyki_paradygmaty_v1_1.pdf}
+
+% 199
+\section{IT1A\_W05}
+\textbf{Które z poniższych mechanizmów są wbudowane w interpreterze języka \textsc{Prolog}?}
+Odpowiedź: \newline
+Prolog udostępnia mechanizmy:
+\begin{itemize}
+\item  rekurencji -- jak metody przetwarzania informacji,
+\item unifikacji -- mechanizmy dopasowywania wzorców,
+\item rezolucji -- metody wnioskowania logicznego,
+\end{itemize}
+Źródło:
+\url{http://ai.ia.agh.edu.pl/wiki/pl:prolog:prolog_lab:wprowadzenie\#programowanie_nieklasyczne}
+
+
+
+%200
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następującą definicję predykatu \lstinline!member/2!:}
+\begin{lstlisting}[language=Prolog, frame=trbl]
+member(H,[H|T]).
+member(H,[_|T]):- member(H,T).
+\end{lstlisting}
+Dla wywołania \lstinline!member(X,[0,1,[2,3],4])! interpreter zwróci:
+
+Odpowiedź: \newline
+X = 0 ; \newline
+X = 1 ; \newline
+X = [2, 3] ; \newline
+X = 4 ; \newline
+false. \newline
+
+
+%201
+\section{IT1A\_W05}
+Rozważmy następującą definicję predykatu \lstinline!member/2!:
+\begin{lstlisting}[language=Prolog, frame=trbl]
+member(H,[H|T]).
+member(H,[_|T]):- member(H,T).
+\end{lstlisting}
+Dla wywołania \lstinline!member(X,[0,1,2,1,3,1,4])! interpreter zwróci:
+
+Przykładowa ODP: 5 rozwiązań (nie powtórzy rozwiązania \lstinline!X = 1! - fałsz
+
+Poprawna odpowiedź
+
+X = 0 ; \newline
+X = 1 ; \newline
+X = 2 ; \newline
+X = 1 ; \newline
+X = 3 ; \newline
+X = 1 ; \newline
+X = 4 ; \newline
+false. \newline
+
+
+%202
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następującą definicję predykatu \lstinline!append/2!: do łączenia list}
+\begin{lstlisting}[language=Prolog, frame=trbl]
+appendd([],L,L).
+appendd([H|T],L,[H|TL]):- appendd(T,L,TL).
+\end{lstlisting}
+\textbf{Dla wywołania \lstinline!append(L1,L2,[1,2,3,4,5])! interpreter zwróci:}
+\vspace{0.4cm}
+
+Odpowiedź: \newline
+L1 = [], 			\newline
+L2 = [1, 2, 3, 4, 5]\newline
+false				\newline
+
+%203
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następującą definicję predykatu \lstinline!append/3! do łączenia list:}
+\begin{lstlisting}[language=prolog, frame=trbl]
+append([],L,L).
+append([H|T],L,[H|TL]):- append(T,L,TL).
+\end{lstlisting}
+
+\vspace{0.4cm}
+Odpowiedź: \lstinline!append(_,[E],L).!
+
+%204
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następujący program w \textsc{Prolog}}
+\begin{lstlisting}[language=Prolog, frame=trbl]
+
+p(a).
+p(b).
+p(c).
+p(a).
+p(c).
+
+run :- 
+	p(X),
+	assert(q(X)),
+	fail.
+	
+\end{lstlisting}
+\textbf{Po skompilowaniu i wykonaniu programu z wywołaniem \lstinline!run!:}
+\vspace{0.4cm}
+
+Odpowiedź: \newline
+W pamięci zostanie zapisane 5 faktów, [q(a),q(b),q(c),q(a),q(c)])
+false.
+
+\vspace{0.4cm}
+Żródło: \url{http://alumni.cs.ucr.edu/~vladimir/cs171/prolog_2.pdf} \newline
+Źródło: \url{http://boklm.eu/prolog/page_5.html} \newline
+
+
+%205
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następujący program w \textsc{Prologu}:}
+\begin{lstlisting}[language=prolog, frame=trbl]
+ln(0,[]) :- !.
+ln(N,[N|L]):- N1 is N-1, ln(N1,L).
+\end{lstlisting}
+\textbf{Po skompilowaniu i wykonaniu programu z wywołaniem \lstinline!ln(7,L)!:}
+
+\vspace{0.4cm}
+Odpowiedź:\newline
+Dostaniemy listę: \lstinline!L = [7, 6, 5, 4, 3, 2, 1].!
+
+
+%206
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następujący program w \textsc{Prolog}}
+\begin{lstlisting}[language=Prolog, frame=trbl]
+
+s1(X) :- not(p(X)),!,q(X).
+s2(X):- q(X), not(p(X)).
+p(a).
+q(b).
+	
+\end{lstlisting}
+\textbf{Po skompilowaniu i wykonaniu programu:}
+\vspace{0.4cm}
+Odpowiedź: \newline
+s1(X). \newline
+false. \newline
+		\newline
+s2(X).  \newline
+X = b.  \newline
+
+\vspace{0.4cm}
+Źródło: \url{http://boklm.eu/prolog/page_5.html} \newline
+
+
+%207
+\section{IT1A\_W05}
+
+\textbf{Rozważmy następujące propozycje programów iteracyjnego sumowania elementów zadanej listy w \textsc{Prologu}:}
+\textit{Tutaj miałyby być te programy...}
+
+\vspace{0.4cm}
+Przykładowa odpowiedź: \newline
+"Zaden, w \textsc{Prologu} nie da się implementować obliczeń iteracyjnych"
+
+Moja odpowiedź:\newline
+Domyślam się że poprawną odpowiedzią mogłoby być:
+\begin{lstlisting}[language=prolog, frame=trbl]
+sumList(L,S):- sumList(L,0,S).
+sumList([H|T],SS,S):-
+	SS1 is SS + H,
+	sumList(T,SS1,S).
+sumList([],SS,S):-
+	!,
+    S is SS.
+\end{lstlisting}
+To prawda, że w Prologu nie ma czegoś takiego, jak pętla i tradycyjna iteracja, ale można ją niejako osiągnąć przez umieszczanie wywołań rekurencyjnych jako ostatniej instrukcji w funkcji. 
+
+Przydałaby się weryfikacja jakiegoś prolog mastera.
+
+%208
+\section{IT1A\_W05} 
+\textbf{Jaki typ w Haskellu będzie miało następujące wyrazenie: r x = x: r x}
+
+\vspace{0.4cm}
+Przykładowa odpowiedź: r :: Integer a => a -> [a] \newline
+Odpowiedź: r :: a -> [a] \newline
+Wyjaśnienie: Wyrażenie to przyjmuje obiekt i zwraca liste, jednak nie jest ograniczone do typu Integer (typ jest zależny od x)
+
+%209
+\section{IT1A\_W05} 
+\textbf{Jak wygląda poprawna wartość dla typu data Tree a = L a | N (Tree a) a (Tree a)}
+
+\vspace{0.4cm}
+Przykładowa odpowiedź: N (L 4) 5 (L ’4’) \newline
+Odpowiedź: N (L 4) 5 (L 4) lub N (L '4') '5' (L ’4’) \newline
+Wyjaśnienie: 'a' musi być wszędzie tego samego typu, nie może być raz integer (4) a potem char('4') 
+
+%210
+\section{IT1A\_W05} 
+\textbf{Haskell jest językiem opartym o paradygmat:}
+
+\vspace{0.4cm}
+Odpowiedź: Funkcyjny
+
+%211
+\section{IT1A\_W05} 
+\textbf{Mechanizm typów w języku Haskell}
+Odpowiedź: Silny, statyczny.\newline
+Wyjaśnienie:\newline
+Rodzaje ze względu na siłę:
+\begin{itemize}
+\item silne - każde wyrażenie ma ustalony typ, nie można go używać w kontekście innych typów,
+\item słabe - typ może być zmieniony automatycznie, jeśli kontekst tego wymaga
+\end{itemize}
+
+Ze względu na czas przypisywania typów do zmiennych:
+\begin{itemize}
+\item dynamiczne - przypisywanie typów do wartości przechowywanych w zmiennych w czasie wykonywania programu,
+\item statyczne - nadawanie typów zmiennym w czasie kompilacji programu
+\end{itemize}
+
+Haskell ma mechanizm zwany type inference - wnioskuje typy na podstawie wartości:
+\begin{lstlisting}
+:t 'a' 
+'a' :: Char 
+\end{lstlisting}
+Funkcje także mają typ:
+\begin{lstlisting}
+addThree x y z = x + y + z
+addThree :: Int -> Int -> Int -> Int
+\end{lstlisting}
+
+%212
+\section{IT1A\_W05} 
+\textbf{Zaznacz prawdziwe zdania: (opcja A podana, reszta wymyślone)
+\begin{itemize}
+\item A. W programowaniu funkcyjnym koncepcja funkcji jest taka jak w algebrze.
+\item B. Programowanie funkcyjne opiera się na rachunku Lambda.
+\item C. Dobrym nawykiem w programowaniu funkcyjnym jest, aby zmienne były immutable.
+\item D. W programowaniu funkcyjnym możemy korzystać jedynie z wbudowanych typów danych.
+\end{itemize}
+}
+Odpowiedź: A, B, C 
+
+%213
+\section{IT1A\_W05} 
+\textbf{Funkcje wyższego rzędu w programowaniu funkcyjnym}\newline
+Odpowiedź: \newline
+To funkcje, które przyjmują inne funkcje jako parametry lub zwracają inne funkcje jako rezultat.\newline
+Wyjaśnienie:
+Ideą programowania funkcyjnego jest używanie funkcji jak każdej innej wartości. Skutek jest taki, że dopuszczone jest przyjmowanie funkcji jako parametry lub ich zwracanie. Przykładem jest funkcja map, która przyjmuje funkcję przekształcającą elementy listy.
+
+%214
+\section{IT1A\_W05} 
+\textbf{Jaki mechanizm w językach funkcyjnych pozwala na wykonanie operacji na zbiorze danych?} \newline
+Odpowiedź: Rekurencja, funkcje specyficzne dla języka.\newline
+Wyjaśnienie:\newline
+Rozumiejąc ‘operacje na zbiorze danych’ jako przechodzenie / modyfikowanie zbioru, możemy wyróżnić dwa sposoby - implementacja operacji za pomocą rekurencji oraz używanie funkcji wbudowanych w język (np. fold, map, niektóre języki zorientowane funkcyjnie mają pętle).
+
+%215
+\section{IT1A\_W05} 
+\textbf{Zaznacz prawdziwe zdania dotyczące programowania funkcyjnego (opcja A podana, reszta wymyślone) :}
+\begin{itemize}
+\item A. Niektóre języki imperatywne zostały wyposazone w konstrukcje z jezyków funkcyjnych.
+\item B. Wszystkie języki funkcyjne są skonstruowane w oparciu o logical programming.
+\item C. Programowanie funkcyjne może być połączone z programowaniem obiektowym.
+\item D. Koncepcja programowania funkcyjnego opiera się o implementacje funkcji, które nie mają skutków ubocznych.
+\end{itemize}
+
+Odpowiedź: A, C, D \newline
+Wyjaśnienie:
+A - na przykład Stream API w Javie 8,
+B - Prolog jest oparty o logical programming, Haskell już nie
+C - np. konstrukcje Haskella, Scali
+D - skutki uboczne są dopuszczone w wielu językach funkcyjnych, ale dobrym nawykiem jest ich unikanie.
+

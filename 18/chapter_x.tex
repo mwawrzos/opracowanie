@@ -1,0 +1,58 @@
+\chapter{Języki i~metody programowania}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+\section{K\_W15}
+\textbf{296. Dla domkniecia Kleene’ego prawdziwe sa nastepujace stwierdzenia:}\\
+przykładowa odp.) jest to zbiór słów powstały przez konkatencje dwóch domknietych dodatnio jezyków\\
+\textbf{FAŁSZ}
+
+Domknięcie Kleene'ego L* języka L jest najmniejszym spośród zbiorów X spełniających\\
+\begin{enumerate}
+\item $\varepsilon \in X$
+\item $L \subseteq X$
+\item jeżeli $s \in X$ oraz $x \in L$, to $sx \in X $
+\end{enumerate}
+
+\textbf{Dodatnie} domknięcie Kleene'ego $L^+$ definiujemy jako najmnieszy spośród zbiorów X spełniających\\
+\begin{enumerate}
+\item $L \subseteq X$
+\item jeżeli $s \in X$ oraz $x \in L$, to $sx \in X $
+\end{enumerate}
+
+Przykładowo:\\\\
+$V = \{ba, ca\}$\\
+$V* = \{\varepsilon, ba, ca, baba, baca, caca, caba, babaca, ...\}$\\
+$V^+ = \{ba, ca, baba, baca, caca, caba, babaca, ...\}$
+
+
+
+
+\section{K\_W15, K\_U15, K\_U21, K\_U22}
+\textbf{300. Odnośnie lematu o pompowaniu dla języków regularnych prawdziwe są:}\\
+przykładowa odp.) lemat słuzy pokazaniu, że określone języki są regularne\\
+\textbf{FAŁSZ}\\
+
+Twierdzenie służy do dowodzenia, że dany język \textbf{nie} jest językiem regularnym\\\\
+Twierdzenie brzmi:\\
+Jeżeli dany język $L$ jest regularny, to istnieje takie $n \geq 1$, że każde słowo w należące do $L$ długości co najmniej $n$ można podzielić na trzy części $xyv$, gdzie $y$ jest niepuste i $|xy| < n$, w taki sposób, że dla każdego $k \geq 0$ słowo postaci $xy^kv$ należy do danego języka.
+\\
+
+
+
+\section{K\_W15, K\_W03, K\_W04, K\_W07, K\_U15, K\_U21, K\_U22}
+\textbf{308. Mamy języki $L_1 = \{ a^{2^n} : n > 0\}$ oraz $L_2 = \{ a^{2n} : n > 0\}$. Które z tych języków są regularne? }\\
+przykładowa odp.) $L_1$ -- tak, $L_2$ -- tak\\
+\textbf{FAŁSZ}\\\\
+
+\textbf{Język regularny} -- język formalny taki, że istnieje automat o skończonej liczbie stanów potrafiący zdecydować, czy dane słowo należy do języka.\\\\
+
+Wykorzystując lemat o pompowaniu należy pokażać, że język jest nieregularny. Dla $L_1$:\\
+\begin{enumerate}
+\item Wybieramy x,y,z takie, że : $x=\varepsilon, y=a^{2^{k}-1}, z=a$
+\item Słowo składa się wyłącznie z liter $a$ oraz $0<|v|<2^k$
+\item Dla $i=2$ słowo $xuv^2wz \notin L_1 $, bo $2^k < |xuv^2wz| < 2^{k+1}$
+\end{enumerate}
+Zatem $L_1$ jest językiem nieregularnym
+

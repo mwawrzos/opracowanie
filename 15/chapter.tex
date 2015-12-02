@@ -1,0 +1,236 @@
+
+\chapter{Inżynieria oprogramowania}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+% \section{IT1A\_W03,IT1A\_U03,IT1A\_U07}
+% \textbf{W~jaki sposób można obliczyć długość tekstu przekazanego jako argument w~poniższej funkcji?}
+% \begin{lstlisting}[language=sql]
+% void foo(const char* txt) {
+% . . .
+% }
+% \end{lstlisting}
+
+% \vspace{0.4cm}
+% \noindent  Tutaj odpowiedzi w dowolnym formacie\\
+% Powyżej fragment kodu\\
+% A tak wstawiamy obrazki\\
+% \begin{center}
+% %\includegraphics[width=6cm]{buka}
+% %\captionof{figure}{Buka}
+% \end{center}
+
+
+% \section{IT1A\_W03,IT1A\_U03,IT1A\_U07}dassdas
+
+\setcounter{section}{247}
+\section{EKK\_1,EKK\_2}
+\textbf{Spośród poniższych wskaż prawidłowe przepływy danych występujące w diagramie DFD.}
+przykładowa odp.) terminator do innego terminatora 
+\\
+Nieprawidłowe przepływy danych w diagramach DFD(Wykłady Klimka):
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III%20rok/Inzynieria%20Oprogramowania/WYKLADY%202010/eio-IO-3-4.pdf
+\begin{itemize}
+\item Magazyn do innego magazynu
+\item Obiekt zewnętrzny do magazynu
+\end{itemize}
+Dodatkowo ze strony(http://jjakiela.prz.edu.pl/dfd.htm):
+\begin{itemize}
+\item Brak komunikacji pomiędzy obiektami zewnętrznymi
+\item Brak czarnych dziur. Czarną dziurą jest proces, który pobiera na wejściu pakiety informacji a nie generuje nic na wyjściu.
+\item Brak magicznych procesów. Magicznym procesem jest proces, który nic nie pobiera na wejściu a na wyjściu generuje przepływ.
+\end{itemize}
+\section{EKK\_1,EKK\_2}
+\textbf{Jakimi cechami charakteryzuje się dobre oprogramowanie przykładowa odp.) częste dokonywanie aktualizacji, niezawodność, poprawność
+} 
+\\
+Oprogramowanie o wysokiej jakości to oprogramowanie spełniające następujące kryteria:
+\begin{itemize}
+\item zgodne z wymaganiami użytkownika
+\item niezawodne
+\item efektywne
+\item łatwe w konserwacji
+\item ergonomiczne
+\end{itemize}
+%http://stud.ics.p.lodz.pl/~zenon/pliki/pytania1.pdf
+
+\section{EKK\_1,EKK\_2}
+\textbf{Podczas którego etapu procesu wytwarzania oprogramowania przygotowywane są definicje bazy danych oraz plików? 
+przykładowa odp.) Analizy
+}
+\\
+%http://it-consulting.pl/autoinstalator/wordpress/2011/03/22/co-wybrac-czyli-cykl-zycia-projektu-tworzenia-oprogramowania/
+Projektowania
+
+Cykl życia projektu tworzenia oprogramowania ma cztery kluczowe fazy:
+\begin{itemize}
+\item Planowanie
+\item Analiza
+\item Projektowanie
+\item Implementacja
+\end{itemize}
+\section{EKK\_1,EKK\_2}
+\textbf{Wstępna próba zdefiniowania elementów systemu oraz ich wzajemnych relacje, organizowanie tych elementów w dobrze określone warstwy z wyraźnych nakreślonymi zależności nazywa się analizą przykładowa odp.) architektury}
+\\
+analiza architektury
+\section{EKK\_1,EKK\_2}
+\textbf{Celem testowania oprogramowania jest przykładowa odp.) wykrycie błędy w oprogramowaniu}
+\\
+%http://ipij.aei.polsl.pl/articles/przeglad-metod-testowania/ 
+Proces testowania ma dwa główne cele:
+\begin{itemize}
+\item wykrycie błędów
+\item weryfikację oprogramowania, czyli sprawdzenie, czy wytwarzane oprogramowanie jest zgodne ze specyfikacją,
+\item walidację oprogramowania, która polega na kontroli czy oprogramowanie jest zgodne z oczekiwaniami użytkownika (pozwala uzyskać żądane wyniki)
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Wskaż które stwierdzenia są prawidłowe 
+przykładowa odp.) diagram poziom 0 w DFD składa się tylko z procesu głównego
+}\\
+Wykład do strony 6 -> ftp://ftp.stosowana.pl/www/upload/StaryIS/III20rok/Inzynieria0Oprogramowania/WYKLADY202010/eio-IO-3-4.pdf
+\section{EKK\_1,EKK\_2}
+\textbf{Tworzenie modelu obiektowego z istniejącej relacyjnej bazy danych jest określane jako
+przykładowa odp.) Backward engineering
+}
+\section{EKK\_1,EKK\_2}
+\textbf{Model wymagania składa się z czterech części
+przykładowa odp.) opis interfejsu, model danych, schemat kontekstu, diagram klas
+}
+Nie ma nigdzie informacji o czymś takim jak model wymagań 
+\section{EKK\_1,EKK\_2}
+\textbf{Którego z poniższych narzędzi nie używa się podczas analizy systemowej?
+przykładowa odp.) Decision Tree
+}\\
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III%20rok/Inzynieria%20Oprogramowania/WYKLADY%202010/eio-IS-2-3.pdf str.4
+Metody strukturalne:
+ \begin{itemize}
+ \item podejście Yourdona (SA/SD, ang. Struture Analysis and Struture Design) -  analiza i projektowanie strukturalne, szeroko tuta j komentowane;
+ \item metodyka SSADM (ang. Structured Software Analysis and Design Methodology )  metodyka podobna do medodyki yourdonowskiej, stosowana w administracjach  rządowych  niektórych krajów;
+\item metodyka Warda-Mellora (SDRTS, ang. Structured Design for Real-Time Systems )  zorientowana na systemy czasu rzeczywistego;
+\item metodyka Hatley'a-Pribhai  również zorientowana na systemy czasu rzeczywistego;
+\item metodyka Lavi-Harela  zawiera m.in. rozbudowany model automatowy;
+\item metodyka MACSCOT (ang. Modular Approach to Software Constrution Operation and Test )  systemy wbudowane;
+\end{itemize}
+Metody operacyjne:
+\begin{itemize}
+\item  metodyka Jaksona (JSD, ang. Jakson System Development)
+\item metodyka Warniera-Orra - m.in. diagramy w postaci tekstu strukturalnego i pewne operaje na tekście opisującym system;
+\end{itemize}
+Metody obiektowe:
+\begin{itemize}
+\item  metodyka OMT (ang. Object Modeling Tehnique) trzy odmienne, uzupełłniającąe się modele opisu;
+\item metodyka HOOD (ang. Hierarhial Object-Oriented Design)  hierarchiczny opis systemu, systemy rozproszone, dobrze określona komunikacja pomidzy obiektami;
+\item metodyka HRT-HOOD (ang. Hard Real-Time HOOD)-  rozszerzenie metody HOOD na systemy o ostrych wymaganiach czasowych 
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Stosowanie techniki prototypowania jest odpowiednie dla
+przykładowa odp.) zespołów programistów, którym brakuje znajomości dziedziny
+}\\
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III%20rok/Inzynieria%20Oprogramowania/WYKLADY%202010/eio-IO-7-8.pdf str. 7
+Prototypowanie (ang. prototyping model ), lub makietowanie, jest stosowane wtedy, gdy istnieje trudność uzyskania pełnej informacji o wymaganiach systemu, względnie informacje te nie są pewne. Sam model przewiduje:
+\begin{itemize}
+\item szybką budową prototypu celem skonfrontowania go z klientem (jego wyobrażeniami o systemie);
+\item rozwijanie pewnego systemu na podstawie prac nad prototypem.
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Które z poniższych nie jest przedmiotem zainteresowanie w fazie projektowania?
+przykładowa odp.) projekt interfejsów}\\
+Faza projektowania (ang. design) - szczegółowy projekt systemu spełniajacy i precyzujący wcześniej określone wymagania
+Efektem fazy jest:
+%http://infolab.stanford.edu/~burback/watersluice/node11.html
+%http://marek.piasecki.staff.iiar.pwr.wroc.pl/dydaktyka/io_2010/w4.pdf str 4
+\begin{itemize}
+\item architektura systemu
+\begin{itemize}
+\item diagramy klas
+\item digramy sekwencji
+\item diagramy stanów
+\item projekt bazy danych
+\end{itemize}
+\item plan wdrożenia
+\item analiza priorytetów
+\item analiza wydajności
+\item plan testów
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Jakie są główne aktywności w modelu spiralnym?
+przykładowa odp.) Definiowanie, Prototypownie, Testowanie, Dostarczenie produktu}\\
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III rok/Inzynieria Oprogramowania/WYKLADY 2010/z-IS.pdf str 9
+Koncepcja podejmowanych operacji, analiza wymagań, projektowanie systemu, szczegółowe projektowanie, kodowanie, testowanie modułowe, integracja i testowanie
+
+
+\section{EKK\_1,EKK\_2}
+\textbf{Czego nie znajdziemy w diagramie kontekstowym?
+przykładowa odp.) Przepływów danych
+}
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III rok/Inzynieria Oprogramowania/WYKLADY 2010/eio-IO-3-4.pdf str 6
+\\
+Diagram kontekstowy zawiera:
+\begin{itemize}
+\item procesy (1 lub niewiele więcej)
+\item terminatory(duża liczba)
+\item przepływy (duża liczba)
+\end{itemize}
+
+Nie zawiera:
+\begin{itemize}
+\item magazynów danych
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Najważniejszy celem inżynierii oprogramowania jest tworzenie software które jest
+przykładowa odp.) Wszystkie powyższe}\\
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III rok/Inzynieria Oprogramowania/WYKLADY 2010/eio-IS-1.pdf str 3
+\textbf{Definicja 1} (F. Bauer) Inżynieria oprogramowania, to ustanowienie i sotosawanie oslidnych zasad inżynierii w celu uzyskania w sposób ekonomiczny oprogramowania, które jest niezawodne i działa wydajnie na rzeczywistej maszynie.\\
+\textbf{Definicja 2} Inżynieria oprogramowania to wiedza techniczna dotycząca faz cyklu życia/wytwarzania oprogramowania, której celem jest uzyskanie oprogramowania, jako wysokiej jakości produktu
+\begin{itemize}
+\item zgodny z wymaganiami klienta
+\item niezawodny
+\item efektywny
+\item łatwy w konserwacji
+\item ergonomiczny
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Przykładem ryzyka występującego podczas wytwarzania oprogramowania jest
+przykładowa odp.) wszystkie powyższe odpowiedzi są poprawne}
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III rok/Inzynieria Oprogramowania/WYKLADY 2010/z-IO-7-8.pdf str 1
+%http://wazniak.mimuw.edu.pl/images/3/3b/Zio-10-wyk.pdf
+\\
+\textbf{Definicja 1} Ryzyko to możliwość zaistnienia sytuacji niepożądanej (ocenianej negatywnie), zawsze jako skutek pewnego zdarzenia.\\
+\textbf{Definicja 2} (woodward i in.) Ryzyko jest zobiektywizowaną niepewnością  wystąpiwnia niepożądanego zdarzenia\\
+\textbf{Definicja 3} (Górski) Ryzyko oznacz możliwość obniżenia poziomu sukcesu przedsięwzięcia (do całkowitego braku sukcesu włączenie).
+Ryzyko jest scharakterzyowane przez przynjajnmniej dwie wielkości: prawdopodobieństwo zdarzenia, negatywne skutki zdarzenia
+\begin{itemize}
+\item klient - przekroczony budżet, przekroczony haramonogram
+\item wykonawca - odmowa klienta uznania systemu za ukończony, nieuznanie umowy z a zakończoną
+\item użytkownik - niewystarczająca lub błedna funkcjonalność, nieprzyjazny interfejs użyttkonika, nieefektywność i zawodność systemu
+\item instalator - trudność w dopasowaniu systemu do środowiska użytkowego
+\item inne przypadki braku satysfakcji uczestników - stron
+\item błędy harmonogramowania - opóźnienie projektu
+\item problemy ze specyfikacją - uzgodnienie zakresu tworzonego ooprogramowania
+\item dodatkowe wymagania pojawiające się w trakcie porjektu
+\item czynnik ludzki - ludzie opuszczają zespół przed zakończeniem projektu
+\item wydajność - róznice między zakładaną a rzeczywistą wydajnością
+\end{itemize}
+
+
+\section{EKK\_1,EKK\_2}
+\textbf{Które z poniższych wielkości są mierzalne bezpośrednio?
+1. rozmiar produktu
+2. wysiłek potrzebny do wytworzenia software
+3. harmonogram
+4. jakość
+przykładowa odp.) zarówno (2) i (4)}\\
+%ftp://ftp.stosowana.pl/www/upload/StaryIS/III rok/Inzynieria Oprogramowania/WYKLADY 2010/z-IS.pdf str 13
+Obszary mierzenia oprogramowania
+\begin{itemize}
+\item rozmiar
+\item modularność
+\item funkcjonalność
+\item wydajność
+\end{itemize}

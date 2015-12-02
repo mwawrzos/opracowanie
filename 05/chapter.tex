@@ -1,0 +1,382 @@
+\chapter{Programowanie obiektowe}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 1
+\answer
+{Jakie są typ i wartość wyrażenia 2 + "2.68"?}
+{Wyrażenie jest niezgodne ze składnią języka.}
+{F}
+{Będzie  to string o wartości "22.68"}
+{String + int = String}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 2
+\answer
+{Aby sprawdzić, czy dwa obiekty typu String mają taką samą zawartość można:}
+{Użyć operatora $==$}
+{F}
+{Użyć metody \textbf{equals} klasy String - s1.equals(s2).}
+{Operator == porównuje w tym wypadku referencje do obiektów, a nie ich zawartość. Do tego służą w Javie metody equals. Teoretycznie operator == mógłby być użyty dla porównania Stringów, jeśli pochodziły by one ze wspólnej puli napisów (wcześnie wywołano na nich metodę intern())}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 3
+\answer
+{Który z poniższych fragmentów kodu sprawdza, czy obiekt wskazywany przez referencję xyz należy do klasy XYZ?}
+{
+	\begin{lstlisting}[language=java]^^J
+if (xyz.dynamicCastTo(XYZ.class) != null)^^J
+	\end{lstlisting}
+}
+{F}
+{
+\begin{lstlisting}[language=java]^^J
+// Method #1^^J
+xyz instanceof XYZ^^J
+^^J
+// Method #2^^J
+XYZ.class.isInstance(xyz)^^J
+^^J
+// Method #3^^J
+XYZ.class.isAssignableFrom(xyz.getClass())^^J
+^^J
+// Method #4^^J
+try {
+    XYZ c = (XYZ) xyz;^^J
+    // No exception: xyz is of type XYZ or IT MIGHT BE NULL!^^J
+} catch (ClassCastException e) {^^J
+}^^J
+// Method #5^^J
+try {^^J
+    XYZ c = XYZ.class.cast(xyz);^^J
+    // No exception: xyz is of type XYZ or IT MIGHT BE NULL!^^J
+} catch (ClassCastException e) {^^J
+}	^^J
+\end{lstlisting}
+}
+{Inne możliwości oraz szersze wyjaśnienie - \url{http://stackoverflow.com/questions/541749/how-to-determine-an-objects-class-in-java} }
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 4
+
+\section{Który z fragmentów kodu poprawnie wypisze elementy tablicy, zdeklarowanej jako:}
+\begin{lstlisting}[language=java]
+int tab[] = new int[] {3, 2, 1, 0};
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=java]
+for ( int i:tab )
+	System.out.println(i +" ");
+\end{lstlisting}
+
+\textbf{PRAWDA}
+
+\vspace{0.4cm}
+\noindent
+\textbf{Odpowiedź:}
+Petla foreach (j.w.), for:
+\begin{lstlisting}[language=java]
+for ( int i = 0; i < tab.length; i++ )
+	System.out.println(tab[i]+" ");
+\end{lstlisting}
+while:
+\begin{lstlisting}[language=java]
+int i = 0;
+while ( i < tab.length )
+	System.out.println(tab[i++] +" ");
+\end{lstlisting}
+i wiele innych możliwości.
+\vspace{0.4cm}
+\noindent
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 5
+
+\section{Przeanalizuj poniższy kod. Co zostanie wypisane?}
+\begin{lstlisting}[language=java]
+loop : for(int i = 0; i<3; i++){
+  for(int j = 0; j<5; j++){
+    System.out.print(i + j);
+    if(j==1) break loop;
+  }
+}
+\end{lstlisting}
+
+\noindent
+\textbf{Przykładowa odpowiedź:} 0011223
+\textbf{FAŁSZ}
+
+\vspace{0.4cm}
+\noindent
+\textbf{Odpowiedź:} 01
+
+\vspace{0.4cm}
+\noindent
+\textbf{Wyjaśnienie:} Instrukcja break z etykieta przenosi nas do pierwszej linii poza blokiem oznaczonym ta etykieta.
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 6
+\answer
+{Które zdanie opisujące własności klas jest prawdziwe?}
+{Dla każdej klasy w języku Java możliwe jest zdefiniowanie klasy potomnej}
+{F}
+{\begin{itemize}
+	\item Klasa może być zadeklarowana jako publiczna (public), wówczas jest dostępna z innych pakietów.
+ 	\item Klasy mogą być zadeklarowane jako abstrakcyjne (abstract), jeśli deklarują lub dziedziczą niezaimplementowane metody abstrakcyjne.
+ 	\item Klasy finalne (final) nie mogą mieć klas potomnych.
+  	\item Wszystkie klasy poza klasa Object są klasami potomnymi jakiejś innej klasy. 
+  	\item W ciele klasy mogą znajdować się:
+    \begin{itemize}
+ 	 	\item deklaracje pól i metod składowych obiektów,
+ 	 	\item konstruktory,
+ 	 	\item deklaracje pól i metod statycznych,
+ 	 	\item deklaracje klas wewnętrznych
+ 	\end{itemize}
+  	\item Elementom deklarowanym wewnątrz klasy można przypisywać standardowe modyfikatory określające prawa dostępu (public, protected, private).
+  	\item Klasa może dziedziczyć tylko po jednej klasie bazowej (brak wielodziedziczenia).
+  	\item Klasy mogą implementować jeden lub kilka interfejsów.
+\end{itemize}}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 7
+\answer
+{Które zdanie opisujące własności klas jest prawdziwe?}
+{Klasa możne implementować wiele interfejsów}
+{T}
+{Powtórzone poprzednie pytanie}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 8
+\answer
+{Które zdanie dotyczące trybów dostępu w języku Java jest prawdziwe?}
+{Pola i metody prywatne nie są dziedziczone}
+{F}
+{
+\begin{itemize}
+\item[] \textbf{private} - element widoczny tylko w ramach instancji tej samej klasy
+\item[] \textbf{domyślny - package} - element widoczny w ramach tego samego pakietu
+\item[] \textbf{protected} - element widoczny jak powyżej, ale w dodatku dostępny także dla podklas danej klasy
+\item[] \textbf{public} - element widoczny dla wszystkich klas
+\end{itemize}
+}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 9
+\answer
+{Która kombinacja modyfikatorów metod jest dopuszczalna}
+{static synchronized}
+{T}
+{Modyfikatory opcjonalne metod (kolejność dowolna, w jednym punkcie wykluczają się): 
+   \begin {description}
+	 \item [public / protected / private] modyfikatory dostępu
+     \item [final / abstract] final blokuje możliwość rozszerzenia metody w klasach pochodnych, abstract sygnalizuje, że metoda nie ma ciała i należy ją rozszerzyć w klasie pochodnej
+     \item [abstract / static] abstract poisane wyżej, static oznacza, że metoda istnieje nawet jeżeli nie istnieje instancja obiektu
+     \item [strictfp / native] native sygnalizuje, że chcemy użyć języka innego niż java, a strictfp zapewnia, że operacje zmiennoprzecinkowe wykonane na różnych maszynach zwrócą dokładnie taki sam wynik
+     \item [synchronized] powoduje, że metoda chroniona jest przez sekcje krytyczną
+   \end {description}}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 10
+\answer
+{Które ze stwierdzeń jest prawdziwe}
+{Wszystkie tablice są klonowalne (realizuja interfejs Cloneable)}
+{T}
+{Pytanie zbyt ogólne do odpowiedzi.}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 11
+\answer
+{W jaki sposób usuwane są obiekty w języku Java?}
+{Nie są programowo usuwane, to środowisko wykonawcze podejmuje decyzje czy i kiedy je usunąć}
+{T}
+{Usuwaniem obiektów w Javie zarządza specjalny proces JVM - Garbage Collector. Jego uruchamianiem i przebiegiem zarządza maszyna wirtualna, użytkownik nie ma możliwości wymusić jego przejścia. Istnieje wprawdzie wywołanie System.gc(), jednak jest to tylko sugestia dla VM. Sam GC działa w dwóch fazach - Marking, gdy oznacza wszystkie obiekty, do których istnieją odwołania jako "żywe" oraz Sweeping, gdy zwalnia pamięć zajmowaną przez nieoznaczone obiekty.}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 12
+\answer
+{Które z poniższych stwierdzeń odnoszących się do konstruktorów klas są prawdziwe}
+{Aby wywołać konstruktor nadklasy, należy w pierwszej instrukcji konstruktora dodać wywołanie super([lista parametrów])}
+{T}
+{
+\begin{itemize}
+	\item Konstruktor jest nieodłączną częścią klasy (abstrakcyjna klasa również posiada swój konstruktor),
+	\item Istnieje on nawet wtedy, kiedy go jawnie nie napiszemy (konstruktor domyślny),
+	\item Nie jest możliwe stworzenie obiektu klasy bez udziału konstruktora,
+	\item Konstruktor MUSI mieć taką samą nazwę, jak nazwa klasy,
+	\item Konstruktor nie może zwracać żadnego typu (nawet void),
+	\item Konstruktor domyślny jest zawsze bezparametrowy,
+	\item Konstruktor domyślny można wywołać tylko wtedy, gdy klasa nie posiada żadnego, zaimplementowanego konstruktora,
+	\item Konstruktor może być przeciążany,
+	\item Podczas wywołania konstruktora danej klasy, wywoływane są również wszystkie konstruktory klas nadrzędnych,
+	\item Konstruktor, o ile posiada parametry, może ustawiać pola wartościami, które dostał jako argumenty, jeżeli konstruktor nie ma żadnych parametrów, wszystkie wartości pól obiektu, będą zainicjalizowane domyślnymi wartościami.
+	\item Konstruktor może być oznaczony dowolnym specyfikatorem dostępu, nawet private (wykorzystywane np. przy implementacji wzorca projektowego Singleton),
+	\item Każdy konstruktor ma jako pierwsze wyrażenie albo odwołanie do przeciążonego konstruktora ( this() ), albo do konstruktora z klasy nadrzędnej ( super() ), pamiętać należy, że wyrażenia te mogą być dodane przez kompilator w trakcie kompilacji, jeżeli nie zostaną napisane (nie znaczy to jednak, że zawsze trzeba je jawnie wpisywać w ciało konstruktora),
+	\item Konstruktor nie może mieć zaimplementowane (używać) jednocześnie słowa kluczowego super() i this(), 
+	\item Konstruktor klasy bazowej (super()), może być wywoływany bez parametrów lub z nimi (zależnie od konstruktorów klasy bazowej),
+	\item Nie można wywołać metody, lub odwołać się do pola instancji klasy, przed operatorem super(),
+	\item Tylko zmienne lub metody statyczne mogą być użyte jako cześć wywołania super (np. super(ClassX.PoleStatyczne) ),
+	\item Interfejsy nie posiadają konstruktorów,
+	\item Konstruktor nie może być wywołany bezpośrednio (tak jak metoda), wywołanie takie może mieć miejsce tylko w innym konstruktorze,
+	\item Konstruktory nie s dziedziczone.
+\end{itemize}
+}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 13
+\answer
+{Które ze stwierdzeń odnoszących się do wyjątków w języku Java są prawdziwe?}
+{Po wygenerowaniu wyjątku, który nie został przechwycony program kończy działanie}
+{F}
+{\begin{itemize}
+ 	\item Wyjątek Exception dziedziczy po klasie Throwable,
+  	\item Klauzura „throws” nie oznacza, że zostanie wyrzucony, a jedynie, że istnieje taka możliwość,
+  	\item Po pojawieniu się wyjątku przerywane jest normalne wykonanie metody, w której wyjątek został wyrzucony. System rozpoczyna poszukiwanie odpowiedniego fragmentu kodu, który jest odpowiedzialny za obsługę wyjątku (ang. Exception handler).
+  	\item Kod obsługi wyjątku ma postać: catch(ExceptionType e){…}
+  	\item Poszukiwanie rozpoczyna się od metody, w której wyjątek został wyrzucony. Jeżeli w bieżącej metodzie kod obsługujący wyjątek nie zostanie odnaleziony, wówczas przeglądana jest w górę zawartość stosu wywołania metod, aż do znalezienia odpowiedniego handlera wyjątku. Handler może zostać dopasowany do wyjątku, jeżeli typem wyrzuconego wyjątku jest wyspecyfikowania klasa ExceptionType lub klasa potomna;
+	\begin{itemize}
+  		\item Jeżeli handler zostanie odnaleziony, wówczas następuje przekazanie do niego sterowania z pominięciem dalszych instrukcji, które znajdują się w metodzie, gdzie nastąpiło wyrzucenie wyjątku. Mechanizm ten nazywany jest przechwytywaniem wyjątków.
+  		\item Jeżeli na stosie wywołań funkcji brak jest odpowiedniego kodu obsługi wyjątków, maszyna wirtualna kończy działanie wątku, lub programu jeżeli jest jednowątkowy.
+	\end{itemize}
+    \item Generowane wyjątki są obiektami. Ich stan pozwala przekazać szczegółowe informacje o typie i miejscu wystąpienia błędów. W szczególności obiekt może przechowywać komunikat (String) oraz zawartość stosu wywołań funkcji dostępną zazwyczaj dzięki metodzie printStackTrace().
+\end{itemize}}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 14
+\answer
+{Które z poniższych stwierdzeń odnoszących się do typów generycznych w języku Java są prawdziwe?}
+{Nie jest możliwe utworzenie tablic typów parametryzowanych}
+{T}
+{}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 15
+\answer
+{Które z poniższych stwierdzeń odnoszące się do klas wewnętrznych i zagnieżdżonych w języku Java są prawdziwe}
+{Obiekt klasy wewnętrznej ma swój stan niezależny od innych obiektów powiązanych z obiektem klasy zewnętrznej}
+{T}
+{}
+{
+Można zdefiniować klasę wewnątrz innej klasy. Wtedy klasę znajdująca się wewnątrz nazywamy klasa zagnieżdżona. Zasięg zagnieżdżonej klasy jest ściśle związany z zasięgiem klasy zewnętrznej. Jeśli klasa B zostanie zdefiniowana wewnątrz klasy A, wtedy B jest znana wewnątrz A, ale nie poza nią. Zagnieżdżona klasa ma dostęp do wszystkich składowych, także prywatnych, należących do klasy zewnętrznej. Klasa zewnętrzna nie ma dostępu do składowych klasy zagnieżdżonej.
+
+Istnieją dwa rodzaje klas zagnieżdżonych: statyczne i niestatyczne. Statyczna klasa zagnieżdżona posiada na początku modyfikator static. Ponieważ jest klasa statyczna, dostęp do składowych klasy zewnętrznej musi się odbywać przez konkretna nazwę obiektu (nie można odwoływać się do zmiennych klasy zewnętrznej w sposób bezpośredni). Z powodu tego ograniczenia bardzo rzadko stosuje się statyczne klasy zagnieżdżone.
+}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 16
+\answer
+{Które z poniższych stwierdzeń odnoszących się do interfejsów w języku Java są prawdziwe}
+{Każda metoda zadeklarowana wewnątrz interfejsu jest publiczna}
+{T}
+{\begin{itemize}
+	\item Interfejsy mogą deklarować wyłącznie metody abstrakcyjne. Domyślnie metody te są publiczne.
+ 	\item Interfejsy mogą definiować stałe (atrybuty typu static final)
+ 	\item Deklarując interfejs, wprowadzamy nowy typ danych – referencję do interfejsu (czyli po prostu możemy stosować nazwę interfejsu tak, jak nazwy klas). Referencje te mogą być użyte jako atrybuty klas, parametry metod oraz zmienne lokalne (np. Interfejs xyz = new KlasaImplementujacaInterfejs()).
+ 	\item Pomiędzy interfejsami może występować relacja dziedziczenia (słowo kluczowe extends).
+	\item Dany interfejs może dziedziczyć po kilku interfejsach. W tym przypadku możliwe jest dziedziczenie wielokrotne.
+ 	\item W programie można zaimplementować wiele hierarchii interfejsów. 
+ 	\item Klasy mogą implementować wiele interfejsów należących do różnych hierarchii.
+\end{itemize}}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 17
+\answer
+{Które stwierdzenie odnoszące się do wątków w języku Java jest prawdziwe}
+{Maszyna wirtualna Javy rozróżnia priorytety wątków. W momencie, kiedy watek o wyższym priorytecie będzie w stanie gotowości, wywłaszczy on watek o niższym priorytecie.}
+{T}
+{Watki działają zazwyczaj w jednym kontekście aplikacji w ramach danej VM. Współdzielą one miedzy sobą stertę VM i otwarte pliki, ale każdy posiada własny stos. 
+
+Watki można tworzyć poprzez implementacje interfejsu Runnable lub rozszerzenie klasy Thread.
+
+Watek kończy działanie po:
+\begin{itemize}
+ \item zakończeniu wykonywania metody run(),
+ \item pojawieniu się wyjątku, który nie został obsłużony,
+ \item wywołaniu metody stop() – aktualnie jest to odradzane, a sama metoda ma status deprecated
+ \end{itemize}
+Aplikacja kończy działanie, gdy:
+ \begin{itemize}
+ \item Wszystkie watki zakończa swoja prace (deamony nie są brane pod uwagę),
+ \item Pojawi się krytyczny wyjątek klasy Error
+\end{itemize}
+ }
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 18
+\answer
+{Które stwierdzenie odnoszące się do wątków w języku Java jest prawdziwe}
+{ Zaleca się zakończenie wątku poprzez wyjście z metody run()}
+{T}
+{Powtórzone poprzednie pytanie.}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 19
+\answer
+{Które stwierdzenia odnoszące się do monitorów w języku Java są prawdziwe}
+{Watek będący właścicielem monitora może wywoływać inne metody synchroniczne. }
+{T}
+{Java pozwala synchronizować watki pracujące ze zmiennymi warunkowymi dzięki użyciu monitorów. Monitory związane są ze specyficznymi danymi (nazywanymi zmiennymi warunkowymi) i działają jako blokada zakładana na tych danych. Gdy watek zajmie monitor dla jakiejś danej, inne watki do czasu zwolnienia monitora zostają zablokowane i nie mogą odczytywać lub modyfikować danych.
+
+Segment kodu w programie, w którym następuje dostęp do tej samej danej z różnych wątków nazywany jest sekcja krytyczna (ang. critical section). W Javie sekcje krytyczna oznaczmy przy użyciu słowa kluczowego synchronized.
+
+W Javie każdy obiekt, który ma metody synchroniczne posiada swój monitor. W momencie gdy sterowanie znajdzie się w metodzie synchronicznej, wątek, który wywołał te metodę zajmuje monitor obiektu, którego metodę wywołano. Inne watki nie mogą wołać metod synchronicznych tego obiektu do czasu zwolnienia monitora. Monitory w Javie są wielodostępne (ang. reentrant). Oznacza to, że watek, który zajął monitor jakiegoś obiektu może wołać inne metody synchroniczne obiektu.
+
+Operacje zajmowania i zwalniania monitora są wykonywane automatycznie przez środowisko wykonawcze Javy, co zapewnia integralność danych i chroni przed wystąpieniem sytuacji wyjątkowych spowodowanych operacjami na monitorach.}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 20
+\answer
+{Które z poniższych stwierdzeń odnoszących się do rozwiązań stosowanych w bibliotece AWT jest prawdziwe?}
+{Za rozmieszczenie komponentów odpowiada przypisany do kontenera obiekt klasy LayoutManager}
+{T}
+{Jeżeli do kontenera nie jest przypisany LayoutManager to komponenty zostaną ustawione przez domyślny LayoutManager}
+{\url{http://www.tutorialspoint.com/awt/awt_layouts.htm}}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 21
+\answer
+{Które z poniższych stwierdzeń odnoszących się do obsługi zdarzeń w bibliotece AWT są prawdziwe}
+{ Adapter to klasa zapewniająca puste implementacje metod interfejsu typu Listener}
+{T}
+{Do obsługi zdarzeń w AWT wykorzystywany jest wzorzec Listenera. Aby jakaś klasa mogła być zarejestrowana jako słuchacz elementu AWT musi implementować interfejs ActionListener, posiadający metodę actionPerformed(ActionEvent arg). Metoda ta jest wywoływana, gdy zostanie wygenerowane zdarzenie na obiekcie powiązanym z danym słuchaczem. Przekazywany jest wtedy jako argument obiekt klasy ActionEvent, zawierający informację m.in. o źródle zdarzenia, które można wykorzystać do podjęcia odpowiednich akcji.}
+{Więcej o obsłudze zdarzeń w bibliotece AWT \url{http://www.cafeaulait.org/course/week7/19.html}}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 22
+\answer
+{Które z poniższych stwierdzeń odnoszących się do biblioteki Swing są prawdziwe}
+{Ciężkimi komponentami w Swing są kontenery górnego poziomu: JFrame, JDialog i JApplet.}
+{T}
+{\begin{itemize}
+\item Swing stanowi kolejna generacje biblioteki graficznej dla platformy Java. 
+\begin{itemize}
+\item Zapewnia bogaty zbiór komponentów graficznych (JLabel, JButton, JCheckBox, JComboBox, JTree, JTextField, JTextArea, itd.)
+\item Został wyposażony w możliwość programowego zmieniania wyglądu aplikacji PLAF - Pluggable Look And Feel
+\item Możliwości graficzne zostały rozszerzone o Java 2D API
+\item Wsparcie dla internacjonalizacji
+\end{itemize}
+\item Swing przejął z AWT podstawowe zasady rozmieszczania komponentów z wykorzystaniem menadżerów układu oraz model obsługi zdarzeń. Podstawowa różnica pomiędzy komponentami Swing i AWT jest sposób implementacji komponentów
+\item Projektując Swing przyjęto, że większość komponentów zostanie całkowicie napisanych języku Java i nie będą powiązane z odpowiednikami (peer) docelowej platformy. Są to właśnie lekkie komponenty (lightweight components). Jedynymi ciężkimi komponentami są kontenery górnego poziomu: JFrame, JDialog i JApplet.
+\item Lekkie komponenty są potomkami klasy JComponent (dziedziczącej po java.awt.Container). Za ich wygląd i zachowanie odpowiada kod w całości napisany w języku Java. Dziki temu niezależnie od platformy reagują na zdarzenia w analogiczny sposób, zużywają mniej zasobów, działają szybciej, ponieważ wszelkie operacje odbywają się bez przekierowania do funkcji systemowych.
+\end{itemize}
+}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 23
+\answer
+{Modelem dla komponentu Swing jest}
+{Klasa elementu składowego (np. elementu listy), której obiekty przechowywane są w komponencie}
+{T}
+{
+\begin{itemize}
+\item Inspiracja dla architektury komponentów Swing był wzorzec MVC (model widok kontroler).
+\item W architekturze komponentów Swing widok i kontroler zostały sprzężone w jeden obiekt nazywany UI Delegate, który skupia w sobie typowe zadania kontrolera i widoku oraz oddelegowuje cześć zadań widoku do obiektów specyficznych dla danej architektury PLAF dostarczanych przez klasę UIManager. Klasa bazowa dla różnych klas UI Delegate jest klasa ComponetUI
+\begin{itemize}
+\item Model przechowuje dane (ale też pełni cześć funkcji kontrolera, na przykład wysyła powiadomienia o zmianie w danych)
+\item UI Delegate jest odpowiedzialny za pobieranie danych z Modelu i ich wizualizacje
+\item Komponent koordynuje działanie Modelu i UI Delegate, a także stanowi interfejs do funkcjonalności biblioteki AWT
+\end{itemize}
+\end{itemize}
+}
+{}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~ 24
+\answer
+{W terminologii Swing Renderer to}
+{ Pojedynczy obiekt, który jest odpowiednio konfigurowany, aby wyświetlić zawartość elementu umieszczonego w kontenerze}
+{T}
+{Jest to klasa używana przez złożone komponenty (lista, lista rozwijana, drzewo, tabela) do wizualizacji danych składowych.}
+{}

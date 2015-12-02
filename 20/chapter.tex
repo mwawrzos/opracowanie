@@ -1,0 +1,102 @@
+\chapter{Podstawy sztucznej inteligencji}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{20}{\section*{\contentsname}}
+\section{EKK\_1, EKK\_3}
+\textbf{Który (które) z poniższych algorytmów zapewniają znalezienie najkrótszej ścieżki w grafie (koszt każdego łuku równy 1):}
+\vspace{0.4cm}
+
+\noindent Według ang. wik najczęsciej używane toi:
+
+\begin{itemize}
+\item Dijkstra
+\item Bellmann-Ford
+\item A*
+\item Floyd-Warshall
+\item Johnson
+\item Viterbi
+\end{itemize}
+
+Dodatkowo prawdopodobnie:
+\begin{itemize}
+\item Przeszukiwanie wszerz (ang. breadth-first search, BFS)
+\item Przeszukiwanie w głąb (ang. Depth-first search, w skrócie DFS)
+\end{itemize}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Algorytm Tree-Search Breadth-First F wygenerował 400 węzłów do głębokosci 3.  Szacunkowy (zastępczy) branching factor b wynosi:}
+\vspace{0.4cm}
+
+\noindent Effective branching factor - srednia ilosć dzieci wygenerowanych przez "przeciętny" węzeł dla danego przeszukiwania.\\
+Definicja:\\
+N: całkowita ilosć węzłów\\
+d: głębokosć drzewa\\
+b: Effective branching factor\\
+$N = b* + (b*)^2 + \ldots + (b*)^d$\\
+Do przybliżonych obliczeń effective branching factor można przyjąć następujący wzór:\\
+$b* = \sqrt[d]{N}$\\
+Dla naszego zadania:\\
+N = 400\\
+d = 3\\
+$b* = \sqrt[3]{400} = 7,37$
+
+\section{EKK\_1,EKK\_2}
+\textbf{Aby algorytm A* znajdował rozwiązanie optymalne w literaturze przytaczane są następujące wymagania co do funkcji heurystycznej h(n):}
+\vspace{0.4cm}
+
+\begin{itemize}
+\item the branching factor is finite (each node has only a finite number of neighbors)
+\item arc costs are greater than some $\epsilon > 0$
+\item h(n) is a lower bound on the actual minimum cost of the lowest-cost path from n to a goal node
+\end{itemize}
+
+\noindent Heurystyka h(n) musi być dopuszczalna (ang. admissible), tzn. jej wartosć zawsze jest mniejsza od lub równa najkrótszej rzeczywistej długosci scieżki.
+
+\section{EKK\_1,EKK\_2}
+\textbf{Algorytmy  Genetyczne  (AG)  stosowane  są  do  optymalizacji  złożonych  funkcjonałów,  w  tym  problemów  z  ograniczeniami;  które  własnosci  tych  algorytmów  sa  prawdziwe:   Dla  wywołania \textit{member(X,[0,1,2,1,3,1,4])} interpreter zwróci:}
+\vspace{0.4cm}
+
+\noindent \textit{member(X,[0,1,2,1,3,1,4])} interpreter zwróci po kolei każdy wyraz tablicy, na koncu yes.\\
+Algorytmy genetyczne gwarantują znalezienie rozwiązania dopuszczalnego, ale nie optymalnego (nie mamy pewno�ci, �e znale�li�my rozwi�zanie optymalne)
+Dzia�anie wzorowanego na teorii doboru naturalnego i ewolucj
+W Algorytmach genetycznych celowo wprowadza si� elementy losowe
+Metoda jest stosunkowo szybka: znalezienie rozwi�zania cz�sto jest mo�liwe po przejrzeniu zaskakuj�co niewielkiej cz�ci przestrzeni stan�w.
+ALgorytmy genetyczne s� algorytmami randomizowanymi.
+S� wolniejsze od prostych heurestyk
+
+\section{EKK\_1,EKK\_2}
+\textbf{Dla  problemu  kryptoarytmetycznego  SEND+MORE=MONEY  najlepsze  zgrubne  ale optymistyczne oszacowanie ilosci rozwiązań do przebadania to:}
+\vspace{0.4cm}
+
+\noindent  For example, the Dudeney puzzle above can be solved by testing all assignments of eight values among the digits 0 to 9 to the eight letters S,E,N,D,M,O,R,Y, giving 1,814,400 possibilities. (?)
+
+\section{EKK\_1,EKK\_2}
+\textbf{Rozważmy wieże hanojskie o N kręgach.  Przestrzeń stanów i rozwiązanie optymalne mają:}
+\vspace{0.4cm}
+\noindent Rozwiązanie optymalne (najmniejsza możliwa ilosć kroków) wynosi $2^n - 1$\\
+Przestrzeń stanów: $3^n$\\
+Ciekawostka: graficzne przedstawienie problemu da nam trójkąt Sierpińskiego. Więcej na \href{https://en.wikipedia.org/wiki/Tower_of_Hanoi#Graphical_representation}{Wiki}
+
+\section{EKK\_1,EKK\_2}
+\textbf{Rozważmy zadanie programowania z ograniczeniami, gdzie szukane są wartości trzech zmiennych X, Y, oraz Z. Wszystkie zmienne są różne od siebie (alldifferent([X,Y,Z])). Dziedzina X to
+$\{1, 2, 3\}$, dziedzina Y to $\{2, 3, 4\}$, a dziedzina Z to $\{3, 4, 5\}$. Ile istnieje rozwiązań dopuszczalnych:}
+\vspace{0.4cm}
+
+\noindent 14 rozwiązań \\ $[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 3], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 3], [2, 4, 5], [3, 2, 4], [3, 2, 5], [3, 4, 5]$
+
+\section{EKK\_1,EKK\_2}
+\textbf{Logiczną konsekwencją zbioru zdań:
+$$
+\{\neg \mathcal{A} \vee \mathcal{P}, \neg \mathcal{P} \vee \mathcal{B} \vee \mathcal{D}, \neg \mathcal{D} \vee \mathcal{N}, \neg \mathcal{D} \vee \mathcal{M}, \neg \mathcal{D} \vee \mathcal{H}, \neg \mathcal{H} \vee \neg \mathcal{S} \vee \mathcal{R}, \neg \mathcal{H} \vee \mathcal{R} \vee \mathcal{I}, \mathcal{A}, \neg \mathcal{B}, \neg \mathcal{R} \}
+$$
+nie jest:}
+\vspace{0.4cm}
+
+\noindent Idąc od tyłu i zakładając, że: $\{A: 1, B: 0, R: 0\}$ można wywnioskować wartości (true/false) poszczególnych wyrazów\\
+$\{A: 1, B: 0, R: 0, P: 1, D: 1, N: 1, M: 1, H: 1, S:0, I: 1\}$\\
+Z tego już łatwo ogarnąć następne zdania logiczne
+
+\begin{center}
+\includegraphics[width=6cm]{buka}
+\captionof{figure}{Buka}
+\end{center}

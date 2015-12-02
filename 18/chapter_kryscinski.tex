@@ -1,0 +1,53 @@
+\chapter{Lingwistyka formalna i teoria automatow}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+\section{Gramatyka jest wieloznaczna, jeżeli:} 
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Jest to gramatyka kontekstowa lub bezkontekstowa \\ 
+
+\noindent \textbf{Odpowiedź:}  Gramatyka wieloznaczna to gramatyka, której język zawiera przynajmniej jedno zdanie wieloznaczne. \\ 
+
+\noindent \textbf{Wyjaśnienie:} \
+Gramatyka wieloznaczna to gramatyka, której język zawiera przynajmniej jedno zdanie wieloznaczne. Gramatyka nie zawierająca  zdania wieloznacznego to gramatyka jednoznaczna. \\
+Zdanie wieloznaczne to zdanie, dla którego  istnieje więcej niż jedno drzewo syntaktyczne wyprowadzania takiego zdania. Cechę jednoznaczności lub wieloznaczności przypisujemy gramatyce,a nie językowi przez nią generowanemu. Często dla danego języka możemy wyprowadzić zarówno gramatykę wieloznaczną,jak i jednoznaczną. Istnieją jednak także języki,dla których zdefiniowanie gramatyki jednoznacznej nie jest możliwe. Nazywamy je językami istotnie wieloznacznymi.
+
+\section{Dla klasyfikacji gramatyk Chomsky'ego prawdziwe są następujące stwierdzenie} 
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Praktyczne znaczenie dla możliwości konstruowania kompilatorów języków programowania mają gramatyki klasy 2 i 3 \\ 
+
+\noindent \textbf{Odpowiedź:}  \\ 
+
+\noindent \textbf{Wyjaśnienie:}
+
+
+\section{Które ogólne stwierdzenia odnośnie języków, gramatyk i automatów są prawdziwe} 
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Jeżeli $L$ jest językiem regularnym, to istnieje automat deterministyczny ze stosem akceptujący ten język \\ 
+
+\noindent \textbf{Odpowiedź:}  \\ 
+\begin{itemize}
+	\item Jeżeli $L$ jest językiem rekurencyjnie przeliczalnym - to istnieje maszyna Turinga akceptująca ten język
+	\item Jeżeli $L$ jest językiem kontekstowym, to istnieje automat liniowo ograniczony akceptujacy ten język
+	\item Jeżeli $L$ jest językiem bezkontekstowym, to istnieje automat niedeterministyczny ze stosem akceptujący ten język
+	\item Jeżeli $L$ jest językiem regularnym, to istnieje automat skończony akceptujący ten język
+\end{itemize}
+
+\noindent \textbf{Wyjaśnienie:}
+Wykłady dr. Klimka
+
+\section{Jeżli $r$ oraz $s$ są wyrażeniami regularnymi dla języków odpowiednio $R$ oraz $S$, to $(r+s)$, $rs$ i $r^*$ są wyrażeniami regularnym reprezentującymi odpowiednio} 
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} $R \cup S$, $R \times S$ i $R^+$\\ 
+
+\noindent \textbf{Odpowiedź:}  $R \cup S$, $R \times S$ i $R^*$\\  
+
+\noindent \textbf{Wyjaśnienie:}\\
+$(r+s) \rightarrow r | q$, oznacza sumę teoriomnogościową języków $R$ i $S$. $R \cup S = \{x | x \in R \lor x \in S\}$ \\
+$rs$, oznacza złożenie (konkatenację) języków $R$ i $S$. $R \times S = \{rs | r \in R, s \in S\}$ \\
+$r^*$, oznacza domknięcie Kleene'go języka $R$. $R^* = R^0 \cup R^1 \cup R^2 \cup ...$  

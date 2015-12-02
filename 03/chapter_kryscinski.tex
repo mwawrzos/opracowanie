@@ -1,0 +1,160 @@
+\chapter{Algorytmy i struktury danych}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+\section{Które stwierdzenia spośród poniższych są prawdziwe} 
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana dpowiedź:} Pesymistyczna i oczekiwana złożoność obliczeniowa są sobie równe dla sortowania przez wybieranie. \\ 
+\noindent \textbf{Odpowiedź:} Pesymistyczna i oczekiwana złożoność obliczeniowa są sobie równe dla sortowania przez wybieranie. \\ 
+\noindent \textbf{Wyjaśnienie:}
+\begin{center}
+	\begin{tabular}{ | l | l | l | l |}
+		\hline
+		Algorytm\ Złożoność czasowa& Optymistyczna & Oczekiwana & Pesymistyczna \\ \hline
+		Bubble sort			& $O(nlog(n))$ & $O(nlog(n))$ & $O(n^2)$\\ \hline
+		Insertion sort		& $O(n)$ & $O(nlog(n))$ &  $O(n^2)$\\ \hline
+		Selection sort		& $O(n^2)$ & $O(n^2)$ & $O(n^2)$ \\ \hline
+		Merge sort			& $O(nlog(n))$ & $O(nlog(n))$ & $O(nlog(n))$\\ \hline
+		Quicksort			 & $O(nlog(n))$ & $O(nlog(n))$& $O(n^2)$ \\ \hline
+	\end{tabular}
+\end{center} 
+
+
+
+\section{Drzewie binarnym przeszukiwanie zgodnie z porządkiem inorder ma postać}
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Zbadaj według kolejności: wierzchołek, lewe poddrzewo, prawe poddrzewo. \\
+
+\noindent \textbf{Odpowiedź:} Zbadaj według kolejności: lewe poddrzewo, wierzchołek, prawe poddrzewo. \\
+
+\noindent \textbf{Wyjaśnienie:}
+\begin{figure}[h]	
+	\centering	
+	\subcaptionbox{Pre-order}
+    {
+		\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 2cm/#1,level distance = 1.5cm},scale=0.6, transform shape]
+		\node [treenode] {$1$}
+		child { node [treenode] {$2$} }
+		child { node [treenode] {$3$ } };
+		\end{tikzpicture}
+	}\qquad\qquad
+    \subcaptionbox{In-order}
+	{
+		\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 2cm/#1,level distance = 1.5cm},scale=0.6, transform shape]
+		\node [treenode] {$2$}
+		child { node [treenode] {$1$} }
+		child { node [treenode] {$3$ } };
+		\end{tikzpicture}
+	} \qquad\qquad
+	\subcaptionbox{Post-order}
+	{
+		\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 2cm/#1,level distance = 1.5cm},scale=0.6, transform shape]
+		\node [treenode] {$3$}
+		child { node [treenode] {$1$} }
+		child { node [treenode] {$2$ } };
+		\end{tikzpicture}
+	}
+\end{figure} \\
+
+
+
+\section{Dany jest graf skierowany G = (V,E), gdzie V =\{1,2,3,4,5,6\}, E = \{(1,2), (1,3), (2,4), (2,5), (4,5), (5,1), (3,5), (3,6)\}. Jeśli graf G przeszukujemy w głąb poczynając od wierzchołka 1 to}
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Krawędź (2,5) może być krawędzią drzewową (w zależności od realizacji algorytmu) \\
+
+\noindent \textbf{Odpowiedź:}  
+\begin{itemize}
+	\item Możliwa kolejność odwiedzonych wierzchołków: $1, 2, 4, 5, 3, 6$
+	\item Krawędzie drzewowe: $(1, 2), (2, 4), (4, 5), (1, 3), (3, 6)$.
+	\item Krawędzie wprzód: $(2, 5), (3, 5)$
+	\item Krawędzie powrotne: $(5, 1)$
+	\item Krawędzie $(2,5), (3, 5)$ może być drzewowe, w zależności od realizacji algorytmu 
+	\item Krawędź $(4, 5)$ może być wprzód, w zależności od realizacji algorytmu 
+\end{itemize}
+
+\noindent \textbf{Wyjaśnienie:}
+Zbiór wszystkich drzew przeszukiwania w głąb - które zostały utworzone podczas przechodzenia po grafie - nazywamy lasem przeszukiwania w głąb.
+Przechodząc pod grafie możemy dokonać klasyfikacji krawędzi na:
+\begin{itemize}
+	\item krawędzie drzewowe - są to krawędzie których zbadanie powoduje odkrycie nowego wierzchołka
+	\item krawędzie powrotne - są to krawędzie łączące wierzchołek z przodkiem
+	\item krawędzie w przód - są to krawędzie niedrzewowe, łączące wierzchołek z potomkiem
+	\item krawędzie poprzeczne - wszystkie inne krawędzie
+\end{itemize}  
+
+
+\section{Dana jest procedura xxx. Przyjmij konwencję, że np. zapis AAABCC oznacza trzykrotne wykonanie instrukcji A, po czym następuje wykonanie instrukcji B a następnie dwukrotnie instrukcji C. Następujące sekwencje instrukcji mogą być wynikami wywołania powyższej procedury}
+\begin{lstlisting}
+Proc(n) {
+	if (warunek(x)) then {
+		A(x);
+		Proc(f(n));
+		B(x);
+	} else
+		C(x);
+}
+\end{lstlisting}
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} AAACCCBBB \\ 
+
+\noindent \textbf{Odpowiedź:} $A^xCB^x, x \ge 0$ \\
+
+\noindent \textbf{Wyjaśnienie:}
+Funkcja Proc jest rekurencyjnie wywoływana pomiędzy wywołaniem A i B. W przypadku kiedy warunek jest spełniony, Proc rozpoczyna się od wywołania funkcji A, następnie rekurencyjnie wywołuje siebie, odkładając wywołanie funkcji B "na później". Będzie to następować tak długo jak warunek jest spełniony. W momencie kiedy warunek będzie niespełniony nastąpi wywołanie funkcji C oraz pozostałe wywołania funkcji B odłożone na stosie wywołań. \\
+
+\section{Niech $p=(x_1, y_1)$, $q=(x_2, y_2)$, $r=(x_3, y_3)$ oraz $det(p, q, r)$, oznacza wyznacznik macierzy}
+\noindent $x_1 \quad y_1 \quad 1$ \\
+$x_2 \quad y_2 \quad 1$ \\
+$x_3 \quad y_3 \quad 1$
+
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Jeśli $det(p, q, r) = 0$ to punkt $r$ leży na prostej wyznaczonej przez punkty p i q \\ 
+
+\noindent \textbf{Odpowiedź:}
+\begin{itemize}
+	\item Jeśli $det(p, q, r) > 0$ to punkt $r$ leży po lewej stronie wektora p $\rightarrow$ q
+	\item Jeśli $det(p, q, r) = 0$ to punkt $r$ leży na prostej wyznaczonej przez punkty p i q
+	\item Jeśli $det(p, q, r) < 0$ to punkt $r$ leży po prawej stronie wektora p $\rightarrow$ q
+	\item Jeśli $sgn(det(p, q, p_1)) = sgn(det(p,q, p_2))$, punkty $p_1$ i $p_2$ leżą po tej samej stronie prostej $p - q$
+\end{itemize}
+
+\noindent \textbf{Wyjaśnienie:}
+Algorytmy geometryczne. Wzięte z wykładów prof. Bieleckiego.
+
+\section{Graf dynamiczny, którego maksymalnej liczby wierzchołków i krawędzi w trakcie wykonywania algorytmu nie potrafimy z góry oszacować powinien być reprezentowany jako}
+
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} Lista list \\ 
+
+\noindent \textbf{Odpowiedź:} Lista sąsiedztwa zaimplementowana jako lista list. \\
+
+\noindent \textbf{Wyjaśnienie:}
+Lista sąsiedztwa jest listą list. Każdy element głównej listy odpowiada jednemu wierzchołkowi $u$ opisywanego grafu. W liście przechowywane są wskaźnili na listy zawierające wierzchołki $v_x$ sąsiednie do $u$. Operacje w większości wykonują się wolniej niż w przypadku macierzy sąsiedztwa. Zaletą jest duża elastyczność w przypadku zmiany ilości wierzchołków oraz mniejsza złożoność pamięciowa, liniowa względem krawędzi.
+
+
+
+\section{Głębokość rekurencji dla ciągu Fibonacciego zaimplementowanego rekurencyjnie zgodnie z arytmetyczną definicją rekurenycjną wynosi}
+
+\vspace{0.4cm}
+\noindent \textbf{Proponowana odpowiedź:} $O(n^4)$ \\ 
+
+\noindent \textbf{Odpowiedź:} $O(2^n)$ \\
+
+\noindent \textbf{Wyjaśnienie:}
+$T(n) = T(n-1) + T(n-2) + c \leq 2T(n-1) + c = 2(2T(n-2) + c) + c = 2^2T(n-2) + 2c + 2^0c =...= 2^nT(0) + 2^{n-1}c + ... + 2c + 2^0c = c(2^n-1)$ \\
+
+
+\section{Problem chińskiego listonosza polega na}
+\noindent \textbf{Proponowana odpowiedź:} Znalezieniu najkrótszej drogi zamkniętej zawierającej wszystkie wierzchołki grafu. \\
+
+\noindent \textbf{Odpowiedź}:  Znalezieniu najkrótszej drogi zamkniętej zawierającej wszystkie \textbf{krawędzie} grafu. \\
+
+\noindent \textbf{Wyjaśnienie}:
+Rozważmy graf, którego krawędzie odpowiadają ulicom w rejonie, obsługiowanym przez listonosza. Wierzchołki to po prostu skrzyżowania ulic. Krawędziom nadajemy wagi, które oznaczają odległości między dwoma skrzyżowaniami. Znalezienie możliwie najkrótszej drogi, którą musi przejść listonosz sprowadza sie do znalezienia w tym grafie drogio minimalnej sumie wag krawędzi, która przechodzi przez każdą krawędź co najmniej raz. Jeśli dany graf posiada cykl Eulera, to istnieje taka droga, która zaczyna i konczy sie w tym samym punkcie i wymaga przejścia po każdej ulicy dokładnie raz. Problem ma zawsze rozwiązanie jeżeli graf jest spójny. 

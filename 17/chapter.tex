@@ -1,0 +1,398 @@
+\chapter{Bazy danych}
+\PartialToc % odkomentować przed wysłaniem !!!!!!!!m
+\startcontents[chapters]
+\printcontents[chapters]{}{1}{\section*{\contentsname}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 279
+
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące kluczy w~relacyjnym modelu danych.}
+{Klucz podstawowy jest zawsze kluczem prostym.}{F}
+{Klucz podstawowy może być kluczem prostym albo złożonym}
+{\\}
+
+\noindent
+Musimy zdefiniować następujące pojęcia:
+\begin{description}
+   \item[Zbiór identyfikujący] dowolny atrybut lub zbiór atrybutów pozwalający na jednoznaczną identyfikację krotki (rekordu) w relacji (tabeli)
+   \item[Klucz] każdy minimalny zbiór identyfikujący, czyli taki że dowolny jego podzbiór właściwy nie jest kluczem (chodzi o to, że nie możemy za pomocą mniejszej ilości atrybutów z tego zbioru uzyskać jednoznaczności przy wyszukiwaniu rekordu)
+   \item[Klucz prosty] klucz składający się z tylko jednego atrybutu
+   \item[Klucz złożony] klucz składający się z więcej niż jednego atrybutu
+   \item[Klucz podstawowy (główny)] wybrany przez użytkownika klucz
+   \item[Klucz obcy] atrybut lub ich zestaw występujący w danej relacji, a będący kluczem określonym w innej relacji,
+   \item[Atrybut kluczowy] - atrybut wchodzący w skład co najmniej jednego klucza
+\end{description}
+A więc przykładowa odpowiedź jest błędna, gdyż klucz podstawowy moży być kluczem złożonym. Poprawne stwierdzenia odnośnie kluczy powinny się dać wywnioskować z powyższych definicji. Przykłady:
+\begin{enumerate}
+\item Jeżeli dla zmiennej relacyjnej istnieje więcej niż jeden klucz, to wszystkie klucze składają się z tej samej liczby atrybutów - Fałsz, ponieważ może instnieć klucz $\{A\}$ i klucz $\{B, C\}$ jednocześnie
+\end{enumerate}
+
+% 280
+
+\answer{Dana jest relacja $R$ o schemacie $H = \{A, B, C, D, E, F, G\}$ i zbiorze zależności funkcyjnych $F = \{\{C\}  \rightarrow  \{A\}, \{C\}  \rightarrow  \{B, F\}, \{C\} \rightarrow  \{G\}, \{E\}  \rightarrow  \{C\}, \{G\}  \rightarrow  \{A, B\}\}$. Które z podanych zbiorów są kluczami relacji $R$?}
+{$\{A, B, C, D, E, F, G\}$ }{F}
+{$\{D, E\}$}
+{\\}
+
+\vspace{0.2cm}
+\noindent
+Aby wyznaczyć wszystkie klucze danej relacji należy policzyć domknięcia tranzytywne wszystkich podzbiorów atrybutów jej schematu $H$. Możemy jednak zauważyć, że atrybuty $D$ i $E$ nie występują po prawej stronie żadnej zależności funkcyjnej. Pozwala to stwierdzić, że muszą się one znajdować w zbiorze będącym kluczem relacji $R$. Liczymy więc domknięcie tranzytywne najmniejszego podzbioru $H$ zawierającego te atrybuty. 
+
+$$
+\{D, E\}^+ = \{D, E, C, A, B, F, G\} = H
+$$
+
+\noindent
+Akurat wyszło nam, że zbiór atrybutów $\{D, E\}$ jest kluczem (bo jego domknięcie tranzytywne jest równe zbiorowi $H$ i żaden z jego podzbiorów właściwych nie jest kluczem). Ponadto możemy stwierdzić, iż nie ma żadnego innego klucza, gdyż każdy pozostały do sprawdzenia zbiór atrybutów zawierałby w sobie atrybuty $D$, $E$ (czyli był nadkluczem).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 281
+\answer{Dla których z podanych operacji algebry relacji schemat(y) argumentu(ów) i relacji wynikowej $s$, są takie same?}
+{rzutowanie}{F}
+{selekcja, suma, iloczyn, różnica}
+{\\}
+
+\vspace{0.2cm}
+\noindent
+Algebra relacji pozwala na konstruowanie nowych relacji ze starych. Wyróżniamy następujące operacje algebry: suma, iloczyn (przecięcie), różnica, selekcja, rzutowanie, iloczyn karteziański i złączenia, przemianowanie (zmiana nazwy relacji lub jej atrybutów).
+
+\vspace{0.2cm}
+\noindent
+Operacje zachowujące schemat(y) relacji: selekcja, suma, iloczyn, różnica \\
+Operacje niezachowujące schemat(ów) relacji: rzutowanie, iloczyn karteziański, złączenia, przemianowanie (prośba o weryfikację przemianowania)
+
+
+
+\vspace{0.2cm}
+\noindent
+Uwaga: założono, że w pytaniu chodzi o zachowywanie schematu w każdym przypadku użycia, a nie w szczególnym.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 282
+\answer{Załóżmy, że w zapytaniu opartym na dwóch relacjach zastępujemy operator złączenia wewnętrznego operatorem złączenia zewnętrznego. Wskaż te operatory, których użycie gwarantuje wynik nie mniejszy (w sensie relacji inkluzji) niż użycie operatora złączenia wewnętrznego.}
+{złączenie lewostronne zewnętrzne}{T}
+{Patrz poniżej}
+{\\}
+
+\vspace{0.2cm}
+\noindent
+Wyróżniamy 4 rodzaje złączenia zewnętrznego: lewostronne, prawostronne, pełne i typu union. Rozważmy złączenie relacji R i S ($R \Join_{\theta} S$)
+\begin{description}
+	\item[LEFT OUTER JOIN] wynikiem są wszystkie krotki z R uzupełnione krotkami z S które spełniają warunek $\theta$. Tak jak w złączeniach wewnętrznych dana krotka z R może ulec złączeniu z wieloma krotkami z S. Krotki z R dla których brakuje pasującej krotki z S uzupełniane są nullami
+    \item[RIGHT OUTER JOIN] analogicznie do LEFT tylko tutaj relacja S uzupełniana jest krotkami z R
+    \item[FULL OUTER JOIN] wynik zawiera wszystkie krotki z R i S. Uzupełniane wartościami null gdy brakuje pasującej krotki w drugiej relacji.
+    \item[UNION]  złączenie zawierające wszystkie krotki relacji R nie pasujące do żadnej krotki relacji S uzupełnione tymi krotkami z relacji S które nie pasują do żadnej krotki relacji R.
+\end{description}
+
+\vspace{0.2cm}
+\noindent
+Operatory, których użycie gwarantuje wynik nie mniejszy niż użycie operatora złączenia wewnętrznego: złączenie lewostronne/prawostronne/pełne zewnętrzne
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 283
+\answer{Wskaż, w których przypadkach klauzule instrukcji \textit{select} są ułożone we właściwej kolejności.}
+{from, where, group by, having}{T}
+{Patrz poniżej}
+{\\}
+
+\vspace{0.2cm}
+\noindent
+Rozszerzona wersja kolejności: 
+$$
+select ... from ... where ... group~by ... having ... order~by ... limit ... offset  
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 284
+
+\answer{Wskaż, które elementy dopuszczalne w konceptualnym modelu danych są niekompatybilne z modelem relacyjnym.}
+{związki rekurencyjne jeden do jednego}{F}
+{Patrz poniżej}{\\}
+\noindent
+\begin{description}
+   \item[Model konceptualny] jest podstawą tworzenia logicznego modelu danych. Składają się na niego: zbiory encji, typy związków, atrybuty i dziedziny atrybutów, klucze i klucze główne, więzy integralnosci.
+\end{description}
+Elementy niekompatybilne, które należy usunąć przy projektowaniu relacyjnych baz danych to:
+\begin{itemize}
+  \item związki binarne typu wiele do wielu
+  \item związki rekurencyjne typu wiele do wielu
+  \item związki złożone
+\end{itemize}
+
+% 285
+
+\answer{Dana jest relacja R o schemacie $H = \{A, B, C, D, E, F\}$ i zbiorze zależności funkcyjnych $F = \{\{A\} \rightarrow \{B\}, \{C\} \rightarrow \{D, E\}, \{A, C\} \rightarrow \{F\}\}$. Które z podanych dekompozycji relacji $R$ na relacje o schematach $H_1, H_2 i H_3$ są bezstratne?}
+{$H_1 = \{A, B, C\}, H_2 = \{D, E, F\}, H_3 = \{C, D\}$}{F}
+{Patrz poniżej}{\\}
+\noindent
+\begin{description}
+   	\item[Dekompozycja] rozbicie relacji na relacje o mniejszej liczbie atrybutów.
+	\item[Dekompozycja stratna] gdy ponowne złączenie relacji nie prowadzi do relacji wyjściowej
+	\item[Dekompozycja bezstratna] gdy ponowne złączenie relacji prowadzi do relacji wyjściowej
+\end{description}
+\vspace{0.2cm}
+\noindent \textbf{Ogólny algorytm sprawdzania bezstratnosci dekompozycji}
+\vspace{0.2cm}
+
+\noindent Niech dany będzie zbiór atrybutów $H = \{A_1,\ldots,A_n\}$ i niech $F$ będzie zbiorem zależności funkcyjnych. Rozważamy dekompozycję relacji $R$ o schemacie $H$ na $k$ relacji $R_i$ o schematach $H_i$.
+Konstruujemy macierz S zawierającą k wierszy o etykietach $R_i$ i $n$ kolumn o etykietach $A_j$.
+\begin{enumerate}
+ 	\item Dla kazdego atrybutu $A_j \in H$ i każdej relacji $R_i$, jeżeli $A_j \in H_i$, to umieszczamy znak \Checkmark w komórce $S(i, j)$.
+	\item Dla każdej zależności funkcyjnej  $X \rightarrow Y \in F (X, Y \subseteq  H)$, dla kazdych dwóch wierszy macierzy $S$, które mają znaki \Checkmark dla wszystkich kolumn ze zbioru $X$, jezeli którykolwiek z wierszy ma znak \Checkmark w jakiejś kolumnie ze zbioru $Y$, to wstawiamy znak \Checkmark równiez w drugim z rozważanych wierszy dla tej kolumny. 
+\end{enumerate}
+Jeżeli istnieje wiersz macierzy zawierający znaki \Checkmark we wszystkich swoich komórkach, to dekompozycja jest bezstratna, w przeciwnym przypadku dekompozycja jest stratna.
+\vspace{0.2cm}
+
+\noindent\textbf{Dla przykładowej odpowiedzi}
+\vspace{0.2cm}
+
+\noindent
+\begin{tabular}{|c|c|c|c|c|c|c|} 
+\hline
+  & $A$ & $B$ & $C$ & $D$ & $E$ & $F$ \\ \hline
+$H_1$ & \Checkmark & \Checkmark & \Checkmark & {\color{red} \Checkmark } & & \\ \hline
+$H_2$ & & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
+$H_3$ & & & \Checkmark & \Checkmark & & \\ \hline
+\end{tabular}
+\vspace{0.2cm}
+
+\noindent
+\Checkmark -- pierwszy krok, {\color{red} \Checkmark} -- drugi krok
+\vspace{0.2cm}
+
+\noindent
+\textbf{Dekompozycja jest stratna!}
+\vspace{0.2cm}
+
+\noindent
+\textbf{Przykładowe bezstratne:}
+\begin{itemize}
+	\item{$H_1 = \{A, B, C, E, F\}, H_2 = \{D, E, F\}, H_3 = \{C, D\}$}
+	\item{$H_1 = \{A, B, C\}, H_2 = \{C, D, E, F\}, H_3 = \{A, C, D, F\}$}
+\end{itemize}
+
+
+% 286
+
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące postaci normalnej Boyce’a–Codda.}
+{Dowolna relacja dwuatrybutowa jest w BCNF}{T}
+{Patrz poniżej}{\\}
+\noindent Niech dana będzie relacja $R$ o schemacie $H = \{A_1,\ldots, A_n\}$ i zbiór zależności funkcyjnych $F$.
+Relacja $R$ jest w postaci normalnej Boyce’a–Codda (BCNF) wtw, gdy dla każdej nietrywialnej, prostej zalezności funkcyjnej $X \rightarrow A \in F^+ $, $X$ jest nadkluczem ($X \subseteq H, A \in H$).
+\vspace{0.2cm}
+
+\noindent \textbf{Prawidłowe stwierdzenia o BCNF:}
+\begin{itemize}
+  \item Jeżeli schemat relacji znajduje się w postaci normalnej Boyce’a–Codda, to nie ma w nim redundancji.
+  \item BCNF oznacza, ze lewa strona każdej nietrywialnej zależności funkcyjnej zawiera klucz
+  \item Dowolna dwuatrybutowa relacja jest w BCNF.
+  \item Dowolną relację $R$ o schemacie $H$ można sprowadzić do BCNF stosując dekompozycję bezstratną, ale niekoniecznie zachowującą zalezności funkcyjne.
+\end{itemize}
+
+% 287
+\answer{Dana jest relacja R o schemacie $H = \left\{A, B, C, D, E\right\}$ oraz zbiór zależnosci funkcyjnych $F = \{\{B, C\} \rightarrow \{D, E\}, \{C, D\} \rightarrow \{B, E\}, \{D\} \rightarrow \{C\}, \{E\} \rightarrow \{B\}\}$. W jakiej maksymalnie postaci normalnej jest relacja $R$? (Zakładamy, ze jest w 1NF.)}
+{3NF}{T}
+{Patrz poniżej}{\\}
+{Aby osądzić, czy dana relacja jest w danej postaci normalnej musimy określić domknięcie zbioru zależności funkcyjnych $F^+$ oraz wyznaczyć wszystkie wystepujące klucze; w tym celu obliczamy domknięcia tranzytywne pozdzbiorów zbioru $F$ oraz zauważamy, że atrybut $A$ nie występuje po prawej stronie żadnej z zależności, więc musi być częścia klucza.} \\ \\
+\begin{tabular}{|c|c|c|} 
+\hline
+	Left & Both & Right \\ \hline
+	& $B$ $C$ $D$ $E$ & \\ \hline
+\end{tabular} \\ \\
+{Ponieważ wszystkie atrybuty (poza atrybutem $A$) występują zarazem po lewej jak i po prawej stronie zależności funkcyjnych, nie pozostaje nam nic innego niż sprawdzić kolejno domknięcia tranzytywne wszystkich podzbiorów owego zbioru atrybutów}
+$$ \{B\}^+ = \{B\} $$
+$$ \{C\}^+ = \{C\} $$
+$$ \{D\}^+ = \{D, C, B, E\}  => \{A, D\}^+ = H $$
+$$ \{E\}^+ = \{E, B\} $$
+Jedynym odnalezionym dwuelementowym kluczem jest zbiór $\{A, D\}$; mogą jednak istnieć inne klucze, dlatego sprawdzamy domknięcia tranzytywne zbiorów zawierajacyh trzy atrybuty, jednocześnie nie będące nadzbiorem dla $\{A, D\}$
+$$ \{B, C\}^+ = \{B, C, D, E\} => \{A, B, C\}^+ = H $$
+$$ \{B, E\}^+ = \{B, E\} $$
+$$ \{C, E\}^+ = \{C, E, B, D\} => \{A, C, E\}^+ = H $$
+{W drugiej turze odnaleźliśmy kolejne dwa klucze: $\{A, B, C\}$ oraz $\{A, C, E\}$; na tym etapie przerywamy juz poszukiwania -- każdy kolejny 4-elementowy zbiór atrubutów byłby nadzbiorem odnalezionych już kluczy.}
+{\\}
+{Powracając do głównego pytania postawionego w zadaniu należy określić, jakie warunku musi spełniać relacja należąca do danej postaci. Przypomnijmy: \\
+Relacja $R$ jest w trzeciej postaci normalnej (3NF) wtw, gdy dla każdej nietrywialnej, prostej zalezności funkcyjnej $X \rightarrow A \in F^+$ $X$ jest nadkluczem lub A nalezy do pewnego klucza relacji $R$ ($X \subseteq H, A \in H$).
+\vspace{0.2cm} \\
+Jeżeli zatem zauważymy, że wszystkie atrybuty $\{A, B, C, D, E\}$ należą do pewnego klucza, to jesteśmy w stanie od razu stwierdzić, że relacja należy do 3NF (drugi z warunków jest zawsze spełniony)}.
+{\\}
+{Pozostaje nam jedynie sprawdzić, czy relacja należy również do BCNF. Przypomnijmy: \\
+Relacja $R$ jest w postaci normalnej Boyce’a–Codda (BCNF) wtw, gdy dla każdej nietrywialnej, prostej zalezności funkcyjnej $X \rightarrow A \in F^+ $, $X$ jest nadkluczem ($X \subseteq H, A \in H$). \\
+Wśród określonych przez nas zależności należących do $F^+$ odnajdujemy jednak zależność $ \{E\} \rightarrow \{B\}$, dla której atrubut $E$ nie jest nadkluczem dla żadnego z istniejących kluczy - zatem relacja nie nalezy do BCNF.}
+\noindent
+
+% 288
+\answer{Wskaz wszystkie prawdziwe stwierdzenia dotyczące trzeciej postaci normalnej.}
+{Dowolną relację mozna sprowadzić do 3NF stosując dekompozycję bezstratną.}{T}
+{Patrz poniżej}{\\}
+\noindent Relacja $R$ jest w trzeciej postaci normalnej (3NF) wtw, gdy dla każdej nietrywialnej, prostej zalezności funkcyjnej $X \rightarrow A \in F^+$ $X$ jest nadkluczem lub A nalezy do pewnego klucza relacji $R$ ($X \subseteq H, A \in H$).
+\vspace{0.2cm}
+
+\noindent \textbf{Prawidłowe stwierdzenia o 3NF:}
+\begin{itemize}
+  \item 3NF oznacza, że każdy atrybut niekluczowy (informacyjny) zależy wyłącznie od klucza. Innymi słowy, atrybuty informacyjne są wzajemnie niezalezne.
+  \item BCNF jest nieco bardziej restrykcyjną wersją 3NF. W BCNF wszystkie atrybuty (równiez kluczowe) muszą spełniać ten warunek. Ten dodatkowy wymóg ma znaczenie, gdy relacja zawiera wiele kluczy.
+  \item Jezeli relacja jest w BCNF, to jest również w 3NF.
+  \item Jezeli relacja jest w 3NF, to możliwe jest występowanie pewnych redundancji. Postać normalna 3NF jest kompromisem używanym wtedy, gdy nie można uzyskać BCNF.
+  \item W praktyce próbujemy uzyskać BCNF, ale ważniejsze jest zachowanie zależności, więc, jesli przejście do BCNF nie zachowuje zależności, wybieramy 3NF.
+  \item Dowolną relację $R$ o schemacie $H$ można sprowadzić do 3NF stosując dekompozycję bezstratną i zachowującą zależności funkcyjne. 
+  \item Relacja jest w 3NF jeśli jest w 2NF i nie zawiera zależności przechodnich
+\end{itemize}
+
+% 289
+
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące kluczy obcych w relacyjnym modelu danych.}
+{Wartosci klucza obcego są unikatowe}{F}
+{Patrz poniżej}{\\}
+\noindent
+\begin{description}
+	\item[Klucz obcy] (\textit{foreign key}) w modelu relacyjnym bazy danych to kombinacja jednego lub wielu atrybutów tabeli, które wyrażają się w dwóch lub większej liczbie relacji. Wykorzystuje się go do tworzenia relacji pomiędzy parą tabel, gdzie w jednej tabeli ten zbiór atrybutów jest kluczem obcym, a w drugiej kluczem głównym.
+\end{description}
+\noindent \textbf{Prawidłowe stwierdzenia o kluczu obcym:}
+\begin{itemize}
+  \item Klucze obce są sposobem łączenia danych przechowywanych w różnych tabelach
+  \item Klucz obcy jest kolumną lub grupą kolumn tabeli, która czerpie swoje wartości z tej samej dziedziny co klucz główny powiązanej z nią tabeli
+  \item Klucz obcy musi odnosić się do istniejącej krotki lub przyjmować wartość \textit{null}, aby jawnie stwierdzić, że nie ma związku z reprezentowanymi obiektami w bazie danych albo że ten związek jest nieznany
+  \item Klucz obcy \textbf{nie musi} być unikatowy w obrębie tabeli
+  \item Klucz obcy może pochodzić z tej samej tabeli, gdy chcemy utworzyć związek rekurencyjny 
+  \item Odwołania klucz obcy – klucz mozna definiować na poziomie \textbf{kolumny} tylko wtedy, gdy powiązane klucze są kluczami prostymi (zawierają jeden atrybut). W PSQL Używamy do tego słowa kluczowego \textbf{\textit{references}}, np.\\
+\lstinline[columns=fixed]{idksiazki char(4) not null references ksiazki,} 
+\item Odwołania klucz obcy – klucz definiowane na poziomie \textbf{tabeli} pozwalają łączyc ze sobą klucze złożone, np.\\
+\lstinline[columns=fixed]{foreign key (numer, idkategorii) references elementy} 
+\item Zarówno klucz główny, jak i obcy mogą miec nazwy nadane przez programistę (w miejsce nazw generowanych przez system zarządzania bazą danych), np.\\
+\lstinline[columns=fixed]{constraint klucz_obcy}\\ 
+\hspace*{1.2cm}\lstinline[columns=fixed]{foreign key (numer, idkategorii) references elementy} 
+
+	\item W przypadku zdefiniowania zalezności między dwoma kluczami, usunięcie lub modyfikacja wartosci (klucza) w tabeli nadrzędnej ma wpływ na tabelę podrzędnę.
+Definiując powiązanie mozna określić, jak system zarządzania bazą danych ma się w takiej sytuacji zachować. Odpowiednie reguły ograniczeń dla kluczy obcych dodaje się
+na końcu definicji ograniczenia\\
+\lstinline[columns=fixed]{references tabela [(kolumna)] [on delete akcja] [on update akcja]}\\ 
+
+Akcje:
+\begin{itemize}
+	\item restrict -– zapobiega usunięciu/modyfikacji rekordu z tabeli nadrzędnej, jezeli istnieje odwołanie do tego rekordu;
+	\item no action -– (akcja domyslna) zgłoszenie błędu, przy próbie usunięcia/modyfikacji rekordu z tabeli nadrzędnej, jezeli istnieje odwołanie do tego rekordu; w przeciwienstwie do poprzedniej akcji sprawdzanie może być odroczone do końca transakcji;
+	\item cascade -– kaskadowe usuwanie/modyfikacja rekordów w tabeli podrzędnej;
+	\item set null -– ustawia wartość klucza obcego na null;
+	\item set default -– ustawia wartosć klucza obcego na wartość domyślną.
+\end{itemize}
+\end{itemize}
+
+% 290
+
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące użycia funkcji agregujących w systemie PostgreSQL.}
+{Klauzula \textit{group by} słuzy do podziału na rozłączne podzbiory krotek będących wynikiem selekcji.}{T}
+{Patrz poniżej}{\\}
+\noindent
+\textbf{Podstawowe funkcje agregujące:}
+\begin{description}
+   \item[count(*)] liczba wierszy spełniających określone (w klauzuli where) warunki 
+   \item[count(x)] liczba wierszy, w których wartość w kolumnie x jest różna od null
+   \item[avg(x)] średnia arytmetyczna wartości w kolumnie x
+   \item[max(x)] maksymalna wartość w kolumnie x
+   \item[min(x)] minimalna wartość w kolumnie x
+   \item[stddev(x)] odchylenie standardowe wartości w kolumnie x
+   \item[sum(x)] suma wartości w kolumnie x
+   \item[variance(x)] wariancja wartości w kolumnie x
+\end{description}
+
+\noindent \textbf {Zdania prawdziwe na temat funkcji agregujących:} 
+\begin{itemize}
+	\item Dostają na wejściu zbiór wartości, a zwracają tylko jedną wartość.
+	\item Są obliczane po uprzednim obliczeniu klauzuli where, dlatego nie mogę one w niej wystapić; jedyną możlwiością pośredniego użycia wyniku funkcji agregującej w klazuli where jest stworzenie podzapytania:
+niepoprawnie: [...] WHERE punkty > avg(punkty) 
+poprawnie: [...] WHERE punkty > (SELECT avg(punkty) FROM wyniki))
+	\item mogą występować w liście SELECT dla kolumn nie wsytępujących w klauzuli GROUP BY
+	\item wówczas wynikiem będzie jedna wartość dla każdej grupy utworzonej przez klauzulę GROUP BY
+	\item mogą byc użyte w klauzuli HAVING
+	\item ignorują wartość null.
+	\item Poza funkcją count, dla zerowej liczby wierszy wszystkie funkcje agregujące zwrócą null (np. sum() nie zwróci 0).
+	\item W przypadku stosowania funkcji min i max do kolumn typu varchar ciągi porównywane są po uprzednim uzupełnieniu ich z prawej strony spacjami.
+	\item Funkcje sum i avg przyjmują jako argument kolumnę o typie numerycznym.
+\end{itemize}
+
+
+% 291
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące transakcji.}
+{Transakcja jest ciągiem operacji w bazie danych, które nalezy wykonać wszystkie lub nie wykonywać żadnej z nich.}{T}
+{Patrz poniżej}{\\}
+\noindent \textbf {Zdania prawdziwe na temat transakcji:} 
+\begin{itemize}
+	\item Transakcja rozpoczyna sie słowem kluczowym BEGIN, a kończy słowem kluczowym END
+	\item{
+    	Transakcja może zakończyć swoje działanie na cztery sposoby:
+    	\begin{itemize}
+    		\item COMMIT - pomyslne zakończenie transakcji i zatwierdzenie wszystkich zmian
+        	\item ROLLBACK - wycofanie wszystkich zmian przeprowadzonych w ramach transakcji
+        	\item może zostać abortowana przez SZBD z powodu zakleszczenia
+    		\item może zostać przerwana z powodu awarii serwera lub dysku
+    	\end{itemize}
+    } 
+	\item PostgreSQL nie zezwala na zagnieżdżanie transakcji (próba wpisania BEGIN podczas trwania transakcji poskutkuje komunikatem "transakcja jest w toku")
+    \item{
+    	Transakcje obowiązują własności ACID, czyli transakcja jest:
+    	\begin{itemize}
+    		\item Niepodzielna (Atomic) – mimo że jest zbiorem działan, musi być wykonywana jako pojedyncza, odbywająca sie w jednym momencie i nie dzieląca na pozdbiory jednostka. 
+        	\item Spójna (Consistent) – po zakonczeniu jej wykonywania system musi być spójny.
+        	\item Odizolowana (Isolated) – jest niezależna od innych wykonujących się w danym momencie transakcji
+    		\item Trwała (Durable) – po wykonaniu musi zostać utrwalona (w PostgreSQL wykonuje się to za pomocą pliku dziennika transakcji)
+    	\end{itemize}
+    }
+    \item Podczas wykonywania transakcji może wystąpic problem brudnych danych i brudnego odczytu; Brudne dane to dane zapisane w transakcji, ale jeszcze nie zatwierdzone. Brudny odczyt to odczyt brudnych danych zapisanych przez inną transakcje; zazwyczaj użytkownik ma możliość zablokowania/odblokowania odczytu brudnych danych, jednak w W PostgreSQL odczyt brudnych danych nie jest możliwy
+    \item Stopień wzajemnej separacji transakcji jest określony za pomocą "poziomu izolacji"; 
+    \item Transakcje powinny być niewielkie
+    \item W przypadku konieczności otrzymania danych od uzytkownika, dobrą szkołą jest uprzednie zebranie wszystkich wartości a następnie zapisanie ich wszystkich razem za pomoca transakcji
+\end{itemize}
+    
+\textbf {Istniejące poziomy izolacji transakcji:}
+\begin{description}
+\item[read committed (odczyt zatwierdzony)] nie można odczytać brudnych danych, ale można zobaczyć zmiany zatwierdzone w między czasie przez inne transakcje, tj. w ramach transakcji wykonanie tego samego zapytania wielokrotnie może dawać inne wyniki
+\item[repeatable read (odczyt powtarzalny)] gwarancja, że po pobraniu krotki
+po raz pierwszy, w przypadku ponowienia zapytania otrzymamy identyczną krotkę
+\item[serializable (odczyt uszeregowany)] Poziom ten wyklucza możliwość wystąpienia wszystkich omawianych zjawisk niepożądanych
+\end{description}
+ 
+
+% 292
+\answer{Wskaż, które ograniczenia można definiować na poziomie kolumny (w instrukcji \textit{create table}).}
+{wartość domyślną atrybutu}{T}
+{Patrz poniżej}{\\}
+\noindent
+(Opcjonalne) ograniczenia dla kolumny pozwalają określić dla niej dodatkowe (poza obligatoryjnem typem - typ nie jest ograniczeniem) reguły.
+\textbf {Możliwe do określenia ograniczenia dla kolumn:}
+\begin{itemize}
+	\item not null – w kolumnie nie mogą byc zapisywane wartosci null;
+	\item unique – wartosci zapisywane w kolumnie muszą być różne dla każdego wiersza w
+tabeli;
+	\item primary key – połaczenie ograniczeń null oraz unique (Uwaga: tworzenie złożonego klucza podstawowego jest możliwe tylko przy użyciu ograniczeń na poziomie tabeli)a poziomie tabeli;
+	\item default wartość - zdefiniowanie wartości domyślnej;
+	\item check (warunek) – warunek sprawdzany w czasie wprowadzania lub aktualizacji
+danych;
+	\item references – ograniczenia kluczy obcych.
+\end{itemize}
+
+
+
+% 293
+\answer{Wskaż wszystkie prawdziwe stwierdzenia dotyczące wartości \textit{null}}
+{Wartosci \textit{null} są różne od spacji, zera czy też pustego łańcucha znaków.}{T}
+{Patrz poniżej}{\\}
+\noindent\textbf{Stwierdzenia prawdziwe dla wartości null:}
+\begin{itemize}
+	\item Wartosci null to tzw. wartości puste, reprezentują one brak wartości danego atrybutu
+(chwilowy lub permanentny)
+	\item W pewnych okolicznosciach (np. wyświetlanie, porządkowanie), wartości null są traktowane jak każde inne
+	\item W pewnych okolicznościach nie podlegają przetwarzaniu i dają nieokreślone wartości funkcji
+    \item Dwie wartości null nie są traktowane jako równe. Porównanie wartosci null z dowolną wartością daje wartoć logiczną unknown lub null (różną od true i false).
+	\item W związku z powyższym, porównanie z wartością null realizujemy za pomocą konstrukcji:
+wyrażenie is null/ wyrażenie is not null
+	\item Null może zastapić dowolną wartość, nie należy bowiem do żadnego typu
+	\item Podstawowa regułą matematyczna jest ich propagacja - działanie arytmetyczne zawierające null da w wyniku null
+	\item Chociaż nie można porównywac ze sobą dwóch wartości null, to w kontekście klauzul group by, order by i distinct wartość null jest traktowana jako identyczna z inną wartością null lub jako jej duplikat.
+	\item Jeżeli podzapytanie skalarne nie zwraca ąadnej krotki, to jako jego wynik
+przyjmowana jest wartość null.
+	\item null może wystąpic jako wartość wstawiana
+	\item W PostgreSQL element tablicy nie może być null (tablica tak).
+\end{itemize}
+
+

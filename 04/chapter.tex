@@ -1,0 +1,36 @@
+\chapter{Podstawy grafiki komputerowej}
+\PartialToc
+%\startcontents[chapters]
+%\printcontents[chapters]{}{1}{\section*{\contentsname}}
+\section{Na czym polega rendering obiektu w grafice?}
+Na przekształceniu struktury 3D w obraz rastowy 2D. \\
+Proces ten jest niezwykle skomplikowany i uwzględnia szereg różnorodnych zmiennych, jak na przykład punkt widzenia, system rzutowania, położenie obiektów, oświetlenie. Podczas renderingu wyliczane są m.in. odbicia, cienie, załamania światła, mgła, atmosfera, efekty wolumetryczne. Jest to bardzo czasochłonna operacja nie wymagająca, poza przygotowaniem, żadnej ingerencji ze strony człowieka.
+
+\section{Proszę podac która wersja etapów w tzw. „graphics pipeline” jest poprawna.}
+Display, Modeling transformation, Viewing transformation, Preventex lighting, Projection, Clipping, Scan conversion or rasterization, Texturing
+
+\section{Proszę podac jakie są podstawowe (dziś) typy grafiki komputerowej?}
+Wektorowa, Rastrowa. Inny podział 2D, 3D.
+
+\section{Czym rózni się OpenGL od Direct3D? }
+OpenGL jest multi-platformowe i jest typu open source. Direct3D jest wydajniejszy.
+
+\section{Jakie są 3 podstawowe transformacje w grafice komputerowej i jaki aparat matematyczny jest używany do liczenia transformacji obiektów na scenie?}
+Translacja, Rotacja, Skalowanie. Liczone przy użyciu macierzy.
+
+\section{Co to jest Ray Tracing?}
+Jest to metoda przemieszczania promienia skanującego.\\
+Umożliwia tworzenie fotorealistycznych obrazów ze scen trójwymiarowych. Opiera się na analizowaniu tylko tych promieni światła, które trafiają bezpośrednio do obserwatora. W rekursywnym śledzeniu promieni bada się dodatkowo promienie odbite, zwierciadlane oraz załamane.
+
+\section{Jakim skrótem oznacza się powszechnie procesor graficzny?}
+GPU
+
+\section{Co to jest fraktal?}
+Jest to obiekt samopodobny. \\ Obiekt matematyczny posiadający własność samopodobieństwa. Grafika fraktalna wykorzystywana jest zwykle do generacji losowych krajobrazów oraz map geograficznych. Charakterystyczną cechą tego rodzaju grafiki jest możliwość nieskończonego powiększania dowolnego elementu obrazu. np. płatki śniegu, system naczyń krwionośnych, systemy wodne rzek, błyskawica.
+
+\section{Co oznacza NURBS?}
+Non Uniform Rational B-Splines. Sposób opisu krzywej lub powierzchni za pomocą formuły matematycznej. Jest lżejszym i bezstratnym opisem tych brył. Konkurencją dla opisu za pomocą trójkątów. Coś jak grafika wektorowa dla rastowej.
+
+\section{Co to jest Z-buforowanie?}
+Jest to sprzetowy algorytm liczenia które fragmenty sceny są widoczne.
+Polega na pamiętaniu informacji o odległości od kamery (głębokości) każdego piksela.
