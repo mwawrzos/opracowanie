@@ -61,7 +61,8 @@
 {W celu znalezienia funkcji interpolującej funkcjami sklejanymi ustalamy przediał $[a,b]$ oraz jego podział węzłami interpolacji takimi, że: $a=x_0<x_1\ldots<x_n=b$ Dane są równieź wartości w węzłach, odpowiednio: $y_0, y_1,\ldots,y_n$. 
 
 Dla $k=0,1,2,\ldots,n-1$ funkcje łączące punkty $(x_{k},y_{k})$ oraz $(x_{k+1},y_{k+1})$ są wielomianami trzeciego stopnia postaci: 
-$$s_{k}(x)=a_{k,0}+a_{k,1}(x-x_{k})+a_{k,2}(x-x_{k})^{2}+a_{k,3}(x-x_{k})^{3}\]\[x\in[x_{k},x_{k+1})$$
+$$s_{k}(x)=a_{k,0}+a_{k,1}(x-x_{k})+a_{k,2}(x-x_{k})^{2}+a_{k,3}(x-x_{k})^{3}$$
+$$x\in[x_{k},x_{k+1})$$
 który ma spełniać następujące warunki:
 $$s_{k}(x_{k})=y_{k}; s_{k}(x_{k+1})=s_{k+1}(y_{k+1}); s'_{k}(x_{k+1})=s'_{k+1}(y_{k+1}); s''_{k}(x_{k+1})=s''_{k+1}(y_{k+1})$$
 }
